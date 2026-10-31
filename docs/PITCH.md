@@ -27,8 +27,8 @@ Theme tie-in: the Halloween character is the repo itself - every repo gets its o
 2. **While it loads (fill the ~11 s):** "Right now we make at most 7 read-only GitHub calls: metadata,
    languages, README, the full file list in one call, the latest commit, a dependency file, and one
    source file we pick. Nothing from the repo is ever run."
-3. **The monster lab plays.** Tip: click **Step** to pause it and press **Next ->** (or the right arrow)
-   to build one part at a time while you explain each key moment; **Auto** resumes.
+3. **The monster lab plays.** It starts in **Step** mode: press **Next ->** (or the right arrow) to build
+   one part at a time while you explain each key moment; switch to **Auto** to let it play on its own.
    "The lab builds it part by part. Every key-moment card quotes a real fact
    - here, the main language and the file we read." Point at the **key moment** cards.
 4. **Result card.** Point at the **signature trait**: "It found that `cube.py` is one single Python

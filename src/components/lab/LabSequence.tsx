@@ -48,8 +48,8 @@ export function LabSequence({ result, onDone }: Props) {
   const [box, setBox] = useState<Box | null>(null);
   /** -1 = lab powering up, 0..n-1 = building steps, n = finale. */
   const [index, setIndex] = useState(-1);
-  /** Step mode: the timer stops and Next (or the right arrow key) moves one step, for walking a demo audience through it. */
-  const [stepping, setStepping] = useState(false);
+  /** Starts in step mode: Next (or the right arrow key) moves one step, for walking a demo audience through it. Auto plays it on a timer. */
+  const [stepping, setStepping] = useState(true);
 
   const onDoneRef = useRef(onDone);
   useEffect(() => {
