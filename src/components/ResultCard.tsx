@@ -13,6 +13,7 @@ import { TraitChip } from "@/components/TraitChip";
 import { factsByOrigin } from "@/components/evidence";
 import { dissect } from "@/components/dissect";
 import { DissectPanel } from "@/components/DissectPanel";
+import { Evolution } from "@/components/Evolution";
 
 /** Shown in the dissect report instead of the inspect list. */
 const REPORT_ONLY = new Set(["f_code_excerpt"]);
@@ -99,6 +100,8 @@ export function ResultCard({ result, handoff }: Props) {
             <p className="mt-1 text-xs uppercase tracking-wide text-muted">{COPY.storyNote}</p>
             <p className="mt-3 max-w-prose text-sm leading-relaxed">{character.originStory}</p>
           </section>
+
+          <Evolution repo={facts.repo} character={character} />
 
           <details open className="mt-8 rounded-2xl border border-line bg-surface p-4">
             <summary className="cursor-pointer font-display text-xl">{COPY.result.inspectHeading}</summary>

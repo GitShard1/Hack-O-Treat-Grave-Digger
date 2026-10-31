@@ -228,3 +228,74 @@ export async function fetchRepoSnapshot(ref: RepoRef, options: FetchOptions = {}
     throw new SummonError("GITHUB_ERROR", "Couldn't reach GitHub. Try again.");
   }
 }
+
+/** The repo's file list at one commit, for the history replay. */
+export type HistoryPoint = { sha: string; date: string; position: number; tree: TreeEntry[]; treeTruncated: boolean };
+export type RepoHistory = { ref: RepoRef; totalCommits: number; points: HistoryPoint[] };
+
+/** "...?page=1234>; rel=\"last\"" -> 1234 */
+function lastPage(link: string | null): number | null {
+  const match = link ? /[?&]page=(\d+)>;\s*rel="last"/.exec(link) : null;
+  return match ? Number(match[1]) : null;
+}
+
+/**
+ * The file list at up to 4 commits spread over the default branch: the first commit, one and two thirds of
+ * the way through, and the latest. At most 8 calls: 1 to count commits, up to 3 to find the older commits,
+ * up to 4 trees. Positions count from the newest commit (1 = latest), as GitHub pages them.
+ */
+export async function fetchRepoHistory(ref: RepoRef, options: FetchOptions = {}): Promise<RepoHistory> {
+  const signedIn = Boolean(options.userToken);
+  const gh = githubClient(options.userToken ?? getGitHubToken() ?? undefined);
+  const slug = repoSlug(ref);
+  const base = `/repos/${encodeURIComponent(ref.owner)}/${encodeURIComponent(ref.name)}`;
+
+  try {
+    const latestRes = await gh(`${base}/commits?per_page=1`);
+    if (!latestRes.ok) throw failure(latestRes, slug, signedIn);
+    const latest = await json<CommitEntry[]>(latestRes);
+    const total = lastPage(latestRes.headers.get("link")) ?? latest.length;
+    if (total === 0) return { ref, totalCommits: 0, points: [] };
+
+    const positions = [...new Set([total, Math.round((total * 2) / 3), Math.round(total / 3), 1])].filter((p) => p >= 1);
+    const commits = await Promise.all(
+      positions.map(async (position) => {
+        if (position === 1) return { position, entry: latest[0] };
+        const res = await gh(`${base}/commits?per_page=1&page=${position}`);
+        if (!res.ok) throw failure(res, slug, signedIn);
+        return { position, entry: (await json<CommitEntry[]>(res))[0] };
+      }),
+    );
+
+    const points = await Promise.all(
+      commits.flatMap(({ position, entry }) => {
+        const sha = entry?.sha;
+        if (!sha) return [];
+        return [
+          (async (): Promise<HistoryPoint> => {
+            const res = await gh(`${base}/git/trees/${encodePath(sha)}?recursive=1`);
+            if (!res.ok && !isMissing(res)) throw failure(res, slug, signedIn);
+            const body = res.ok ? await json<TreeResponse>(res) : {};
+            const files: TreeEntry[] = (body.tree ?? []).flatMap((e) =>
+              e.type === "blob" && e.path ? [{ path: e.path, size: typeof e.size === "number" ? e.size : 0 }] : [],
+            );
+            return {
+              sha,
+              date: entry?.commit?.committer?.date ?? "",
+              position,
+              tree: files.slice(0, TREE_MAX_FILES),
+              treeTruncated: Boolean(body.truncated) || files.length > TREE_MAX_FILES,
+            };
+          })(),
+        ];
+      }),
+    );
+    return { ref, totalCommits: total, points: points.sort((a, b) => b.position - a.position) };
+  } catch (error) {
+    if (error instanceof SummonError) throw error;
+    if (error instanceof DOMException && error.name === "TimeoutError") {
+      throw new SummonError("GITHUB_ERROR", "GitHub took too long to answer. Try again.");
+    }
+    throw new SummonError("GITHUB_ERROR", "Couldn't reach GitHub. Try again.");
+  }
+}
