@@ -17,8 +17,8 @@ export type LabStep = {
   moment: Moment | null;
 };
 
-/** Seconds. Boot + steps + finale stays within about 6-9 seconds. */
-export const LAB_TIMING = { boot: 0.8, step: 1.3, finale: 1.3 } as const;
+/** Seconds. Boot + steps + finale stays within about 12-18 seconds: slow enough to read each key moment aloud. */
+export const LAB_TIMING = { boot: 1.6, step: 2.6, finale: 2.6 } as const;
 
 /** First fact (in COPY order) that the repo actually has, filled into its template. */
 export function pickMoment(part: BuildStage, facts: Fact[]): Moment | null {

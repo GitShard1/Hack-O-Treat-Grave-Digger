@@ -39,11 +39,11 @@ describe("lab timeline", () => {
     }
   });
 
-  it("stays within about 6-9 seconds", () => {
+  it("stays within about 12-18 seconds", () => {
     for (const accessories of [[], ["lantern"]] as const) {
       const seconds = labDuration(buildTimeline(withFacts(exampleResult.facts, [...accessories])));
-      expect(seconds).toBeGreaterThanOrEqual(6);
-      expect(seconds).toBeLessThanOrEqual(9);
+      expect(seconds).toBeGreaterThanOrEqual(12);
+      expect(seconds).toBeLessThanOrEqual(18);
     }
   });
 });

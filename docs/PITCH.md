@@ -119,7 +119,7 @@ repo's history so you can watch its monster grow."
 - At most **7** GitHub API calls per dig; **0** on a repeat dig within 10 minutes.
 - **116** automated tests; about 8,500 lines of TypeScript including tests.
 - Cataclysm: **10,471** files, **64%** JSON; spincube: **2** files, `cube.py` is **7,594** characters in one expression.
-- About **11-12 s** for a live dig (mostly Claude); the lab itself runs 7-9 s.
+- About **11-12 s** for a live dig (mostly Claude); the lab itself runs about 15-18 s (Step mode lets you go at your own pace).
 
 ### Likely questions
 - **"Is the story made up?"** The story is labelled fiction; the traits and the dissect report are not.
