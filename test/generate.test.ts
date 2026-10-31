@@ -54,7 +54,7 @@ describe("validateCharacter", () => {
     expect(validateCharacter(swapped, facts, a.factId)).toContainEqual(expect.stringContaining("signature"));
   });
 
-  it("rejects stories outside 80-120 words", () => {
+  it("rejects stories outside 70-140 words", () => {
     expect(validateCharacter({ ...valid, originStory: "Too short." }, facts)).toContainEqual(
       expect.stringContaining("origin story"),
     );

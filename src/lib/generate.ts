@@ -116,7 +116,8 @@ export function validateCharacter(character: Character, facts: RepoFacts, signat
     problems.push("two traits cite the same fact");
   }
   const wordCount = character.originStory.trim().split(/\s+/).length;
-  if (wordCount < 80 || wordCount > 120) problems.push(`origin story is ${wordCount} words (want 80-120)`);
+  // The prompt asks for 80-120 words; we accept 70-140 so a near miss does not cost a slow retry.
+  if (wordCount < 70 || wordCount > 140) problems.push(`origin story is ${wordCount} words (want 70-140)`);
   return problems;
 }
 
