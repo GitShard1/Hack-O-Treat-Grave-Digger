@@ -12,7 +12,7 @@ through it. Lines in quotes are things to say; **bold** is what to point at on s
 - [ ] Backup ready: "See a saved example" works with no network, no GitHub, no Claude.
 
 ## Hook (15s)
-"Many GitHub users, like you, have dead repositories just... collecting dust. You may ask: What can we do about these rotting repos? Well, Grave Digger revives your GitHub repositories from the dead."
+"Many GitHub users, like you, have dead repositories just... collecting dust. Well, Grave Digger revives your GitHub repositories from the dead."
 
 "Just paste in any GitHub repository, and here the monster awaits... from the dead. Lets dig up a grave!"
 
