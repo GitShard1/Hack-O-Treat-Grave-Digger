@@ -4,40 +4,75 @@
     "repo": "example-org/haunted-widgets",
     "url": "https://github.com/example-org/haunted-widgets",
     "facts": [
-      { "id": "f_lang_top", "label": "Main language", "value": "71% TypeScript" },
-      { "id": "f_lang_count", "label": "Languages", "value": "4 languages" },
-      { "id": "f_deps_count", "label": "Dependencies", "value": "42 in package.json" },
-      { "id": "f_stars", "label": "Stars", "value": "1,284" },
-      { "id": "f_age", "label": "Created", "value": "6 years ago" },
-      { "id": "f_last_push", "label": "Last push", "value": "3 days ago" },
-      { "id": "f_readme_theme", "label": "README says", "value": "\"A tiny UI widget toolkit\"" }
+      {
+        "id": "f_lang_top",
+        "label": "Main language",
+        "value": "71% TypeScript"
+      },
+      {
+        "id": "f_lang_count",
+        "label": "Languages",
+        "value": "4 languages"
+      },
+      {
+        "id": "f_deps_count",
+        "label": "Dependencies",
+        "value": "42 in package.json"
+      },
+      {
+        "id": "f_stars",
+        "label": "Stars",
+        "value": "1,284"
+      },
+      {
+        "id": "f_age",
+        "label": "Created",
+        "value": "6 years ago"
+      },
+      {
+        "id": "f_last_push",
+        "label": "Last push",
+        "value": "3 days ago"
+      },
+      {
+        "id": "f_readme_theme",
+        "label": "README says",
+        "value": "\"A tiny UI widget toolkit\""
+      }
     ]
   },
   "character": {
-    "name": "Widgetwraith the Many-Handed",
+    "name": "Placeholder Monster",
     "archetype": "ghost",
-    "palette": ["#3178c6", "#f7df1e", "#b8f2e6"],
+    "palette": [
+      "#3178c6",
+      "#f7df1e",
+      "#b8f2e6"
+    ],
     "eyes": "many",
-    "accessories": ["chains", "lantern"],
+    "accessories": [
+      "chains",
+      "lantern"
+    ],
     "aura": "fog",
     "traits": [
       {
-        "title": "Stitched from TypeScript",
-        "description": "Its ectoplasm glows the exact blue of its main language.",
+        "title": "Placeholder trait 1",
+        "description": "This is a placeholder.",
         "factId": "f_lang_top"
       },
       {
-        "title": "Rattles 42 chains",
-        "description": "One chain for every dependency it drags through the night.",
+        "title": "Placeholder trait 2",
+        "description": "This is a placeholder.",
         "factId": "f_deps_count"
       },
       {
-        "title": "Still restless",
-        "description": "Pushed just days ago: this spirit refuses to stay buried.",
+        "title": "Placeholder trait 3",
+        "description": "This is a placeholder.",
         "factId": "f_last_push"
       }
     ],
-    "originStory": "SAMPLE DATA. Six winters ago, a tiny toolkit was laid to rest in an unmarked repo. Nobody expected it to stir. But each new dependency rattled the soil a little louder, until forty-two chains broke the surface and something pale and blue drifted out, clutching a lantern of half-finished widgets. Now Widgetwraith haunts the component libraries of the night, assembling buttons no one asked for and tooltips that whisper. Some say it pushed a commit only three days ago. Some say it never stopped. Either way, the lantern is still lit, and the widgets are still multiplying.",
+    "originStory": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
     "source": "saved-example"
   }
 }

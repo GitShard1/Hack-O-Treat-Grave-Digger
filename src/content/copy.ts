@@ -39,7 +39,7 @@ export const COPY = {
   },
   sourceBadge: {
     live: null,
-    fallback: "Quick summon (AI unavailable)",
-    "saved-example": "Saved example",
+    fallback: "Placeholder monster: writing not built yet",
+    "saved-example": "Saved example (placeholder text)",
   },
 } as const;

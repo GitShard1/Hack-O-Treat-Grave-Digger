@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { CharacterSchema } from "@/lib/contract";
-import { fallbackCharacter } from "@/lib/fallback";
+import { fallbackCharacter, PLACEHOLDER_NAME, PLACEHOLDER_STORY, PLACEHOLDER_TRAIT } from "@/lib/fallback";
 import { buildFacts, measureRepo } from "@/lib/facts";
 import { buildUserPrompt, generateCharacter, validateCharacter } from "@/lib/generate";
 import { NOW, bareSnapshot, msSnapshot, requestsSnapshot } from "./helpers";
@@ -16,6 +16,15 @@ describe("fallbackCharacter", () => {
       expect(validateCharacter(character, facts)).toEqual([]);
     });
   }
+
+  it("uses obvious placeholder text until monster writing is built", () => {
+    const facts = buildFacts(requestsSnapshot, NOW);
+    const character = fallbackCharacter(facts, measureRepo(requestsSnapshot, NOW));
+    expect(character.name).toBe(PLACEHOLDER_NAME);
+    expect(character.originStory).toBe(PLACEHOLDER_STORY);
+    expect(character.originStory.startsWith("Lorem ipsum")).toBe(true);
+    for (const trait of character.traits) expect(trait.description).toBe(PLACEHOLDER_TRAIT);
+  });
 
   it("gives contrasting repos different monsters", () => {
     const monster = (snapshot: typeof requestsSnapshot) =>
