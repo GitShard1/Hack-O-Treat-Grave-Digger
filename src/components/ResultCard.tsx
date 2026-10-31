@@ -1,4 +1,4 @@
-// OWNER: Builder B. Result screen. TODO(B): reveal animation (framer-motion), art direction.
+// OWNER: Builder B. Result screen. TODO(B): art direction.
 import type { SummonSuccess } from "@/lib/contract";
 import { Monster } from "@/components/Monster/Monster";
 import { TraitChip } from "@/components/TraitChip";
@@ -19,12 +19,13 @@ export function ResultCard({ result }: { result: SummonSuccess }) {
       {badge && <span className="rounded-full bg-amber-400/20 px-3 py-1 text-xs text-amber-200">{badge}</span>}
       <Monster character={character} />
       <h2 className="text-2xl font-bold">{character.name}</h2>
+      <p className="text-sm capitalize opacity-80">{character.archetype}</p>
       <p className="text-sm opacity-70">
         Summoned from <a className="underline" href={facts.url}>{facts.repo}</a>
       </p>
       <ul className="grid w-full gap-2">
-        {character.traits.map((t) => (
-          <TraitChip key={t.title} trait={t} fact={factById.get(t.factId)} />
+        {character.traits.map((trait, index) => (
+          <TraitChip key={`${index}-${trait.factId}`} trait={trait} fact={factById.get(trait.factId)} />
         ))}
       </ul>
       <section className="w-full">

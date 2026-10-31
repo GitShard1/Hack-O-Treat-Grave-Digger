@@ -36,7 +36,7 @@ export const FactSchema = z.object({
 export type Fact = z.infer<typeof FactSchema>;
 
 export const RepoFactsSchema = z.object({
-  /** "owner/name" */
+  /** "owner/name", built with repoSlug() in github.ts */
   repo: z.string(),
   url: z.url(),
   facts: z.array(FactSchema).min(1),
@@ -48,7 +48,7 @@ export type RepoFacts = z.infer<typeof RepoFactsSchema>;
 export const TraitSchema = z.object({
   title: z.string().max(60),
   description: z.string().max(240),
-  /** Must match a Fact.id in the same response. Checked by assertTraitsCiteFacts. */
+  /** Must match a Fact.id in the same response. Checked server-side by validateCharacter() in generate.ts. */
   factId: z.string(),
 });
 export type Trait = z.infer<typeof TraitSchema>;
@@ -58,13 +58,13 @@ export const CHARACTER_SOURCES = ["live", "fallback", "saved-example"] as const;
 export const CharacterSchema = z.object({
   name: z.string().max(60),
   archetype: ArchetypeSchema,
-  /** 2–3 hex colours, derived from the language mix. */
+  /** 2-3 hex colours, derived from the language mix. */
   palette: z.array(z.string().regex(/^#[0-9a-fA-F]{6}$/)).min(2).max(3),
   eyes: EyeStyleSchema,
   accessories: z.array(AccessorySchema).max(3),
   aura: AuraSchema,
   traits: z.tuple([TraitSchema, TraitSchema, TraitSchema]),
-  /** Fiction, 80–120 words. Always labelled as fiction in the UI. */
+  /** Fiction, 80-120 words (checked in generate.ts). Always labelled as fiction in the UI. */
   originStory: z.string(),
   /** Never present "fallback" or "saved-example" as a fresh live generation. */
   source: z.enum(CHARACTER_SOURCES),
@@ -83,17 +83,26 @@ export const ERROR_CODES = [
   "REPO_NOT_FOUND",
   "RATE_LIMITED",
   "GITHUB_ERROR",
-  "NOT_IMPLEMENTED",
+  "NOT_IMPLEMENTED", // scaffolding only: remove once github.ts is implemented
   "INTERNAL",
 ] as const;
 export type ErrorCode = (typeof ERROR_CODES)[number];
 
-export type SummonSuccess = { ok: true; facts: RepoFacts; character: Character };
-export type SummonFailure = { ok: false; error: ErrorCode; message: string };
-export type SummonResponse = SummonSuccess | SummonFailure;
+export const ErrorCodeSchema = z.enum(ERROR_CODES);
 
-/** Every trait must cite a fact that was actually fetched. */
-export function assertTraitsCiteFacts(character: Character, facts: RepoFacts): boolean {
-  const ids = new Set(facts.facts.map((f) => f.id));
-  return character.traits.every((t) => ids.has(t.factId));
-}
+export const SummonSuccessSchema = z.object({
+  ok: z.literal(true),
+  facts: RepoFactsSchema,
+  character: CharacterSchema,
+});
+export const SummonFailureSchema = z.object({
+  ok: z.literal(false),
+  error: ErrorCodeSchema,
+  message: z.string(),
+});
+/** `ok` is the discriminant: narrow on it before reading facts or error. */
+export const SummonResponseSchema = z.discriminatedUnion("ok", [SummonSuccessSchema, SummonFailureSchema]);
+
+export type SummonSuccess = z.infer<typeof SummonSuccessSchema>;
+export type SummonFailure = z.infer<typeof SummonFailureSchema>;
+export type SummonResponse = z.infer<typeof SummonResponseSchema>;

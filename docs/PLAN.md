@@ -6,10 +6,10 @@
 
 ## MVP (must have for demo)
 - [ ] URL input + 3 one-click example repos
-- [ ] Bounded GitHub fetch (≤ ~6 calls) → facts builder (fact IDs)
-- [ ] Claude call → validated `Character` JSON (zod), retry once, deterministic fallback
+- [ ] Bounded GitHub fetch (<= ~6 calls) -> facts builder (fact IDs)
+- [ ] Claude call -> validated `Character` JSON (zod), retry once, deterministic fallback
 - [ ] Procedural SVG monster (ghost, zombie, golem)
-- [ ] Reveal + result card: name, visual, 3 evidence-backed traits, origin story (80–120 words)
+- [ ] Reveal + result card: name, visual, 3 evidence-backed traits, origin story (80-120 words)
 - [ ] Loading / error / retry states
 - [ ] Deployed on Vercel
 
@@ -27,7 +27,7 @@
 | 3:00 | Deployed, polished reveal, error handling |
 | 4:00 | Freeze, test, rehearse, backup video, submit |
 
-**If slipping:** 2 archetypes → no accessories → simple fade instead of reveal → skip extras. Never add architecture.
+**If slipping:** 2 archetypes -> no accessories -> simple fade instead of reveal -> skip extras. Never add architecture.
 
 ## Who's on what
 | Person | Working on |

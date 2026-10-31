@@ -4,6 +4,11 @@ import { SummonError } from "@/lib/errors";
 
 export type RepoRef = { owner: string; name: string };
 
+/** "owner/name": the one place this string is built. */
+export function repoSlug(ref: RepoRef): string {
+  return `${ref.owner}/${ref.name}`;
+}
+
 /**
  * Bounded snapshot of a repo (~6 API calls max, no cloning).
  * TODO(A): decide exact fields as you implement fetchRepoSnapshot.
@@ -14,6 +19,7 @@ export type RepoSnapshot = {
   stars: number;
   createdAt: string;
   pushedAt: string;
+  latestCommitAt: string | null; // date of the latest commit on the default branch
   languages: Record<string, number>; // bytes per language
   readme: string | null; // truncated to ~4k chars, UNTRUSTED text
   rootFiles: string[];
@@ -29,9 +35,9 @@ export function parseRepoUrl(input: string): RepoRef {
 /**
  * TODO(A): fetch metadata, languages, README, root listing, one manifest, latest commit.
  * - Read the token from process.env.GITHUB_TOKEN (optional); never log or return it.
- * - Map 404 → REPO_NOT_FOUND, 403/429 with rate-limit headers → RATE_LIMITED, else GITHUB_ERROR.
+ * - Map 404 -> REPO_NOT_FOUND, 403/429 with rate-limit headers -> RATE_LIMITED, else GITHUB_ERROR.
  * - Never execute anything from the repo.
  */
 export async function fetchRepoSnapshot(ref: RepoRef): Promise<RepoSnapshot> {
-  throw new SummonError("NOT_IMPLEMENTED", `fetchRepoSnapshot not implemented yet (${ref.owner}/${ref.name})`);
+  throw new SummonError("NOT_IMPLEMENTED", `fetchRepoSnapshot not implemented yet (${repoSlug(ref)})`);
 }

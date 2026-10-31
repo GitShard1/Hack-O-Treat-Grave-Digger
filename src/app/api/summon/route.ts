@@ -1,4 +1,4 @@
-// OWNER: Builder A. POST /api/summon { url } → SummonResponse
+// OWNER: Builder A. POST /api/summon { url } -> SummonResponse
 import { NextResponse } from "next/server";
 import { SummonRequestSchema, type ErrorCode, type SummonResponse } from "@/lib/contract";
 import { SummonError } from "@/lib/errors";
@@ -9,7 +9,7 @@ import { generateCharacter } from "@/lib/generate";
 export const runtime = "nodejs";
 export const maxDuration = 30;
 
-const STATUS: Record<ErrorCode, number> = {
+const HTTP_STATUS_BY_ERROR: Record<ErrorCode, number> = {
   INVALID_URL: 400,
   REPO_NOT_FOUND: 404,
   RATE_LIMITED: 429,
@@ -18,7 +18,9 @@ const STATUS: Record<ErrorCode, number> = {
   INTERNAL: 500,
 };
 
-// TODO(A): small in-memory cache keyed by "owner/name".
+// TODO(A): small in-memory cache keyed by repoSlug(ref).
+// - Pre-warm it for the demo repos before presenting.
+// - Store each character with its original source, so a cached fallback stays "fallback".
 
 export async function POST(req: Request): Promise<NextResponse<SummonResponse>> {
   const body: unknown = await req.json().catch(() => null);
@@ -42,5 +44,5 @@ export async function POST(req: Request): Promise<NextResponse<SummonResponse>> 
 }
 
 function fail(error: ErrorCode, message: string): NextResponse<SummonResponse> {
-  return NextResponse.json({ ok: false, error, message }, { status: STATUS[error] });
+  return NextResponse.json({ ok: false, error, message }, { status: HTTP_STATUS_BY_ERROR[error] });
 }

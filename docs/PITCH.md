@@ -6,7 +6,7 @@ _TBD_
 ## Problem (30s)
 _TBD_
 
-## Demo (1–2 min)
+## Demo (1-2 min)
 1. 
 
 ## Tech (30s)
