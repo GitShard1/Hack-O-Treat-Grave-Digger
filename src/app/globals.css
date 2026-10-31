@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+/* TODO(B): art direction tokens (palette, glow, fog backdrop) */
+:root {
+  --background: #0d0b14;
+  --foreground: #f1ecff;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}

@@ -1,0 +1,43 @@
+{
+  "ok": true,
+  "facts": {
+    "repo": "example-org/haunted-widgets",
+    "url": "https://github.com/example-org/haunted-widgets",
+    "facts": [
+      { "id": "f_lang_top", "label": "Main language", "value": "71% TypeScript" },
+      { "id": "f_lang_count", "label": "Languages", "value": "4 languages" },
+      { "id": "f_deps_count", "label": "Dependencies", "value": "42 in package.json" },
+      { "id": "f_stars", "label": "Stars", "value": "1,284" },
+      { "id": "f_age", "label": "Created", "value": "6 years ago" },
+      { "id": "f_last_push", "label": "Last push", "value": "3 days ago" },
+      { "id": "f_readme_theme", "label": "README says", "value": "\"A tiny UI widget toolkit\"" }
+    ]
+  },
+  "character": {
+    "name": "Widgetwraith the Many-Handed",
+    "archetype": "ghost",
+    "palette": ["#3178c6", "#f7df1e", "#b8f2e6"],
+    "eyes": "many",
+    "accessories": ["chains", "lantern"],
+    "aura": "fog",
+    "traits": [
+      {
+        "title": "Stitched from TypeScript",
+        "description": "Its ectoplasm glows the exact blue of its main language.",
+        "factId": "f_lang_top"
+      },
+      {
+        "title": "Rattles 42 chains",
+        "description": "One chain for every dependency it drags through the night.",
+        "factId": "f_deps_count"
+      },
+      {
+        "title": "Still restless",
+        "description": "Pushed just days ago: this spirit refuses to stay buried.",
+        "factId": "f_last_push"
+      }
+    ],
+    "originStory": "SAMPLE DATA. Six winters ago, a tiny toolkit was laid to rest in an unmarked repo. Nobody expected it to stir. But each new dependency rattled the soil a little louder, until forty-two chains broke the surface and something pale and blue drifted out, clutching a lantern of half-finished widgets. Now Widgetwraith haunts the component libraries of the night, assembling buttons no one asked for and tooltips that whisper. Some say it pushed a commit only three days ago. Some say it never stopped. Either way, the lantern is still lit, and the widgets are still multiplying.",
+    "source": "saved-example"
+  }
+}
