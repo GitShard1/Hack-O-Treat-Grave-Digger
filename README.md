@@ -6,6 +6,8 @@ Paste a public GitHub repository URL. Grave Digger reads a small set of real fac
 
 Built for the Hack-O-Treat hackathon. Design doc: [docs/DESIGN.md](docs/DESIGN.md)
 
+> **Catching up? Start with [docs/Stuff_WeDidSoFar.md](docs/Stuff_WeDidSoFar.md)**: what's done, what's in progress, and what's next.
+
 ## Demo
 - **Live demo:** _link_
 - **Video:** _link_
@@ -106,6 +108,7 @@ src/components/ResultCard.tsx, TraitChip.tsx
 src/lib/examples.ts          Saved examples
 
 docs/                        Design doc, idea, plan, pitch
+docs/Stuff_WeDidSoFar.md     Progress log: what's done so far and what's next
 ```
 Search for `TODO(A)` and `TODO(B)` to find each builder's next steps. See [CONTRIBUTING.md](CONTRIBUTING.md) for how we work together.
 
