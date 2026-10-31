@@ -3,7 +3,7 @@
 ## Context
 Theme: "Hack for a Halloween Character". Two builders, four hours. This is the design doc the team builds from; `docs/IDEA.md` and `docs/PLAN.md` are short summaries of it.
 
-Originality: everything is built independently from scratch. No code, assets, prompts, docs or distinctive designs are taken from reference projects (RepoStory, pstack, maddock). References are for high-level inspiration only.
+Originality: everything is built independently from scratch. No code, assets, prompts, docs or distinctive designs are taken from reference projects (pstack, maddock). References are for high-level inspiration only.
 
 ## Theme & how we sell it
 **Official brief:** "Hack for a Halloween Character": create your best project that a Halloween character could use in their day-to-day life.
