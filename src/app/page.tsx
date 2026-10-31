@@ -2,7 +2,7 @@
 "use client";
 import { useState, type FormEvent } from "react";
 import { SummonResponseSchema, type SummonSuccess } from "@/lib/contract";
-import { exampleResult } from "@/lib/examples";
+import { savedExamples } from "@/lib/examples";
 import { COPY } from "@/content/copy";
 import { AuthButton } from "@/components/AuthButton";
 import { DigLoader } from "@/components/DigLoader";
@@ -25,6 +25,15 @@ type State =
 export default function Home() {
   const [url, setUrl] = useState("");
   const [state, setState] = useState<State>({ status: "idle" });
+  const [exampleIndex, setExampleIndex] = useState(0);
+
+  /** Each click shows the next saved example, so all of them can be demoed without GitHub or Claude. */
+  function showExample() {
+    const result = savedExamples[exampleIndex % savedExamples.length];
+    if (!result) return;
+    setExampleIndex((i) => i + 1);
+    setState({ status: "done", result, runId: Date.now() });
+  }
 
   async function summon(repoUrl: string) {
     setState({ status: "loading" });
@@ -113,7 +122,7 @@ export default function Home() {
           <button
             type="button"
             disabled={busy}
-            onClick={() => setState({ status: "done", result: exampleResult, runId: Date.now() })}
+            onClick={showExample}
             className="px-1 text-muted underline underline-offset-2 hover:text-ink disabled:opacity-50"
           >
             {COPY.savedExample}

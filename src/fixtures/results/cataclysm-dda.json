@@ -1,0 +1,143 @@
+{
+  "ok": true,
+  "facts": {
+    "repo": "CleverRaven/Cataclysm-DDA",
+    "url": "https://github.com/CleverRaven/Cataclysm-DDA",
+    "facts": [
+      {
+        "id": "f_description",
+        "label": "Description",
+        "value": "\"Cataclysm - Dark Days Ahead. A turn-based survival game set in a post-apocalyptic world.\""
+      },
+      {
+        "id": "f_lang_top",
+        "label": "Main language",
+        "value": "97% C++"
+      },
+      {
+        "id": "f_lang_mix",
+        "label": "Languages",
+        "value": "20 languages: C++, Python, CMake, Java"
+      },
+      {
+        "id": "f_stars",
+        "label": "Stars",
+        "value": "13,443"
+      },
+      {
+        "id": "f_age",
+        "label": "Created",
+        "value": "Sep 2012 (14 years ago)"
+      },
+      {
+        "id": "f_last_push",
+        "label": "Last push",
+        "value": "today"
+      },
+      {
+        "id": "f_last_commit",
+        "label": "Latest commit",
+        "value": "Oct 2026"
+      },
+      {
+        "id": "f_deps",
+        "label": "Dependencies",
+        "value": "0 in pyproject.toml"
+      },
+      {
+        "id": "f_readme",
+        "label": "README",
+        "value": "4,000 characters"
+      },
+      {
+        "id": "f_readme_title",
+        "label": "README headline",
+        "value": "\"Cataclysm: Dark Days Ahead\""
+      },
+      {
+        "id": "f_root_files",
+        "label": "Top-level files",
+        "value": "49 files and folders"
+      },
+      {
+        "id": "f_tests",
+        "label": "Tests",
+        "value": "Has a test folder or test files"
+      },
+      {
+        "id": "f_ci",
+        "label": "CI",
+        "value": "Has CI configuration"
+      },
+      {
+        "id": "f_license",
+        "label": "License",
+        "value": "Has a license file"
+      },
+      {
+        "id": "f_tree_files",
+        "label": "Files",
+        "value": "10,471 files"
+      },
+      {
+        "id": "f_tree_types",
+        "label": "File types",
+        "value": "64% .json, 13% .gz, 8% .cpp"
+      },
+      {
+        "id": "f_tree_folder",
+        "label": "Biggest folder",
+        "value": "data/mods/ holds 4,748 files (45%)"
+      },
+      {
+        "id": "f_tree_names",
+        "label": "Files in src",
+        "value": "activity_actor, map, game, npctalk, iuse, vehicle"
+      },
+      {
+        "id": "f_code_file",
+        "label": "File we read",
+        "value": "src/game.h (20,000 characters, 483 lines)"
+      },
+      {
+        "id": "f_code_imports",
+        "label": "game.h imports",
+        "value": "array, chrono, cstdint, ctime, functional"
+      }
+    ]
+  },
+  "character": {
+    "name": "The Tile-Hoarder of Dodge Hollow",
+    "archetype": "golem",
+    "palette": [
+      "#f34b7d",
+      "#3572a5",
+      "#b07219"
+    ],
+    "eyes": "glowing",
+    "accessories": [
+      "top-hat",
+      "chains"
+    ],
+    "aura": "sparks",
+    "traits": [
+      {
+        "title": "Built from ten thousand tiles",
+        "description": "Roughly two-thirds of its body is made of .json pieces, so it stitches itself together one data file at a time.",
+        "factId": "f_tree_types"
+      },
+      {
+        "title": "Wears its headers like armour",
+        "description": "Its heart is src/game.h, a header that pulls in array, chrono, cstdint, ctime and functional before it does anything else.",
+        "factId": "f_code_imports"
+      },
+      {
+        "title": "Keeps its mods in one big chest",
+        "description": "Nearly half its parts live in data/mods/, so every new wasteland creature gets stored in the same drawer.",
+        "factId": "f_tree_folder"
+      }
+    ],
+    "originStory": "Long ago, in a valley where the sky never quite stopped flickering, a tinkerer tried to build a survivor out of scraps. The scraps were ideas: a world that stays put between sessions, a vehicle with a full tank of gas, a horde of giant insects and killer robots. Nothing could hold them together until the tinkerer wrote a single header, game.h, and bound it with clanking chains of includes. Each night the creature grew another piece from the mods folder, a zombie here, a rusty dish there, until it stood up on its own. Now it wanders the wasteland with a glowing stare and a top hat, still scavenging for parts. Travellers say that if you listen closely near its chains, you can hear it humming C++ to itself, counting every tile it has ever collected.",
+    "source": "saved-example"
+  }
+}

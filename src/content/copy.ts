@@ -90,6 +90,6 @@ export const COPY = {
   sourceBadge: {
     live: null,
     fallback: "Placeholder monster: writing not built yet",
-    "saved-example": "Saved example (placeholder text)",
+    "saved-example": "Saved example: dug up earlier, not live",
   },
 } as const;

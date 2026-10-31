@@ -1,0 +1,111 @@
+{
+  "ok": true,
+  "facts": {
+    "repo": "EricZ6365/spincube",
+    "url": "https://github.com/EricZ6365/spincube",
+    "facts": [
+      {
+        "id": "f_description",
+        "label": "Description",
+        "value": "\"a spinning cube render in wireframe contained within 1 expresssion windows only\""
+      },
+      {
+        "id": "f_lang_top",
+        "label": "Main language",
+        "value": "100% Python"
+      },
+      {
+        "id": "f_stars",
+        "label": "Stars",
+        "value": "0"
+      },
+      {
+        "id": "f_age",
+        "label": "Created",
+        "value": "Jul 2026 (0 years ago)"
+      },
+      {
+        "id": "f_last_push",
+        "label": "Last push",
+        "value": "3 months ago"
+      },
+      {
+        "id": "f_last_commit",
+        "label": "Latest commit",
+        "value": "Jul 2026"
+      },
+      {
+        "id": "f_readme",
+        "label": "README",
+        "value": "No README found"
+      },
+      {
+        "id": "f_root_files",
+        "label": "Top-level files",
+        "value": "2 files and folders"
+      },
+      {
+        "id": "f_tree_files",
+        "label": "Files",
+        "value": "2 files"
+      },
+      {
+        "id": "f_tree_types",
+        "label": "File types",
+        "value": "100% .py"
+      },
+      {
+        "id": "f_tree_few_files",
+        "label": "Source files",
+        "value": "Only 2 source files: cube.py, shadecube.py"
+      },
+      {
+        "id": "f_code_file",
+        "label": "File we read",
+        "value": "cube.py (7,594 characters, 53 lines)"
+      },
+      {
+        "id": "f_code_imports",
+        "label": "cube.py imports",
+        "value": "functools, math, ctypes, time"
+      },
+      {
+        "id": "f_code_one_expression",
+        "label": "Program shape",
+        "value": "cube.py is one single expression"
+      }
+    ]
+  },
+  "character": {
+    "name": "Spinnicus the One-Line Witch",
+    "archetype": "witch",
+    "palette": [
+      "#3572a5",
+      "#ff8a1f"
+    ],
+    "eyes": "single",
+    "accessories": [
+      "lantern"
+    ],
+    "aura": "sparks",
+    "traits": [
+      {
+        "title": "Cast in a single breath",
+        "description": "Its whole spell is one unbroken expression, so there is not a single line for it to hide behind.",
+        "factId": "f_code_one_expression"
+      },
+      {
+        "title": "Borrows Windows spellbooks",
+        "description": "It brews its magic from time, math, functools and ctypes, then calls on Windows spirits to paint each frame.",
+        "factId": "f_code_imports"
+      },
+      {
+        "title": "A coven of just two",
+        "description": "Only two source files, cube.py and shadecube.py, keep this witch's coven wonderfully small.",
+        "factId": "f_tree_few_files"
+      }
+    ],
+    "originStory": "Once upon a midnight in a repository named spincube, a witch sat before a window and wove a single spell. It was not written in many lines. It was one expression, stretched like a cobweb across the whole file cube.py, and it summoned a wireframe cube that spins forever in one window. The witch borrowed time, math, functools and ctypes from the shelves of Python, then whispered to the Windows gdi32 and user32 spirits to paint each frame. Only two source files, cube.py and shadecube.py, keep the coven small. Those who gaze say the cube's edges shimmer with sparks, and that the spell still hums on quiet nights, waiting for a viewer to press play.",
+    "source": "saved-example"
+  }
+}

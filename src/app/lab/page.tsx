@@ -13,7 +13,7 @@ import { Monster } from "@/components/Monster/Monster";
 import { ResultCard } from "@/components/ResultCard";
 import { LabReplay } from "@/components/lab/LabReplay";
 import { MOTIFS } from "@/components/Monster/signature";
-import { exampleResult } from "@/lib/examples";
+import { savedExamples } from "@/lib/examples";
 
 export const metadata: Metadata = { title: "Monster lab", robots: { index: false } };
 
@@ -46,7 +46,7 @@ export default function LabPage() {
       <h1 className="font-display text-4xl">Monster lab</h1>
       <p className="mt-1 text-sm text-muted">Every archetype, then real snapshots through the fallback pipeline (no API keys).</p>
 
-      <LabReplay samples={[...samples, exampleResult]} />
+      <LabReplay samples={[...savedExamples, ...samples]} />
 
       <section className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3">
         {ARCHETYPES.map((archetype, i) => {

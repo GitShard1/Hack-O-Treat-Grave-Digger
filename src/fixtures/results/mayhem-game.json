@@ -1,0 +1,97 @@
+{
+  "ok": true,
+  "facts": {
+    "repo": "Roblox-MAYHEM/Game",
+    "url": "https://github.com/Roblox-MAYHEM/Game",
+    "facts": [
+      {
+        "id": "f_lang_top",
+        "label": "Main language",
+        "value": "100% Luau"
+      },
+      {
+        "id": "f_stars",
+        "label": "Stars",
+        "value": "0"
+      },
+      {
+        "id": "f_age",
+        "label": "Created",
+        "value": "Jun 2026 (0 years ago)"
+      },
+      {
+        "id": "f_last_push",
+        "label": "Last push",
+        "value": "2 months ago"
+      },
+      {
+        "id": "f_last_commit",
+        "label": "Latest commit",
+        "value": "Aug 2026"
+      },
+      {
+        "id": "f_readme",
+        "label": "README",
+        "value": "No README found"
+      },
+      {
+        "id": "f_root_files",
+        "label": "Top-level files",
+        "value": "13 files and folders"
+      },
+      {
+        "id": "f_tree_files",
+        "label": "Files",
+        "value": "307 files"
+      },
+      {
+        "id": "f_tree_types",
+        "label": "File types",
+        "value": "98% .luau, 1% .md"
+      },
+      {
+        "id": "f_tree_names",
+        "label": "Files in ServerScriptService/Weapon/Weapons",
+        "value": "BaseballBat, GreatSword, Boots, ClassicSword, DBShotgun, PumpShotgun"
+      },
+      {
+        "id": "f_code_file",
+        "label": "File we read",
+        "value": "ServerScriptService/GameSettings.luau (2,230 characters, 61 lines)"
+      }
+    ]
+  },
+  "character": {
+    "name": "Sir Ghostwick of the Armory",
+    "archetype": "ghost",
+    "palette": [
+      "#00a2ff",
+      "#ff8a1f"
+    ],
+    "eyes": "glowing",
+    "accessories": [
+      "scarf",
+      "lantern"
+    ],
+    "aura": "sparks",
+    "traits": [
+      {
+        "title": "Keeper of Six Weapons",
+        "description": "Six weapons rest on its shelves, from a BaseballBat to a DBShotgun, and it guards every one of them.",
+        "factId": "f_tree_names"
+      },
+      {
+        "title": "Ghost Mode Phasing",
+        "description": "With a whispered request it flips a body into the NoCollision group and drifts straight through friends and foes.",
+        "factId": "f_code_file"
+      },
+      {
+        "title": "Speaks Only Luau",
+        "description": "Nearly every file is Luau, so the spirit chatters in one tongue and never switches languages.",
+        "factId": "f_tree_types"
+      }
+    ],
+    "originStory": "Long ago, in a quiet corner of ServerScriptService, a spirit wandered the halls of a Roblox game. It kept watch over a dusty armory where six weapons waited on their shelves: BaseballBat, GreatSword, Boots, ClassicSword, DBShotgun and PumpShotgun. Nobody asked it to guard them, but it insisted. One night it found a little switch in GameSettings.luau, a secret ritual called Ghost Mode. Whenever a player whispered the request, the spirit drew their body into the NoCollision group, slipping through friends and foes alike. Campfire tellers say it still floats between the Players and the Dummy targets, humming the Init song at midnight. Its three hundred and seven files are its family, and it has never been lonely since.",
+    "source": "saved-example"
+  }
+}
