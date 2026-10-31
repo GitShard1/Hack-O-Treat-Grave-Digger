@@ -64,7 +64,7 @@ export const CharacterSchema = z.object({
   accessories: z.array(AccessorySchema).max(3),
   aura: AuraSchema,
   traits: z.tuple([TraitSchema, TraitSchema, TraitSchema]),
-  /** Fiction, asked for at 80-120 words and accepted at 70-140 (checked in generate.ts). Always labelled as fiction in the UI. */
+  /** Fiction, asked for at 50-90 words and accepted at 40-110 (checked in generate.ts). Always labelled as fiction in the UI. */
   originStory: z.string(),
   /** Never present "fallback" or "saved-example" as a fresh live generation. */
   source: z.enum(CHARACTER_SOURCES),

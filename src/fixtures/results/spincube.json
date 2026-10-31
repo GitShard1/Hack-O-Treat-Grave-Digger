@@ -77,35 +77,33 @@
     ]
   },
   "character": {
-    "name": "Spinnicus the One-Line Witch",
-    "archetype": "witch",
+    "name": "Spincubus",
+    "archetype": "ghost",
     "palette": [
       "#3572a5",
       "#ff8a1f"
     ],
-    "eyes": "single",
-    "accessories": [
-      "lantern"
-    ],
+    "eyes": "glowing",
+    "accessories": [],
     "aura": "sparks",
     "traits": [
       {
-        "title": "Cast in a single breath",
-        "description": "Its whole spell is one unbroken expression, so there is not a single line for it to hide behind.",
+        "title": "One unbroken expression",
+        "description": "The whole program is a single expression, so the filament running through its body never has to pause for a new line.",
         "factId": "f_code_one_expression"
       },
       {
-        "title": "Borrows Windows spellbooks",
-        "description": "It brews its magic from time, math, functools and ctypes, then calls on Windows spirits to paint each frame.",
+        "title": "Four imports, light pack",
+        "description": "It carries only functools, math, ctypes and time, so it travels with very little luggage.",
         "factId": "f_code_imports"
       },
       {
-        "title": "A coven of just two",
-        "description": "Only two source files, cube.py and shadecube.py, keep this witch's coven wonderfully small.",
+        "title": "Two source files, one soul",
+        "description": "Only cube.py and shadecube.py live in the folder, so the monster has very few places to hide.",
         "factId": "f_tree_few_files"
       }
     ],
-    "originStory": "Once upon a midnight in a repository named spincube, a witch sat before a window and wove a single spell. It was not written in many lines. It was one expression, stretched like a cobweb across the whole file cube.py, and it summoned a wireframe cube that spins forever in one window. The witch borrowed time, math, functools and ctypes from the shelves of Python, then whispered to the Windows gdi32 and user32 spirits to paint each frame. Only two source files, cube.py and shadecube.py, keep the coven small. Those who gaze say the cube's edges shimmer with sparks, and that the spell still hums on quiet nights, waiting for a viewer to press play.",
+    "originStory": "Spincubus haunts a single window, 500 pixels wide, where it turns a wireframe cube without rest. Its diet is pure math, borrowed from the math module and digested in one gulp. Behaviour is the strange part: a glowing filament knots through its whole body, and everything it is fits inside a single expression, so it cannot be interrupted for a loop. Field guides note it keeps no README and prefers shadecube.py for company. Disturb it at your peril, but the spin never stops, because it is still busy being one unbroken sentence.",
     "source": "saved-example"
   }
 }

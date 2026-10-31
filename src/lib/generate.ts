@@ -101,7 +101,7 @@ The origin story (50 to 90 words):
 - Never open with "Long ago", "Once upon a time" or "Legend says", and never end with "travellers say", "they say" or similar.
 - Never write out a whole list from the facts. Pick at most 3 items from any list, and do not recite fact values one after another.
 - Jokes may exaggerate, but must not contradict a fact (a file that is listed exists).
-- You may gently tease a real quirk you can see in the facts or excerpts (a file named SomethingBACKUP, a 7,000-character one-liner, a README that is missing). Tease the monster, kindly.
+- You may gently tease one real quirk of THIS repository that you can see in its facts or excerpts, such as an odd file name or an unusual file. Tease the monster, kindly. Never borrow a quirk that is not in this repository's facts or excerpts.
 
 Rules:
 - Use only the facts given. Do not invent real events, incidents, release history, numbers, or contributor behaviour.

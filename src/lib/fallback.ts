@@ -10,7 +10,7 @@ import { paletteFromLanguages } from "@/lib/palette";
 
 export const PLACEHOLDER_NAME = "Placeholder Monster";
 export const PLACEHOLDER_TRAIT = "This is a placeholder.";
-/** 100 words of filler so the origin-story length check still runs on placeholder output (70-140 accepted). */
+/** 100 words of filler so the origin-story length check still runs on placeholder output (40-110 accepted). */
 export const PLACEHOLDER_STORY =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
   "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +

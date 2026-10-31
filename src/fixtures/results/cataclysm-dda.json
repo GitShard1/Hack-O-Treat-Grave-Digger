@@ -107,37 +107,34 @@
     ]
   },
   "character": {
-    "name": "The Tile-Hoarder of Dodge Hollow",
+    "name": "Jsonstrophe",
     "archetype": "golem",
     "palette": [
       "#f34b7d",
       "#3572a5",
       "#b07219"
     ],
-    "eyes": "glowing",
-    "accessories": [
-      "top-hat",
-      "chains"
-    ],
+    "eyes": "many",
+    "accessories": [],
     "aura": "sparks",
     "traits": [
       {
-        "title": "Built from ten thousand tiles",
-        "description": "Roughly two-thirds of its body is made of .json pieces, so it stitches itself together one data file at a time.",
+        "title": "Tablets from 64% JSON",
+        "description": "Most of its files are JSON, so a swarm of little data tablets, each labelled by file type, orbits it.",
         "factId": "f_tree_types"
       },
       {
-        "title": "Wears its headers like armour",
-        "description": "Its heart is src/game.h, a header that pulls in array, chrono, cstdint, ctime and functional before it does anything else.",
-        "factId": "f_code_imports"
+        "title": "Parts stacked in data/mods",
+        "description": "Nearly half its files sit in one mods folder, so it is a golem stitched together from thousands of small parts.",
+        "factId": "f_tree_folder"
       },
       {
-        "title": "Keeps its mods in one big chest",
-        "description": "Nearly half its parts live in data/mods/, so every new wasteland creature gets stored in the same drawer.",
-        "factId": "f_tree_folder"
+        "title": "Chained by game.h includes",
+        "description": "game.h pulls in array, chrono, cstdint, ctime and functional, so its arms are bound by a chain of headers.",
+        "factId": "f_code_imports"
       }
     ],
-    "originStory": "Long ago, in a valley where the sky never quite stopped flickering, a tinkerer tried to build a survivor out of scraps. The scraps were ideas: a world that stays put between sessions, a vehicle with a full tank of gas, a horde of giant insects and killer robots. Nothing could hold them together until the tinkerer wrote a single header, game.h, and bound it with clanking chains of includes. Each night the creature grew another piece from the mods folder, a zombie here, a rusty dish there, until it stood up on its own. Now it wanders the wasteland with a glowing stare and a top hat, still scavenging for parts. Travellers say that if you listen closely near its chains, you can hear it humming C++ to itself, counting every tile it has ever collected.",
+    "originStory": "WANTED: Jsonstrophe. Known for surviving a turn-based post-apocalypse while juggling 64 percent JSON. Last seen lurking in data/mods/, where 4,748 files crowd the shelves. Its only pyproject.toml exists to keep lines at 79 characters, a habit it considers a personal challenge. Dangerous when someone opens game.h, since its includes never end. Reward: one full tank of gas, offered to whoever convinces it that a semicolon is enough.",
     "source": "saved-example"
   }
 }

@@ -62,36 +62,33 @@
     ]
   },
   "character": {
-    "name": "Sir Ghostwick of the Armory",
+    "name": "Nocollidus Phantomix",
     "archetype": "ghost",
     "palette": [
       "#00a2ff",
       "#ff8a1f"
     ],
     "eyes": "glowing",
-    "accessories": [
-      "scarf",
-      "lantern"
-    ],
-    "aura": "sparks",
+    "accessories": [],
+    "aura": "fog",
     "traits": [
       {
-        "title": "Keeper of Six Weapons",
-        "description": "Six weapons rest on its shelves, from a BaseballBat to a DBShotgun, and it guards every one of them.",
+        "title": "Claws labelled with real weapons",
+        "description": "Each claw is tagged with a real weapon name from the Weapon/Weapons folder, so this monster never forgets its arsenal.",
         "factId": "f_tree_names"
       },
       {
-        "title": "Ghost Mode Phasing",
-        "description": "With a whispered request it flips a body into the NoCollision group and drifts straight through friends and foes.",
+        "title": "Drifts through friends on command",
+        "description": "A toggle moves players into a NoCollision group in GameSettings.luau, letting this ghost pass straight through its allies.",
         "factId": "f_code_file"
       },
       {
-        "title": "Speaks Only Luau",
-        "description": "Nearly every file is Luau, so the spirit chatters in one tongue and never switches languages.",
+        "title": "Speaks almost only Luau",
+        "description": "Nearly every file is Luau, so the creature has learned one language and wears its vocabulary proudly.",
         "factId": "f_tree_types"
       }
     ],
-    "originStory": "Long ago, in a quiet corner of ServerScriptService, a spirit wandered the halls of a Roblox game. It kept watch over a dusty armory where six weapons waited on their shelves: BaseballBat, GreatSword, Boots, ClassicSword, DBShotgun and PumpShotgun. Nobody asked it to guard them, but it insisted. One night it found a little switch in GameSettings.luau, a secret ritual called Ghost Mode. Whenever a player whispered the request, the spirit drew their body into the NoCollision group, slipping through friends and foes alike. Campfire tellers say it still floats between the Players and the Dummy targets, humming the Init song at midnight. Its three hundred and seven files are its family, and it has never been lonely since.",
+    "originStory": "Gather round, junior devs. This creature lets players turn into ghosts, drifting through one another by swapping collision groups in GameSettings.luau. Its claws are labelled with the weapons from ServerScriptService/Weapon/Weapons, including BaseballBat, GreatSword and Boots. It has no README, so it tells its life story out loud instead. It promised to pass through walls, yet its Boots claw keeps colliding with the Weapons folder. Keep your coffee warm, kids, and when a ghost asks for NoCollision, politely point it toward the Weapons folder.",
     "source": "saved-example"
   }
 }
