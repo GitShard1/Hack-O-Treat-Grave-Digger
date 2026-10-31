@@ -30,7 +30,7 @@ export const COPY = {
     chooseRepos: "Choose repos",
     signOut: "Sign out",
     privacyNote:
-      "Signed in: private repos work too. Their README and dependency file excerpts are sent to Anthropic's API to write your monster, and results are never cached or shared.",
+      "Signed in: private repos work too. Their README, dependency file and one source file excerpts are sent to Anthropic's API to write your monster, and results are never cached or shared.",
     messages: {
       ok: "Signed in with GitHub.",
       error: "GitHub sign-in didn't finish. Try again.",
@@ -48,15 +48,28 @@ export const COPY = {
     aliveShout: "It's alive!",
     monitor: { command: "> grave-digger --build", repo: "> repo:", stage: "> stage" },
     stages: {
-      frame: { status: "> forming the frame...", moments: { f_age: "Born {v}", f_stars: "Watched by {v} stargazers" } },
-      ectoplasm: { status: "> pumping in the ectoplasm...", moments: { f_lang_top: "Stitched from {v}", f_lang_mix: "Stitched from {v}" } },
+      frame: {
+        status: "> forming the frame...",
+        moments: { f_tree_folder: "Heaviest limb: {v}", f_age: "Born {v}", f_stars: "Watched by {v} stargazers" },
+      },
+      ectoplasm: { status: "> pumping in the ectoplasm...", moments: { f_lang_top: "Stitched from {v}", f_lang_mix: "Stitched from {v}", f_tree_types: "Mixed from {v}" } },
       eyes: {
         status: "> switching on the eyes...",
-        moments: { f_readme_title: "First words: {v}", f_readme_theme: "First words: {v}", f_description: "First words: {v}" },
+        moments: {
+          f_code_one_expression: "Found: {v}",
+          f_code_file: "Read {v}",
+          f_readme_title: "First words: {v}",
+          f_description: "First words: {v}",
+        },
       },
       accessories: {
         status: "> bolting on the extras...",
-        moments: { f_deps_named: "Bolted on: {v}", f_deps: "Spare parts: {v}", f_deps_count: "Spare parts: {v}" },
+        moments: {
+          f_tree_names: "Bolted on: {v}",
+          f_code_imports: "Wired to: {v}",
+          f_deps_named: "Bolted on: {v}",
+          f_deps: "Spare parts: {v}",
+        },
       },
       aura: { status: "> igniting the aura...", moments: { f_last_push: "Last stirred {v}", f_last_commit: "Latest commit {v}" } },
     },

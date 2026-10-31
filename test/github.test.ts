@@ -71,6 +71,7 @@ const repo = {
   private: true,
   description: "A private crypt",
   stargazers_count: 3,
+  default_branch: "main",
   created_at: "2020-01-01T00:00:00Z",
   pushed_at: "2026-10-30T00:00:00Z",
 };
@@ -87,14 +88,23 @@ describe("fetchRepoSnapshot", () => {
     if (savedToken !== undefined) process.env.GITHUB_TOKEN = savedToken;
   });
 
-  it("builds a snapshot in at most 6 calls and uses the user's token", async () => {
+  const tree = (paths: [string, string, number?][]) => ({
+    body: { truncated: false, tree: paths.map(([path, type, size]) => ({ path, type, size })) },
+  });
+
+  it("builds a snapshot in at most 7 calls and uses the user's token", async () => {
     const calls = mockGitHub({
       [base]: { body: repo },
       [`${base}/languages`]: { body: { TypeScript: 900, CSS: 100 } },
       [`${base}/readme`]: { text: "# Secret Crypt\nDo not open." },
-      [`${base}/contents/`]: { body: [{ name: "package.json", type: "file" }, { name: "src", type: "dir" }] },
-      [`${base}/commits?per_page=1`]: { body: [{ commit: { committer: { date: "2026-10-29T00:00:00Z" } } }] },
+      [`${base}/git/trees/main?recursive=1`]: tree([
+        ["package.json", "blob", 40],
+        ["src", "tree"],
+        ["src/index.ts", "blob", 900],
+      ]),
+      [`${base}/commits?per_page=1`]: { body: [{ sha: "abc123", commit: { committer: { date: "2026-10-29T00:00:00Z" } } }] },
       [`${base}/contents/package.json`]: { text: '{"dependencies":{"zod":"4"}}' },
+      [`${base}/contents/src/index.ts`]: { text: "export const crypt = 1;" },
     });
 
     const snapshot = await fetchRepoSnapshot({ owner: "ghoul", name: "secret-crypt" }, { userToken: "user-token" });
@@ -108,8 +118,12 @@ describe("fetchRepoSnapshot", () => {
       readme: "# Secret Crypt\nDo not open.",
       rootFiles: ["package.json", "src"],
       manifest: { file: "package.json", content: '{"dependencies":{"zod":"4"}}' },
+      latestCommitSha: "abc123",
+      tree: [{ path: "package.json", size: 40 }, { path: "src/index.ts", size: 900 }],
+      treeTruncated: false,
+      sourceFile: { path: "src/index.ts", content: "export const crypt = 1;", truncated: false },
     });
-    expect(calls.length).toBeLessThanOrEqual(6);
+    expect(calls.length).toBeLessThanOrEqual(7);
     for (const call of calls) expect(call.headers.Authorization).toBe("Bearer user-token");
   });
 
@@ -117,13 +131,26 @@ describe("fetchRepoSnapshot", () => {
     mockGitHub({
       [base]: { body: repo },
       [`${base}/languages`]: { body: {} },
-      [`${base}/contents/`]: { body: [{ name: "main.c", type: "file" }] },
+      [`${base}/git/trees/main?recursive=1`]: tree([["main.c", "blob", 10]]),
       [`${base}/commits?per_page=1`]: { body: [] },
     });
     const snapshot = await fetchRepoSnapshot({ owner: "ghoul", name: "secret-crypt" });
     expect(snapshot.readme).toBeNull();
     expect(snapshot.manifest).toBeNull();
     expect(snapshot.latestCommitAt).toBeNull();
+    expect(snapshot.sourceFile).toBeNull(); // main.c is too small to be worth reading
+  });
+
+  it("reports a cut-short file list and source file", async () => {
+    mockGitHub({
+      [base]: { body: repo },
+      [`${base}/git/trees/main?recursive=1`]: { body: { truncated: true, tree: [{ path: "main.py", type: "blob", size: 30_000 }] } },
+      [`${base}/contents/main.py`]: { text: "x = 1\n".repeat(5_000) },
+    });
+    const snapshot = await fetchRepoSnapshot({ owner: "ghoul", name: "secret-crypt" });
+    expect(snapshot.treeTruncated).toBe(true);
+    expect(snapshot.sourceFile).toMatchObject({ path: "main.py", truncated: true });
+    expect(snapshot.sourceFile?.content.length).toBe(20_000);
   });
 
   it("truncates the README to 4,000 characters", async () => {
@@ -139,7 +166,7 @@ describe("fetchRepoSnapshot", () => {
   it("treats missing optional data as empty for an empty repo instead of failing", async () => {
     mockGitHub({
       [base]: { body: { ...repo, description: null } },
-      [`${base}/contents/`]: { status: 404, body: { message: "This repository is empty." } },
+      [`${base}/git/trees/main?recursive=1`]: { status: 409, body: { message: "Git Repository is empty." } },
       [`${base}/commits?per_page=1`]: { status: 409, body: { message: "Git Repository is empty." } },
     });
     const snapshot = await fetchRepoSnapshot({ owner: "ghoul", name: "secret-crypt" });
@@ -150,6 +177,9 @@ describe("fetchRepoSnapshot", () => {
       readme: null,
       rootFiles: [],
       manifest: null,
+      tree: [],
+      treeTruncated: false,
+      sourceFile: null,
     });
   });
 

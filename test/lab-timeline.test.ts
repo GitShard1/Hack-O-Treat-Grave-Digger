@@ -18,7 +18,8 @@ describe("lab timeline", () => {
     expect(steps.map((s) => s.stage)).toEqual([1, 2, 3, 4, 5]);
     expect(steps[0]?.moment?.text).toBe("Born Feb 2011 (15 years ago)");
     expect(steps[1]?.moment?.text).toBe("Stitched from 99% Python");
-    expect(steps[3]?.moment?.text).toBe("Bolted on: charset_normalizer, idna, urllib3");
+    expect(steps[2]?.moment?.text).toBe("Read src/requests/api.py (7,152 characters, 181 lines)");
+    expect(steps[3]?.moment?.text).toBe("Bolted on: models, sessions, adapters, cookies, auth, api");
     expect(steps[4]?.moment?.fact.id).toBe("f_last_push");
   });
 

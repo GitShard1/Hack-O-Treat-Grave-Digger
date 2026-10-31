@@ -7,6 +7,8 @@ import { buildFacts, measureRepo } from "@/lib/facts";
 import type { RepoSnapshot } from "@/lib/github";
 import requests from "@/fixtures/snapshots/psf-requests.json";
 import ms from "@/fixtures/snapshots/vercel-ms.json";
+import spincube from "@/fixtures/snapshots/spincube.json";
+import mayhem from "@/fixtures/snapshots/mayhem-game.json";
 import { Monster } from "@/components/Monster/Monster";
 import { ResultCard } from "@/components/ResultCard";
 import { LabReplay } from "@/components/lab/LabReplay";
@@ -24,7 +26,7 @@ const VARIANTS: Pick<Character, "palette" | "eyes" | "accessories" | "aura">[] =
 ];
 
 export default function LabPage() {
-  const samples = ([requests, ms] as RepoSnapshot[]).map((snapshot) => {
+  const samples = ([spincube, mayhem, requests, ms] as RepoSnapshot[]).map((snapshot) => {
     const facts = buildFacts(snapshot);
     return { ok: true as const, facts, character: fallbackCharacter(facts, measureRepo(snapshot)) };
   });
