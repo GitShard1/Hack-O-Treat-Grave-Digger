@@ -55,15 +55,15 @@ Then open `.env.local` and fill in:
 | Variable | What it is | Who sets it up |
 |---|---|---|
 | `ANTHROPIC_API_KEY` | Claude API key from [console.anthropic.com](https://console.anthropic.com) (needs API credits, not a Claude subscription) | Whoever owns generation |
-| `GITHUB_TOKEN` | Fine-grained GitHub token, public repositories, read-only. Raises the limit from 60 to 5,000 GitHub calls per hour | Builder A |
+| `GITHUB_TOKEN` | Fine-grained GitHub token, public repositories, read-only. Raises the limit from 60 to 5,000 GitHub calls per hour. If set, it is checked at startup and the app will not start if GitHub rejects it | Builder A |
 | `GITHUB_APP_CLIENT_ID`, `GITHUB_APP_CLIENT_SECRET`, `GITHUB_APP_SLUG`, `SESSION_SECRET`, `APP_URL` | GitHub sign-in for private repos. See [GitHub sign-in](#github-sign-in-private-repos) below | Builder A |
 
 Everything is optional. With no keys at all, public repos work and get the built-in fallback monster.
 
 Rules for keys:
 - `.env.local` is ignored by git. **Never commit it, paste keys in chat, or put them in code.**
-- Keys are only read on the server (`src/lib/github.ts`, `src/lib/generate.ts`, `src/lib/auth/`, all marked `server-only`). They never reach the browser.
-- The app still starts without keys. Features that need them return an error or the fallback character.
+- Keys are only read on the server (`src/lib/github-auth.ts`, `src/lib/generate.ts`, `src/lib/auth/`, all marked `server-only`). They never reach the browser.
+- The app still starts without keys. Features that need them return an error or the fallback character. A `GITHUB_TOKEN` that is set but wrong stops startup with a clear message, so a bad token is caught early.
 
 ### 4. Run it
 ```bash
@@ -123,6 +123,7 @@ src/lib/contract.ts          Shared data contract (Zod schemas and types). Agree
 
 Builder A (data and generation)
 src/lib/github.ts            Bounded GitHub fetch (6 calls max) and URL parsing
+src/lib/github-auth.ts       GITHUB_TOKEN lookup and startup check (run from src/instrumentation.ts)
 src/lib/auth/                GitHub App sign-in and encrypted session cookie
 src/app/api/auth/            Sign-in, callback, sign-out and "who am I" routes
 src/lib/facts.ts             Snapshot to measured numbers and evidence facts (deterministic)

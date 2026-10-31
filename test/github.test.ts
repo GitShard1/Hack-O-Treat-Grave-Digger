@@ -11,11 +11,32 @@ describe("parseRepoUrl", () => {
     ["https://www.github.com/vercel/next.js/tree/canary/docs", "vercel", "next.js"],
     ["  https://github.com/vercel/ms/  ", "vercel", "ms"],
     ["https://github.com/a/b?tab=readme", "a", "b"],
+    ["http://github.com/psf/requests", "psf", "requests"],
+    ["www.github.com/vercel/ms", "vercel", "ms"],
+    ["https://github.com/vercel/ms?tab=readme#top", "vercel", "ms"],
+    ["https://github.com/some-user/my_repo-2.0", "some-user", "my_repo-2.0"],
   ])("reads %s", (input, owner, name) => {
     expect(parseRepoUrl(input)).toEqual({ owner, name });
   });
 
-  it.each(["", "psf", "https://gitlab.com/psf/requests", "https://github.com/", "-bad/repo", "psf/..", "a b/c"])(
+  it.each([
+    "",
+    "   ",
+    "psf",
+    "https://gitlab.com/psf/requests",
+    "https://github.com/",
+    "https://github.com/owner",
+    "-bad/repo",
+    "psf/..",
+    "https://github.com/owner/.",
+    "a b/c",
+    "https://github.com/owner/" + "a".repeat(101),
+    "ftp://github.com/owner/repo",
+    "owner/repo/extra",
+    "https://github.com.evil.example/owner/repo",
+    "javascript:alert(1)",
+    "a".repeat(301),
+  ])(
     "rejects %j",
     (input) => {
       expect(() => parseRepoUrl(input)).toThrowError(SummonError);
@@ -103,6 +124,43 @@ describe("fetchRepoSnapshot", () => {
     expect(snapshot.readme).toBeNull();
     expect(snapshot.manifest).toBeNull();
     expect(snapshot.latestCommitAt).toBeNull();
+  });
+
+  it("truncates the README to 4,000 characters", async () => {
+    mockGitHub({
+      [base]: { body: repo },
+      [`${base}/languages`]: { body: {} },
+      [`${base}/readme`]: { text: "x".repeat(5000) },
+    });
+    const snapshot = await fetchRepoSnapshot({ owner: "ghoul", name: "secret-crypt" });
+    expect(snapshot.readme?.length).toBe(4000);
+  });
+
+  it("treats missing optional data as empty for an empty repo instead of failing", async () => {
+    mockGitHub({
+      [base]: { body: { ...repo, description: null } },
+      [`${base}/contents/`]: { status: 404, body: { message: "This repository is empty." } },
+      [`${base}/commits?per_page=1`]: { status: 409, body: { message: "Git Repository is empty." } },
+    });
+    const snapshot = await fetchRepoSnapshot({ owner: "ghoul", name: "secret-crypt" });
+    expect(snapshot).toMatchObject({
+      description: null,
+      latestCommitAt: null,
+      languages: {},
+      readme: null,
+      rootFiles: [],
+      manifest: null,
+    });
+  });
+
+  it("still stops on a rate limit from an optional call", async () => {
+    mockGitHub({
+      [base]: { body: repo },
+      [`${base}/languages`]: { status: 403, body: {}, headers: { "x-ratelimit-remaining": "0" } },
+    });
+    await expect(fetchRepoSnapshot({ owner: "ghoul", name: "secret-crypt" })).rejects.toMatchObject({
+      code: "RATE_LIMITED",
+    });
   });
 
   it("reports a missing or hidden repo, with a sign-in hint", async () => {

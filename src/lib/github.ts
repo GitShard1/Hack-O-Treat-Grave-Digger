@@ -2,6 +2,7 @@
 // nothing from the repo is ever executed. README and manifest text are UNTRUSTED data.
 import "server-only";
 import { SummonError } from "@/lib/errors";
+import { getGitHubToken } from "@/lib/github-auth";
 import { MANIFEST_FILES } from "@/lib/manifest";
 
 export type RepoRef = { owner: string; name: string };
@@ -31,31 +32,39 @@ const README_MAX_CHARS = 4_000;
 const MANIFEST_MAX_CHARS = 4_000;
 const REQUEST_TIMEOUT_MS = 8_000;
 
+// GitHub owner (user or org): 1-39 chars, letters, digits and hyphens, no leading hyphen.
 const OWNER = /^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$/;
+// GitHub repo name: letters, digits, ".", "-", "_", max 100 chars. "." and ".." are not valid names.
 const NAME = /^[A-Za-z0-9._-]{1,100}$/;
+const MAX_INPUT_LENGTH = 300;
 
 /**
- * Accepts "https://github.com/owner/name", "github.com/owner/name", "owner/name",
- * with or without ".git", a trailing slash, or extra path such as "/tree/main".
+ * Accepts "https://github.com/owner/name", "github.com/owner/name", "www.github.com/owner/name"
+ * or a bare "owner/name", with or without ".git", a trailing slash or a query. Extra path such as
+ * "/tree/main" is allowed only after a github.com host. Pure string work: no network call.
  */
 export function parseRepoUrl(input: string): RepoRef {
-  const trimmed = input.trim();
-  const path = trimmed
-    .replace(/^https?:\/\//i, "")
-    .replace(/^(www\.)?github\.com\//i, "")
-    .split(/[?#]/)[0];
-  const [owner, rawName] = (path ?? "").split("/");
-  const name = rawName?.replace(/\.git$/i, "");
+  const invalid = () => new SummonError("INVALID_URL", "That doesn't look like a GitHub repo. Try https://github.com/owner/repo.");
 
-  const looksLikeOtherHost = /^https?:\/\//i.test(trimmed) && !/^https?:\/\/(www\.)?github\.com\//i.test(trimmed);
-  if (looksLikeOtherHost || !owner || !name || !OWNER.test(owner) || !NAME.test(name) || name === "." || name === "..") {
-    throw new SummonError("INVALID_URL", "That doesn't look like a GitHub repo. Try https://github.com/owner/repo.");
-  }
+  const trimmed = input.trim();
+  if (trimmed.length === 0 || trimmed.length > MAX_INPUT_LENGTH) throw invalid();
+
+  // Strip an optional scheme, then the host must be github.com. A bare "owner/name" has no host.
+  const withoutScheme = trimmed.replace(/^https?:\/\//i, "");
+  const hostMatch = withoutScheme.match(/^(?:www\.)?github\.com\/(.*)$/i);
+  const hasHost = hostMatch !== null;
+  const pathPart = (hostMatch?.[1] ?? withoutScheme).split(/[?#]/)[0] ?? "";
+  const segments = pathPart.split("/").filter((s) => s.length > 0);
+  if (segments.length < 2 || (!hasHost && segments.length !== 2)) throw invalid();
+
+  const owner = segments[0] ?? "";
+  const name = (segments[1] ?? "").replace(/\.git$/i, "");
+  if (!OWNER.test(owner) || !NAME.test(name) || name === "." || name === "..") throw invalid();
   return { owner, name };
 }
 
 export type FetchOptions = {
-  /** Signed-in user's token (for private repos). Falls back to GITHUB_TOKEN, then no token. */
+  /** Signed-in user's token (for private repos). Falls back to GITHUB_TOKEN (read in github-auth.ts), then no token. */
   userToken?: string;
 };
 
@@ -108,21 +117,33 @@ async function optionalText(gh: Gh, path: string, slug: string, signedIn: boolea
   return (await res.text()).slice(0, maxChars);
 }
 
+/** Only created_at and pushed_at are relied on; everything else may be missing. */
 type RepoResponse = {
-  name: string;
-  owner: { login: string };
-  private: boolean;
-  description: string | null;
-  stargazers_count: number;
+  name?: string;
+  owner?: { login?: string };
+  private?: boolean;
+  description?: string | null;
+  stargazers_count?: number;
   created_at: string;
   pushed_at: string;
 };
 type ContentEntry = { name: string; type: string };
-type CommitEntry = { commit: { committer: { date: string } | null } };
+type CommitEntry = { commit?: { committer?: { date?: string } | null } };
+
+/** Optional data that just isn't there: 404, or 409 for an empty repo. */
+const isMissing = (res: Response) => res.status === 404 || res.status === 409;
+
+function numbersOnly(value: Record<string, unknown>): Record<string, number> {
+  const out: Record<string, number> = {};
+  for (const [key, bytes] of Object.entries(value)) {
+    if (typeof bytes === "number" && Number.isFinite(bytes)) out[key] = bytes;
+  }
+  return out;
+}
 
 export async function fetchRepoSnapshot(ref: RepoRef, options: FetchOptions = {}): Promise<RepoSnapshot> {
   const signedIn = Boolean(options.userToken);
-  const gh = githubClient(options.userToken ?? process.env.GITHUB_TOKEN);
+  const gh = githubClient(options.userToken ?? getGitHubToken() ?? undefined);
   const slug = repoSlug(ref);
   const base = `/repos/${encodeURIComponent(ref.owner)}/${encodeURIComponent(ref.name)}`;
 
@@ -139,14 +160,14 @@ export async function fetchRepoSnapshot(ref: RepoRef, options: FetchOptions = {}
       gh(`${base}/contents/`),
       gh(`${base}/commits?per_page=1`),
     ]);
-    if (!languagesRes.ok) throw failure(languagesRes, slug, signedIn);
-    const languages = await json<Record<string, number>>(languagesRes);
-
-    // An empty repo has no contents and no commits (404/409); treat both as empty.
+    // Only the metadata call is required. Missing optional data counts as empty;
+    // any other failure, such as a rate limit, still stops the summon.
+    for (const res of [languagesRes, rootRes, commitsRes]) {
+      if (!res.ok && !isMissing(res)) throw failure(res, slug, signedIn);
+    }
+    const languages = languagesRes.ok ? numbersOnly(await json<Record<string, unknown>>(languagesRes)) : {};
     const rootFiles = rootRes.ok ? (await json<ContentEntry[]>(rootRes)).map((entry) => entry.name) : [];
-    if (!rootRes.ok && rootRes.status !== 404 && rootRes.status !== 409) throw failure(rootRes, slug, signedIn);
     const commits = commitsRes.ok ? await json<CommitEntry[]>(commitsRes) : [];
-    if (!commitsRes.ok && commitsRes.status !== 409) throw failure(commitsRes, slug, signedIn);
 
     // 6. The first manifest we know how to read, if any.
     const manifestFile = MANIFEST_FILES.find((file) => rootFiles.includes(file));
@@ -155,13 +176,14 @@ export async function fetchRepoSnapshot(ref: RepoRef, options: FetchOptions = {}
       : null;
 
     return {
-      ref: { owner: repo.owner.login, name: repo.name }, // canonical, after any redirect
-      private: repo.private,
-      description: repo.description,
-      stars: repo.stargazers_count,
+      // Canonical names after any redirect, when GitHub sends them.
+      ref: { owner: repo.owner?.login ?? ref.owner, name: repo.name ?? ref.name },
+      private: repo.private ?? false,
+      description: repo.description ?? null,
+      stars: typeof repo.stargazers_count === "number" ? repo.stargazers_count : 0,
       createdAt: repo.created_at,
       pushedAt: repo.pushed_at,
-      latestCommitAt: commits[0]?.commit.committer?.date ?? null,
+      latestCommitAt: commits[0]?.commit?.committer?.date ?? null,
       languages,
       readme,
       rootFiles,
