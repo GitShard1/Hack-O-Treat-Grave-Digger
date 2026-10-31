@@ -60,20 +60,37 @@ function labelsFor(motif: Motif, fact: Fact): string[] {
   }
 }
 
+/**
+ * The part for a signature fact. Also used by the server (generate.ts) before Claude writes, so the
+ * story can describe the part that will be drawn.
+ */
+export function pickMotif(signatureFactId: string, facts: Fact[]): { motif: Motif; cage: boolean } {
+  const geometry = facts.some((f) => GEOMETRY_SOURCES.includes(f.id) && GEOMETRY.test(f.value));
+  let motif: Motif;
+  if (signatureFactId === "f_code_one_expression" || signatureFactId === "f_tree_few_files") motif = "filament";
+  else if (signatureFactId === "f_tree_types" || signatureFactId === "f_tree_folder") motif = "swarm";
+  else if (signatureFactId === "f_tree_names") motif = "rig";
+  else motif = geometry ? "cage" : "glyphs";
+  return { motif, cage: geometry && motif !== "cage" };
+}
+
+/** What each part looks like, in words, for the story prompt. */
+export const MOTIF_DESCRIPTIONS: Record<Motif, string> = {
+  cage: "a rotating wireframe cube that cages its whole body",
+  filament: "one unbroken glowing filament knotted through its whole body",
+  swarm: "a swarm of little data tablets, labelled with file types, orbiting it",
+  rig: "a rig of jointed limbs, each tipped with a claw labelled with one of the real file names",
+  glyphs: "a ring of words from its own description circling it",
+};
+
 export function signatureOf(character: Character, facts: Fact[]): Signature | null {
   const fact = facts.find((f) => f.id === character.traits[0].factId);
   if (!fact) return null;
-  const geometry = facts.some((f) => GEOMETRY_SOURCES.includes(f.id) && GEOMETRY.test(f.value));
-
-  let motif: Motif;
-  if (fact.id === "f_code_one_expression" || fact.id === "f_tree_few_files") motif = "filament";
-  else if (fact.id === "f_tree_types" || fact.id === "f_tree_folder") motif = "swarm";
-  else if (fact.id === "f_tree_names") motif = "rig";
-  else motif = geometry ? "cage" : "glyphs";
+  const { motif, cage } = pickMotif(fact.id, facts);
 
   return {
     motif,
-    cage: geometry && motif !== "cage",
+    cage,
     labels: labelsFor(motif, fact),
     fact,
     seed: hash(`${fact.id}:${fact.value}`),
