@@ -1,6 +1,8 @@
-# Hack-O-Treat 🎃
+# Grave Digger 🪦
 
-> _One-line pitch goes here._
+> Every codebase has a monster inside it. Meet yours, and see what brought it to life.
+
+Built for the Hack-O-Treat hackathon. Design doc: [docs/DESIGN.md](docs/DESIGN.md)
 
 ## The Problem
 _What problem are we solving, and for whom?_
