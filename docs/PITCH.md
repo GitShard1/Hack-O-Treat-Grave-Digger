@@ -15,6 +15,10 @@ through it. Lines in quotes are things to say; **bold** is what to point at on s
 "Every codebase has a monster inside it. Paste a GitHub repo, and Grave Digger digs through the real
 code and builds the creature it describes - then lets you dissect it."
 
+"Many GitHub users, like you, have dead repositories just... collecting dust. You may ask: What can we do about these rotting repos? Well, Grave Digger revives your GitHub repositories from the dead."
+
+"Paste any repository, and here the monster awaits. Lets dig up a grave!"
+
 ## Problem (30s)
 "Opening an unfamiliar repo is intimidating: thousands of files, no idea where to start. READMEs tell
 you what a project wants to be, not what's strange about how it's built. We wanted something you
