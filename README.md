@@ -24,6 +24,8 @@ Built for the Hack-O-Treat hackathon. Design doc: [docs/DESIGN.md](docs/DESIGN.m
 
 ## Setup
 
+**New to this? Follow the step-by-step Windows guide: [docs/RUN_LOCALLY.md](docs/RUN_LOCALLY.md).**
+
 ### 1. Prerequisites
 - **Node.js 20 or newer.** Download it from [nodejs.org](https://nodejs.org). It includes **npm** (Node Package Manager), which installs the project's libraries and runs its commands.
 - **Git**
