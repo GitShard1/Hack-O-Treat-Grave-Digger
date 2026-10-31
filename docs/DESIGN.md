@@ -9,11 +9,7 @@ Originality: everything is built independently from scratch. No code, assets, pr
 **Official brief:** "Hack for a Halloween Character": create your best project that a Halloween character could use in their day-to-day life.
 **Organizer ruling (31 Oct, #ask-organizer):** interpretation is up to us and they're not strict about it, but we have to *sell it* to them.
 
-**Our angle covers both readings:**
-- *Involving* a character: every repo becomes its own Halloween monster.
-- *For* a character: the app is the work tool of **the Grave Digger**, a Halloween character whose day job is digging up buried, forgotten and still-twitching repos and finding out what monster lives inside each one. The landing page and pitch speak in the Grave Digger's voice ("Another plot to dig…"), so judges see a character using the tool, not just a generator.
-
-Pitch line for judges: *"The Grave Digger's day job is exhuming codebases. We built the shovel."*
+**Our reading:** the project *involves* a Halloween character. It turns any GitHub repo into its own Halloween monster. It doesn't need to be a tool a character uses. The organizer confirmed that reading is fine.
 
 ---
 
