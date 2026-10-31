@@ -17,7 +17,7 @@ code and builds the creature it describes - then lets you dissect it."
 
 "Many GitHub users, like you, have dead repositories just... collecting dust. You may ask: What can we do about these rotting repos? Well, Grave Digger revives your GitHub repositories from the dead."
 
-"Paste any repository, and here the monster awaits. Lets dig up a grave!"
+"Just paste in any GitHub repository, and here the monster awaits... from the dead. Lets dig up a grave!"
 
 ## Problem (30s)
 "Opening an unfamiliar repo is intimidating: thousands of files, no idea where to start. READMEs tell
