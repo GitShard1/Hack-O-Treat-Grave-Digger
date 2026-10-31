@@ -14,7 +14,7 @@ through it. Lines in quotes are things to say; **bold** is what to point at on s
 ## Hook (15s)
 "Many GitHub users, like you, have dead repositories just... collecting dust. Well, Grave Digger revives your GitHub repositories from the dead as monsters that represents them."
 
-"Just paste in any GitHub repository, and here the monster awaits... from the dead. Lets dig up a grave!"
+"Just paste in any GitHub repository, and the app digs up their grave."
 
 ## Problem (30s)
 "Opening an unfamiliar repo is intimidating: thousands of files, no idea where to start. READMEs tell
