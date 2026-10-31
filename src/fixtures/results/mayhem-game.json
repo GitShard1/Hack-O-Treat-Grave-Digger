@@ -72,33 +72,35 @@
     ]
   },
   "character": {
-    "name": "Nocollidus Phantomix",
-    "archetype": "ghost",
+    "name": "Mayhem Gamemangler",
+    "archetype": "golem",
     "palette": [
       "#00a2ff",
       "#ff8a1f"
     ],
-    "eyes": "glowing",
-    "accessories": [],
-    "aura": "fog",
+    "eyes": "pair",
+    "accessories": [
+      "lantern"
+    ],
+    "aura": "embers",
     "traits": [
       {
-        "title": "Claws labelled with real weapons",
-        "description": "Each claw is tagged with a real weapon name from the Weapon/Weapons folder, so this monster never forgets its arsenal.",
+        "title": "Weapon-Labelled Claws",
+        "description": "ServerScriptService/Weapon/Weapons holds six weapon files, including BaseballBat, GreatSword and Boots.",
         "factId": "f_tree_names"
       },
       {
-        "title": "Drifts through friends on command",
-        "description": "A toggle moves players into a NoCollision group in GameSettings.luau, letting this ghost pass straight through its allies.",
+        "title": "Collision Group Joints",
+        "description": "GameSettings.luau registers the ViewModel, Players and NoCollision groups and switches character parts between them.",
         "factId": "f_code_file"
       },
       {
-        "title": "Speaks almost only Luau",
-        "description": "Nearly every file is Luau, so the creature has learned one language and wears its vocabulary proudly.",
+        "title": "Luau-Dominant Frame",
+        "description": "98% of the 307 files are .luau, and only 1% are .md.",
         "factId": "f_tree_types"
       }
     ],
-    "originStory": "Gather round, junior devs. This creature lets players turn into ghosts, drifting through one another by swapping collision groups in GameSettings.luau. Its claws are labelled with the weapons from ServerScriptService/Weapon/Weapons, including BaseballBat, GreatSword and Boots. It has no README, so it tells its life story out loud instead. It promised to pass through walls, yet its Boots claw keeps colliding with the Weapons folder. Keep your coffee warm, kids, and when a ghost asks for NoCollision, politely point it toward the Weapons folder.",
+    "originStory": "Gather round, junior devs. This creature lives behind a ghost switch: one remote call and a character slips through every other player like fog. Its claws are labelled BaseballBat, GreatSword and DBShotgun, so every swing carries a file name. It arrived with no README, so it tells its tale by firelight instead. Its one habit is slipping through GameSettings.luau as if the file were fog too. Keep your coffee close, and whatever you do, don't rename its claws.",
     "source": "saved-example"
   }
 }

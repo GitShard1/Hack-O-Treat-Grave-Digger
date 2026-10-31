@@ -88,32 +88,34 @@
   },
   "character": {
     "name": "Spincubus",
-    "archetype": "ghost",
+    "archetype": "witch",
     "palette": [
       "#3572a5",
       "#ff8a1f"
     ],
     "eyes": "glowing",
-    "accessories": [],
+    "accessories": [
+      "candle"
+    ],
     "aura": "sparks",
     "traits": [
       {
-        "title": "One unbroken expression",
-        "description": "The whole program is a single expression, so the filament running through its body never has to pause for a new line.",
+        "title": "Single-Expression Body",
+        "description": "cube.py is one expression spanning 53 lines, with lambdas nested inside a single dictionary literal.",
         "factId": "f_code_one_expression"
       },
       {
-        "title": "Four imports, light pack",
-        "description": "It carries only functools, math, ctypes and time, so it travels with very little luggage.",
+        "title": "Standard-Library Imports",
+        "description": "cube.py imports functools, math, ctypes and time, all from the Python standard library.",
         "factId": "f_code_imports"
       },
       {
-        "title": "Two source files, one soul",
-        "description": "Only cube.py and shadecube.py live in the folder, so the monster has very few places to hide.",
+        "title": "Two-Module Layout",
+        "description": "The repository holds only two source files, cube.py and shadecube.py, with no other Python modules.",
         "factId": "f_tree_few_files"
       }
     ],
-    "originStory": "Spincubus haunts a single window, 500 pixels wide, where it turns a wireframe cube without rest. Its diet is pure math, borrowed from the math module and digested in one gulp. Behaviour is the strange part: a glowing filament knots through its whole body, and everything it is fits inside a single expression, so it cannot be interrupted for a loop. Field guides note it keeps no README and prefers shadecube.py for company. Disturb it at your peril, but the spin never stops, because it is still busy being one unbroken sentence.",
+    "originStory": "The Spincubus is found on a Windows desktop, where it draws a rotating cube in thin wireframe lines. It feeds on the clock, reading time and math with every turn. Its body is one unbroken expression, stretched over fifty-three lines, and a glowing filament runs through every fold of it. Field notes record no README, so no naturalist has learned its habits from a manual. Its companion, shadecube.py, lives in the same clearing, but the Spincubus has never been seen shading a single face. It spins on, faithful to one line.",
     "source": "saved-example"
   }
 }

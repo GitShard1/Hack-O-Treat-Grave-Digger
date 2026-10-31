@@ -100,7 +100,7 @@ export function ResultCard({ result, handoff }: Props) {
             <p className="mt-3 max-w-prose text-sm leading-relaxed">{character.originStory}</p>
           </section>
 
-          <details className="mt-8 rounded-2xl border border-line bg-surface p-4">
+          <details open className="mt-8 rounded-2xl border border-line bg-surface p-4">
             <summary className="cursor-pointer font-display text-xl">{COPY.result.inspectHeading}</summary>
             <p className="mt-2 text-xs text-muted">{COPY.result.inspectNote}</p>
             <div className="mt-4 grid gap-5 sm:grid-cols-2">

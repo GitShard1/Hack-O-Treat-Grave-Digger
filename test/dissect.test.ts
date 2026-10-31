@@ -31,8 +31,8 @@ describe("dissect", () => {
     const report = dissect(cataclysm!);
     expect(report?.motif).toBe("swarm");
     expect(report?.links.map((l) => l.url)).toContain(
-      // GitHub's canonical owner/name casing, as returned when the repo was fetched.
-      `${cataclysm!.facts.url}/tree/84fc3f4fc034cde01221574d35f0e0defb73f52c/data/mods`,
+      // GitHub's canonical owner/name casing and the commit inspected, as saved with the example.
+      `${cataclysm!.facts.url}/tree/${cataclysm!.facts.facts.find((f) => f.id === "f_tree_revision")?.value}/data/mods`,
     );
   });
 
