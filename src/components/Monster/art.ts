@@ -25,6 +25,19 @@ export const ART = {
   hill: "var(--art-hill)",
   silhouette: "var(--art-silhouette)",
   epitaph: "var(--art-epitaph)",
+  labWall: "var(--art-lab-wall)",
+  labWallLine: "var(--art-lab-wall-line)",
+  labFloorGrid: "var(--art-lab-floor-grid)",
+  labSteel: "var(--art-lab-steel)",
+  labSteelLight: "var(--art-lab-steel-light)",
+  labGlass: "var(--art-lab-glass)",
+  labGlassEdge: "var(--art-lab-glass-edge)",
+  labScreen: "var(--art-lab-screen)",
+  labScreenText: "var(--art-lab-screen-text)",
+  labFrame: "var(--art-lab-frame)",
+  labSpark: "var(--art-lab-spark)",
+  labFlash: "var(--art-lab-flash)",
+  labVignette: "var(--art-lab-vignette)",
 } as const;
 
 /** CSS filter that makes any SVG or element look hand-drawn. Defined once in <SketchDefs />. */

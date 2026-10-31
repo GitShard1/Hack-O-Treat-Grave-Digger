@@ -37,6 +37,30 @@ export const COPY = {
       unavailable: "GitHub sign-in isn't set up on this server yet.",
     },
   },
+  /** The monster lab build sequence that plays after a summon. Moments only quote real repo facts: {v} is the fact value. */
+  lab: {
+    ariaLabel: "The monster lab is building your monster from the repo's facts.",
+    skip: "Skip",
+    skipHint: "Skip to the finished monster",
+    momentTag: "key moment",
+    boot: "> powering up the lab...",
+    alive: "> it's alive!",
+    aliveShout: "It's alive!",
+    monitor: { command: "> grave-digger --build", repo: "> repo:", stage: "> stage" },
+    stages: {
+      frame: { status: "> forming the frame...", moments: { f_age: "Born {v}", f_stars: "Watched by {v} stargazers" } },
+      ectoplasm: { status: "> pumping in the ectoplasm...", moments: { f_lang_top: "Stitched from {v}", f_lang_mix: "Stitched from {v}" } },
+      eyes: {
+        status: "> switching on the eyes...",
+        moments: { f_readme_title: "First words: {v}", f_readme_theme: "First words: {v}", f_description: "First words: {v}" },
+      },
+      accessories: {
+        status: "> bolting on the extras...",
+        moments: { f_deps_named: "Bolted on: {v}", f_deps: "Spare parts: {v}", f_deps_count: "Spare parts: {v}" },
+      },
+      aura: { status: "> igniting the aura...", moments: { f_last_push: "Last stirred {v}", f_last_commit: "Latest commit {v}" } },
+    },
+  },
   sourceBadge: {
     live: null,
     fallback: "Placeholder monster: writing not built yet",

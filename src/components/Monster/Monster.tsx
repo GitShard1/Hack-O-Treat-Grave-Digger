@@ -1,21 +1,52 @@
 // OWNER: Builder B. Procedural SVG monster assembled from Character parts.
 // Layers, back to front: glow, back aura, body, eyes, accessories, front aura.
+// Pass `stage` to draw a partly built monster (used by the monster lab); leave it out for the finished one.
 "use client";
-import { useId } from "react";
+import { useId, type ReactNode } from "react";
+import { motion } from "framer-motion";
 import type { Character } from "@/lib/contract";
 import { ART } from "./art";
 import { BODIES, type Colors } from "./bodies";
 import { Accessories, AuraBack, AuraFront, Eyes } from "./parts";
+import { BUILD_STAGES, type BuildStage } from "./stages";
 
-type Props = { character: Character; size?: number; animated?: boolean };
+type Props = {
+  character: Character;
+  size?: number;
+  animated?: boolean;
+  /** How many BUILD_STAGES are done (0-5). Undefined draws the finished monster with no entry animation. */
+  stage?: number;
+};
 
-export function Monster({ character, size = 280, animated = true }: Props) {
+const FRAME_COLORS: Colors = { body: ART.labFrame, accent: ART.labFrame, third: ART.labFrame };
+const POP = { type: "spring", stiffness: 260, damping: 16 } as const;
+
+export function Monster({ character, size = 280, animated = true, stage }: Props) {
   const uid = useId().replace(/:/g, "");
   const glowId = `${uid}-glow`;
   const haloId = `${uid}-halo`;
+  const fillId = `${uid}-fill`;
   const [body = ART.defaultBody, accent = ART.defaultAccent, third] = character.palette;
   const colors: Colors = { body, accent, third: third ?? accent };
   const { anchors, draw } = BODIES[character.archetype];
+
+  const building = stage !== undefined;
+  const done = (part: BuildStage) => !building || stage > BUILD_STAGES.indexOf(part);
+
+  /** In the lab each part animates in when it first appears; the finished monster renders plain. */
+  const enter = (part: string, from: Record<string, number>, children: ReactNode, transition: object = POP) =>
+    building ? (
+      <motion.g key={part} initial={from} animate={{ opacity: 1, x: 0, y: 0, scale: 1, scaleY: 1 }} transition={transition}>
+        {children}
+      </motion.g>
+    ) : (
+      children
+    );
+
+  const eyes = <Eyes style={character.eyes} at={anchors.eyes} colors={colors} glowId={glowId} />;
+  const accessories = (
+    <Accessories items={character.accessories} archetype={character.archetype} anchors={anchors} colors={colors} glowId={glowId} />
+  );
 
   return (
     <svg
@@ -38,23 +69,40 @@ export function Monster({ character, size = 280, animated = true }: Props) {
           <stop offset="0%" stopColor={colors.accent} stopOpacity={0.45} />
           <stop offset="100%" stopColor={colors.accent} stopOpacity={0} />
         </radialGradient>
+        {building && (
+          <clipPath id={fillId} clipPathUnits="userSpaceOnUse">
+            {/* Ectoplasm rises from the feet up. */}
+            <motion.rect
+              x={-20}
+              width={280}
+              height={320}
+              initial={{ y: 290 }}
+              animate={{ y: done("ectoplasm") ? -20 : 290 }}
+              transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }}
+            />
+          </clipPath>
+        )}
       </defs>
 
-      <ellipse cx={120} cy={150} rx={120} ry={130} fill={`url(#${haloId})`} />
+      {done("aura") &&
+        enter("halo", { opacity: 0, scale: 0.4 }, <ellipse cx={120} cy={150} rx={120} ry={130} fill={`url(#${haloId})`} />, {
+          duration: 0.7,
+        })}
       <ellipse cx={120} cy={262} rx={74} ry={9} fill={ART.groundShadow} opacity={0.4} />
-      <AuraBack aura={character.aura} colors={colors} />
+      {done("aura") && enter("aura-back", { opacity: 0 }, <AuraBack aura={character.aura} colors={colors} />, { duration: 0.6 })}
       <g className={animated ? "gd-float" : undefined}>
-        {draw(colors)}
-        <Eyes style={character.eyes} at={anchors.eyes} colors={colors} glowId={glowId} />
-        <Accessories
-          items={character.accessories}
-          archetype={character.archetype}
-          anchors={anchors}
-          colors={colors}
-          glowId={glowId}
-        />
+        {building ? (
+          <>
+            {done("frame") && enter("frame", { opacity: 0, scaleY: 0.3, y: 30 }, draw(FRAME_COLORS))}
+            <g clipPath={`url(#${fillId})`}>{draw(colors)}</g>
+          </>
+        ) : (
+          draw(colors)
+        )}
+        {done("eyes") && enter("eyes", { opacity: 0, scale: 0 }, eyes)}
+        {done("accessories") && enter("accessories", { opacity: 0, y: -60 }, accessories, { ...POP, damping: 11 })}
       </g>
-      <AuraFront aura={character.aura} colors={colors} />
+      {done("aura") && enter("aura-front", { opacity: 0 }, <AuraFront aura={character.aura} colors={colors} />, { duration: 0.6 })}
     </svg>
   );
 }

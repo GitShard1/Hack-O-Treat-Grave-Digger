@@ -1,4 +1,4 @@
-// OWNER: Builder B. Input, example repos, loading, result, and error with retry.
+// OWNER: Builder B. Input, example repos, loading, the monster lab and result, and error with retry.
 "use client";
 import { useState, type FormEvent } from "react";
 import { SummonResponseSchema, type SummonSuccess } from "@/lib/contract";
@@ -6,8 +6,7 @@ import { exampleResult } from "@/lib/examples";
 import { COPY } from "@/content/copy";
 import { AuthButton } from "@/components/AuthButton";
 import { DigLoader } from "@/components/DigLoader";
-import { ResultCard } from "@/components/ResultCard";
-import { Reveal } from "@/components/Reveal";
+import { SummonReveal } from "@/components/lab/SummonReveal";
 import { SketchFrame } from "@/components/SketchFrame";
 
 /** Three contrasting public repos for judges: a huge framework, a classic library, a tiny utility. */
@@ -128,9 +127,7 @@ export default function Home() {
           </SketchFrame>
         )}
         {state.status === "done" && (
-          <Reveal key={state.runId}>
-            <ResultCard result={state.result} />
-          </Reveal>
+          <SummonReveal key={state.runId} result={state.result} />
         )}
       </div>
     </main>

@@ -67,4 +67,19 @@
   --art-hill: #151a38;
   --art-silhouette: #05060f;
   --art-epitaph: #4dff9a;         /* code carved on tombstones */
+
+  /* monster lab (the build sequence after a summon) */
+  --art-lab-wall: #10152e;
+  --art-lab-wall-line: rgb(242 239 230 / 0.10);
+  --art-lab-floor-grid: rgb(77 255 154 / 0.28);
+  --art-lab-steel: #5b6283;
+  --art-lab-steel-light: #8d94b8;
+  --art-lab-glass: rgb(207 214 255 / 0.07);
+  --art-lab-glass-edge: rgb(207 214 255 / 0.55);
+  --art-lab-screen: #07160f;
+  --art-lab-screen-text: #4dff9a;
+  --art-lab-frame: #2a3058;       /* the unfilled body before ectoplasm goes in */
+  --art-lab-spark: #fff3b0;
+  --art-lab-flash: #eef2ff;       /* the "it's alive" lightning flash */
+  --art-lab-vignette: #05060f;
 }
