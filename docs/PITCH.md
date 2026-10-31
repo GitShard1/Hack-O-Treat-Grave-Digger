@@ -27,7 +27,9 @@ Theme tie-in: the Halloween character is the repo itself - every repo gets its o
 2. **While it loads (fill the ~11 s):** "Right now we make at most 7 read-only GitHub calls: metadata,
    languages, README, the full file list in one call, the latest commit, a dependency file, and one
    source file we pick. Nothing from the repo is ever run."
-3. **The monster lab plays.** "The lab builds it part by part. Every key-moment card quotes a real fact
+3. **The monster lab plays.** Tip: click **Step** to pause it and press **Next ->** (or the right arrow)
+   to build one part at a time while you explain each key moment; **Auto** resumes.
+   "The lab builds it part by part. Every key-moment card quotes a real fact
    - here, the main language and the file we read." Point at the **key moment** cards.
 4. **Result card.** Point at the **signature trait**: "It found that `cube.py` is one single Python
    expression - the whole program, no separate statements. That's why the monster is threaded with one
@@ -40,7 +42,11 @@ Theme tie-in: the Halloween character is the repo itself - every repo gets its o
    - "**excerpt**: the real first lines of the code." Click **open cube.py on GitHub** if time allows.
 6. **Story.** "Claude writes the story in one of six voices - this one's a field guide - and it has to
    cite real facts. The monster changes when the repo changes: same repo, same commit day, same monster."
-7. **Contrast (if time):** click **See a saved example** to show MAYHEM (limbs labelled with real weapon
+7. **Watch it evolve.** Under the story, click **Replay its history**, then **next ->** (or **play**).
+   "Same rules, any commit: we replay the file-list fingerprint at the first commit, one and two thirds
+   through, and today." Best on MAYHEM: its weapon roster changes across 27 commits (Medkit, Rock, Pan
+   and Flamethrower early on; Boots and two shotguns now). Costs up to 8 GitHub calls, only when clicked.
+8. **Contrast (if time):** click **See a saved example** to show MAYHEM (limbs labelled with real weapon
    files) or Cataclysm (a swarm of `.json` tablets: 64% of its 10,471 files are JSON).
 
 Backup if anything fails live: skip steps 1-3 and use **See a saved example** (cycles spincube ->
