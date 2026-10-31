@@ -57,7 +57,8 @@ export function Monster({ character, size = 280, animated = true, stage, facts, 
     enter(
       `signature-${layer}`,
       { opacity: 0, scale: 0.6 },
-      <SignaturePart signature={signature} colors={colors} layer={layer} glowId={glowId} animated={animated} />,
+      // Still while building: the lab already moves a 3D camera, and a per-frame redraw on top makes it stutter.
+      <SignaturePart signature={signature} colors={colors} layer={layer} glowId={glowId} animated={animated && !building} />,
       { duration: 0.7 },
     );
 

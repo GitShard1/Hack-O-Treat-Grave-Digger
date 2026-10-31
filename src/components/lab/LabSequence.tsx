@@ -205,15 +205,24 @@ export function LabSequence({ result, onDone }: Props) {
             </div>
           </div>
           <div className="flex shrink-0 gap-2">
-            <button
-              type="button"
-              onClick={() => setStepping((s) => !s)}
-              aria-pressed={stepping}
+            <div
+              role="group"
+              aria-label={COPY.lab.modeLabel}
               title={COPY.lab.stepHint}
-              className="pointer-events-auto shrink-0 rounded-xl border border-line bg-surface-strong px-4 py-2 font-display text-lg leading-none backdrop-blur-sm transition hover:border-highlight focus-visible:outline-2 focus-visible:outline-highlight"
+              className="pointer-events-auto flex shrink-0 overflow-hidden rounded-xl border border-line bg-surface-strong font-display text-lg leading-none backdrop-blur-sm"
             >
-              {stepping ? COPY.lab.autoplay : COPY.lab.step}
-            </button>
+              {[false, true].map((mode) => (
+                <button
+                  key={String(mode)}
+                  type="button"
+                  onClick={() => setStepping(mode)}
+                  aria-pressed={stepping === mode}
+                  className={`px-3 py-2 transition focus-visible:outline-2 focus-visible:outline-highlight ${stepping === mode ? "bg-highlight/20 text-highlight" : "text-muted hover:text-ink"}`}
+                >
+                  {mode ? COPY.lab.step : COPY.lab.autoplay}
+                </button>
+              ))}
+            </div>
             {stepping && (
               <button type="button" onClick={next} title={COPY.lab.nextHint} className="pointer-events-auto shrink-0 rounded-xl border border-line bg-surface-strong px-4 py-2 font-display text-lg leading-none backdrop-blur-sm transition hover:border-highlight focus-visible:outline-2 focus-visible:outline-highlight border-highlight text-highlight">
                 {COPY.lab.next} {"->"}

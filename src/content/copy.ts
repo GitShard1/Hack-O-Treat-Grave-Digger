@@ -55,6 +55,7 @@ export const COPY = {
     ariaLabel: "The monster lab is building your monster from the repo's facts.",
     skip: "Skip",
     skipHint: "Skip to the finished monster",
+    modeLabel: "Lab speed",
     step: "Step",
     stepHint: "Pause the lab and move one step at a time (right arrow key works too)",
     autoplay: "Auto",
