@@ -2,12 +2,20 @@
 // story, and every fact we found in a "What we could inspect" panel (weak evidence lives there, not up top).
 // With `handoff`, it picks up where the monster lab left off: the panel grows out of the lab panel,
 // the monster flies from the lab into its slot, and the text fades in around it.
+// Clicking the monster (or the Dissect button) opens the dissect report under the top row.
+"use client";
+import { useMemo, useState } from "react";
 import type { SummonSuccess } from "@/lib/contract";
 import { COPY } from "@/content/copy";
 import { Monster } from "@/components/Monster/Monster";
 import { FadeIn, FlipIn, PANEL_LAYOUT_ID, PanelPlate, type Rect } from "@/components/lab/Handoff";
 import { TraitChip } from "@/components/TraitChip";
 import { factsByOrigin } from "@/components/evidence";
+import { dissect } from "@/components/dissect";
+import { DissectPanel } from "@/components/DissectPanel";
+
+/** Shown in the dissect report instead of the inspect list. */
+const REPORT_ONLY = new Set(["f_code_excerpt"]);
 
 type Props = { result: SummonSuccess; handoff?: { monsterFrom: Rect | null } };
 
@@ -17,6 +25,8 @@ export function ResultCard({ result, handoff }: Props) {
   const badge = COPY.sourceBadge[character.source];
   const intro = Boolean(handoff);
   const [signature, ...others] = character.traits;
+  const report = useMemo(() => dissect(result), [result]);
+  const [dissecting, setDissecting] = useState(false);
 
   return (
     <article className="relative mx-auto w-full max-w-5xl overflow-x-clip p-5 sm:p-8">
@@ -32,7 +42,19 @@ export function ResultCard({ result, handoff }: Props) {
               <div aria-hidden className="h-full rounded-full bg-[radial-gradient(circle,var(--color-page-glow)_0%,transparent_70%)]" />
             </FadeIn>
             <FlipIn from={handoff?.monsterFrom} className="relative">
-              <Monster character={character} size={300} facts={facts.facts} className="h-auto max-w-full" />
+              {report ? (
+                <button
+                  type="button"
+                  onClick={() => setDissecting(true)}
+                  title={COPY.dissect.monsterHint}
+                  aria-label={COPY.dissect.monsterHint}
+                  className="cursor-pointer rounded-3xl focus-visible:outline-2 focus-visible:outline-highlight"
+                >
+                  <Monster character={character} size={300} facts={facts.facts} className="h-auto max-w-full" />
+                </button>
+              ) : (
+                <Monster character={character} size={300} facts={facts.facts} className="h-auto max-w-full" />
+              )}
             </FlipIn>
           </div>
 
@@ -47,8 +69,20 @@ export function ResultCard({ result, handoff }: Props) {
             <ul className="mt-5">
               <TraitChip index={0} trait={signature} fact={factById.get(signature.factId)} signature />
             </ul>
+            {report && (
+              <button
+                type="button"
+                onClick={() => setDissecting((open) => !open)}
+                aria-expanded={dissecting}
+                className="mt-3 rounded-xl border border-highlight/60 px-4 py-2 text-sm text-highlight transition hover:bg-highlight/10"
+              >
+                {COPY.dissect.button.replace("{part}", report.part)}
+              </button>
+            )}
           </FadeIn>
         </div>
+
+        {report && dissecting && <DissectPanel report={report} onClose={() => setDissecting(false)} />}
 
         <FadeIn show={intro} delay={0.55}>
           <ul className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -70,7 +104,7 @@ export function ResultCard({ result, handoff }: Props) {
             <summary className="cursor-pointer font-display text-xl">{COPY.result.inspectHeading}</summary>
             <p className="mt-2 text-xs text-muted">{COPY.result.inspectNote}</p>
             <div className="mt-4 grid gap-5 sm:grid-cols-2">
-              {factsByOrigin(facts.facts).map(({ origin, facts: group }) => (
+              {factsByOrigin(facts.facts.filter((f) => !REPORT_ONLY.has(f.id))).map(({ origin, facts: group }) => (
                 <section key={origin}>
                   <h4 className="text-xs uppercase tracking-widest text-highlight">{COPY.result.origins[origin]}</h4>
                   <dl className="mt-2 grid gap-1 text-sm">

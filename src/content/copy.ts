@@ -87,6 +87,48 @@ export const COPY = {
       aura: { status: "> igniting the aura...", moments: { f_last_push: "Last stirred {v}", f_last_commit: "Latest commit {v}" } },
     },
   },
+  /** "Dissect your monster": the technical report behind the signature part (src/components/dissect.ts). */
+  dissect: {
+    button: "Dissect the {part} ->",
+    monsterHint: "Click the monster to dissect it",
+    command: "$ grave-digger dissect --part",
+    close: "close",
+    meaningLabel: "what it is",
+    lookForLabel: "look for",
+    rulesHeading: "signature rules, first match wins",
+    ruleStates: { chosen: "[x] chosen", skipped: "[-] below threshold", found: "[ ] also found", absent: "[ ] not in repo" },
+    excerptHeading: "excerpt",
+    fallbackFile: "the README",
+    fallbackFolder: "the biggest folder",
+    rows: { part: "part", detector: "detector", result: "result", source: "source", imports: "imports", scanned: "scanned" },
+    links: { file: "open {file} on GitHub ->", folder: "open {folder} on GitHub ->" },
+    parts: {
+      cage: { name: "wireframe cage", meaning: "The project is about geometry or rendering, so it lives inside a spinning wireframe." },
+      filament: { name: "unbroken filament", meaning: "One line drawn through the whole body: a program with no break in it." },
+      swarm: { name: "data swarm", meaning: "Most of the repo is data, so its files orbit the body as tablets." },
+      rig: { name: "tool limbs", meaning: "Each limb is a real file from the folder with the most source files." },
+      glyphs: { name: "word halo", meaning: "Nothing stranger stood out, so it wears its own description." },
+    },
+    /** Keyed by the signature fact id. {file}, {folder}, {heavy} and {v} are filled from real facts. */
+    lookFor: {
+      f_code_one_expression: "In {file}, follow how each step feeds the next inside one expression instead of separate statements.",
+      f_tree_types: "Open {heavy} to see the data files, then {file} for code that is not data.",
+      f_tree_folder: "Open {heavy}, where a large share of all files live, then {file}.",
+      f_tree_names: "Pick a limb and open its file in {folder}; each one is a separate piece of the project.",
+      f_tree_few_files: "Read {file} top to bottom: the whole program fits in a few files.",
+      default: "Start with {file}, then the README.",
+    },
+    /** Short notes for imports that say something about how a program works. */
+    importNotes: {
+      ctypes: "calls native C libraries directly",
+      subprocess: "runs other programs",
+      socket: "talks over the network at the socket level",
+      threading: "runs work in parallel threads",
+      asyncio: "runs work concurrently with async/await",
+      child_process: "runs other programs",
+      worker_threads: "runs work in parallel threads",
+    },
+  },
   sourceBadge: {
     live: null,
     fallback: "Placeholder monster: writing not built yet",

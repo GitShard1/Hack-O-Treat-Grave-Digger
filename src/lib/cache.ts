@@ -7,7 +7,7 @@ import type { SummonSuccess } from "@/lib/contract";
 import { repoSlug, type RepoSnapshot } from "@/lib/github";
 
 /** Bump when the prompt, facts or art rules change, so older cached monsters are not reused. */
-export const GENERATION_VERSION = "2026-10-31.4";
+export const GENERATION_VERSION = "2026-10-31.5";
 
 const MAX_ENTRIES = 200;
 /** A repo dug again this soon reuses its result without asking GitHub (saves the 60 calls/hour budget). */

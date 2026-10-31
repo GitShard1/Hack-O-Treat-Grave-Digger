@@ -41,6 +41,8 @@ export type RepoMeasures = {
     imports: string[];
     /** Whole file is one Python expression. Only checked when the full file was read. */
     oneExpression: boolean;
+    /** First non-blank lines, each "<line number>| <text>", for the dissect panel. UNTRUSTED text. */
+    excerpt: string;
   } | null;
 };
 
@@ -90,7 +92,22 @@ function measureCode(file: NonNullable<RepoSnapshot["sourceFile"]>): NonNullable
     lines: content.split(/\r?\n/).length,
     imports: importsOf(path, content),
     oneExpression: !truncated && extension(path) === "py" && content.length >= 500 && pythonStatementCount(content) === 1,
+    excerpt: excerptOf(content),
   };
+}
+
+const EXCERPT_LINES = 8;
+const EXCERPT_LINE_CHARS = 100;
+
+/** "12| first line" ... for the first few non-blank lines, each cut to a readable width. */
+function excerptOf(content: string): string {
+  return content
+    .split(/\r?\n/)
+    .map((text, index) => ({ text: text.replace(/\t/g, "  ").trimEnd(), number: index + 1 }))
+    .filter((line) => line.text.trim().length > 0)
+    .slice(0, EXCERPT_LINES)
+    .map(({ text, number }) => `${number}| ${text.length > EXCERPT_LINE_CHARS ? `${text.slice(0, EXCERPT_LINE_CHARS - 3)}...` : text}`)
+    .join("\n");
 }
 
 export function buildFacts(snapshot: RepoSnapshot, now: Date = new Date()): RepoFacts {
@@ -138,6 +155,10 @@ export function buildFacts(snapshot: RepoSnapshot, now: Date = new Date()): Repo
     add("f_code_file", "File we read", `${m.code.path} (${m.code.chars.toLocaleString("en-US")} characters, ${plural(m.code.lines, "line")})`);
     if (m.code.imports.length > 0) add("f_code_imports", `${name} imports`, m.code.imports.join(", "));
     if (m.code.oneExpression) add("f_code_one_expression", "Program shape", `${name} is one single expression`);
+    if (m.code.excerpt) add("f_code_excerpt", `${name} excerpt`, m.code.excerpt);
+  }
+  if (snapshot.latestCommitSha && /^[0-9a-f]{7,40}$/i.test(snapshot.latestCommitSha)) {
+    add("f_tree_revision", "Inspected revision", snapshot.latestCommitSha);
   }
 
   return { repo: m.slug, url: `https://github.com/${m.slug}`, facts };

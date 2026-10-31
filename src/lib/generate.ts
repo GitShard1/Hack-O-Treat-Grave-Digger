@@ -73,6 +73,9 @@ export function planStory(facts: RepoFacts, snapshot: RepoSnapshot, signatureId:
   return { signatureId, look, voice: pickVoice(snapshot) };
 }
 
+/** Facts kept for the dissect panel only: never offered to Claude as trait evidence. */
+export const NOT_FOR_TRAITS = new Set(["f_code_excerpt", "f_tree_revision"]);
+
 const OPENING_CLICHES = /^(long ago|once upon|legend (has it|says)|in a (land|time)|it was a dark)/i;
 const CLOSING_CLICHES = /(travell?ers|tellers|those who \w+|legend|they) (say|whisper|claim)/i;
 
@@ -115,7 +118,11 @@ function fenceSafe(text: string): string {
 }
 
 export function buildUserPrompt(facts: RepoFacts, snapshot: RepoSnapshot, plan: StoryPlan): string {
-  const factLines = facts.facts.map((f) => `- ${f.id} | ${f.label}: ${f.value}`).join("\n");
+  // The excerpt is raw repo text (it goes in the fenced source excerpt instead) and the revision is a hash: neither is a trait.
+  const factLines = facts.facts
+    .filter((f) => !NOT_FOR_TRAITS.has(f.id))
+    .map((f) => `- ${f.id} | ${f.label}: ${f.value}`)
+    .join("\n");
   const readme = snapshot.readme ? fenceSafe(snapshot.readme.slice(0, README_EXCERPT_CHARS)) : "(no README found)";
   const manifest = snapshot.manifest
     ? `${snapshot.manifest.file}:\n${fenceSafe(snapshot.manifest.content.slice(0, MANIFEST_EXCERPT_CHARS))}`

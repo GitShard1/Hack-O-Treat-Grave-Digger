@@ -58,6 +58,16 @@
         "id": "f_code_file",
         "label": "File we read",
         "value": "ServerScriptService/GameSettings.luau (2,230 characters, 61 lines)"
+      },
+      {
+        "id": "f_code_excerpt",
+        "label": "GameSettings.luau excerpt",
+        "value": "1| local PhysicsService = game:GetService(\"PhysicsService\")\n2| local Players = game:GetService(\"Players\")\n3| local ReplicatedStorage = game:GetService(\"ReplicatedStorage\")\n4| local CollectionService = game:GetService(\"CollectionService\")\n6| local Remotes = ReplicatedStorage.Events\n7| local module = {}\n9| local NO_COLLIDE_GROUP = \"NoCollision\"\n10| local DEFAULT_PLAYER_GROUP = \"Players\""
+      },
+      {
+        "id": "f_tree_revision",
+        "label": "Inspected revision",
+        "value": "7eb0ca0119eda9baba067c239cfe7e19f67cacbb"
       }
     ]
   },

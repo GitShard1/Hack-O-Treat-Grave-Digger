@@ -74,6 +74,11 @@ describe("file-list facts", () => {
     expect(valueOf(facts, "f_tree_few_files")).toBe("Only 2 source files: cube.py, shadecube.py");
     expect(valueOf(facts, "f_code_imports")).toBe("functools, math, ctypes, time");
     expect(valueOf(facts, "f_code_one_expression")).toBe("cube.py is one single expression");
+    expect(valueOf(facts, "f_tree_revision")).toBe("fd8445315d238201ad722b6d7a88a92de344833f");
+    const excerpt = valueOf(facts, "f_code_excerpt")?.split("\n") ?? [];
+    expect(excerpt.length).toBeLessThanOrEqual(8);
+    expect(excerpt[0]).toMatch(/^1\| \(lambda all_libs=/);
+    for (const line of excerpt) expect(line.length).toBeLessThanOrEqual(110);
   });
 
   it("names the files in the busiest source folder", () => {

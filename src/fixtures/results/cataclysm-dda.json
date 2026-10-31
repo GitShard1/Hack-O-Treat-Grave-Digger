@@ -103,6 +103,16 @@
         "id": "f_code_imports",
         "label": "game.h imports",
         "value": "array, chrono, cstdint, ctime, functional"
+      },
+      {
+        "id": "f_code_excerpt",
+        "label": "game.h excerpt",
+        "value": "1| #pragma once\n2| #ifndef CATA_SRC_GAME_H\n3| #define CATA_SRC_GAME_H\n5| #include <array>\n6| #include <chrono>\n7| #include <cstdint>\n8| #include <ctime>\n9| #include <functional>"
+      },
+      {
+        "id": "f_tree_revision",
+        "label": "Inspected revision",
+        "value": "84fc3f4fc034cde01221574d35f0e0defb73f52c"
       }
     ]
   },

@@ -73,6 +73,16 @@
         "id": "f_code_one_expression",
         "label": "Program shape",
         "value": "cube.py is one single expression"
+      },
+      {
+        "id": "f_code_excerpt",
+        "label": "cube.py excerpt",
+        "value": "1| (lambda all_libs={\"functools\": __import__(\"functools\"),\"math\": __import__(\"math\"), \"ctypes\": (lam...\n2| setattr(m,\"gdi32\",m.WinDLL(\"gdi32.dll\", use_last_error=True)) or setattr(m,\"user32\",m.WinDLL(\"use...\n3| \"time\": __import__(\"time\"), \"wintypes\": __import__(\"ctypes.wintypes\", fromlist=[\"*\"]), \"config\": ...\n4| {\"angle\": 0., \"buf\": [0] * 350 * 500, \"depth\": [999999] * 350 * 500}}, init=[lambda all_libs: {\"W...\n5| Structure,), {\"_fields_\": [(\"style\", all_libs[\"ctypes\"].c_uint), (\"lpfnWndProc\", all_libs[\"ctypes...\n6| all_libs[\"ctypes\"].wintypes.HWND, all_libs[\"ctypes\"].wintypes.UINT,  all_libs[\"ctypes\"].wintypes....\n7| (\"cbClsExtra\", all_libs[\"ctypes\"].c_int), (\"cbWndExtra\", all_libs[\"ctypes\"].c_int), (\"hInstance\",...\n8| all_libs[\"ctypes\"].c_void_p), (\"hCursor\", all_libs[\"ctypes\"].c_void_p), (\"hbrBackground\", all_lib..."
+      },
+      {
+        "id": "f_tree_revision",
+        "label": "Inspected revision",
+        "value": "fd8445315d238201ad722b6d7a88a92de344833f"
       }
     ]
   },

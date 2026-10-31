@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { CharacterSchema } from "@/lib/contract";
 import { fallbackCharacter, PLACEHOLDER_NAME, PLACEHOLDER_STORY, PLACEHOLDER_TRAIT } from "@/lib/fallback";
 import { buildFacts, measureRepo, pickSignatureFactId } from "@/lib/facts";
-import { VOICES, buildUserPrompt, generateCharacter, pickVoice, planStory, validateCharacter } from "@/lib/generate";
+import { NOT_FOR_TRAITS, VOICES, buildUserPrompt, generateCharacter, pickVoice, planStory, validateCharacter } from "@/lib/generate";
 import { NOW, bareSnapshot, mayhemSnapshot, msSnapshot, requestsSnapshot, spincubeSnapshot } from "./helpers";
 
 const snapshots = { requests: requestsSnapshot, ms: msSnapshot, bare: bareSnapshot, spincube: spincubeSnapshot, mayhem: mayhemSnapshot };
@@ -72,7 +72,12 @@ describe("buildUserPrompt", () => {
   it("lists every fact id and fences repo text", () => {
     const facts = buildFacts(requestsSnapshot, NOW);
     const prompt = buildUserPrompt(facts, requestsSnapshot, planStory(facts, requestsSnapshot, "f_tree_names"));
-    for (const fact of facts.facts) expect(prompt).toContain(fact.id);
+    for (const fact of facts.facts) {
+      if (NOT_FOR_TRAITS.has(fact.id)) expect(prompt).not.toContain(`- ${fact.id} |`);
+      else expect(prompt).toContain(fact.id);
+    }
+    // The code excerpt only appears inside the fenced source excerpt.
+    expect(facts.facts.some((f) => f.id === "f_code_excerpt")).toBe(true);
     expect(prompt).toContain("Signature fact (the first trait must cite it): f_tree_names");
     expect(prompt).toContain("src/requests/api.py:");
     expect(prompt.match(/<repo_data>/g)).toHaveLength(1);
