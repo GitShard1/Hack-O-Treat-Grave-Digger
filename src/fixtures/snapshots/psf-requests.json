@@ -1,0 +1,43 @@
+{
+  "ref": {
+    "owner": "psf",
+    "name": "requests"
+  },
+  "description": "A simple, yet elegant, HTTP library.",
+  "stars": 54656,
+  "createdAt": "2011-02-13T18:38:17Z",
+  "pushedAt": "2026-10-26T17:14:44Z",
+  "latestCommitAt": "2026-10-26T17:14:41Z",
+  "languages": {
+    "Python": 390104,
+    "Makefile": 2527
+  },
+  "readme": "# Requests\n\n[![Version](https://img.shields.io/pypi/v/requests.svg?maxAge=86400)](https://pypi.org/project/requests/)\n[![Supported Versions](https://img.shields.io/pypi/pyversions/requests.svg)](https://pypi.org/project/requests)\n[![Downloads](https://static.pepy.tech/badge/requests/month)](https://pepy.tech/project/requests)\n[![Contributors](https://img.shields.io/github/contributors/psf/requests.svg)](https://github.com/psf/requests/graphs/contributors)\n[![Documentation](https://readthedocs.org/projects/requests/badge/?version=latest)](https://requests.readthedocs.io)\n\n**Requests** is a simple, yet elegant, HTTP library.\n\n```python\n>>> import requests\n>>> r = requests.get('https://httpbin.org/basic-auth/user/pass', auth=('user', 'pass'))\n>>> r.status_code\n200\n>>> r.headers['content-type']\n'application/json; charset=utf8'\n>>> r.encoding\n'utf-8'\n>>> r.text\n'{\"authenticated\": true, ...'\n>>> r.json()\n{'authenticated': True, ...}\n```\n\nRequests allows you to send HTTP/1.1 requests extremely easily. There\u2019s no need to manually add query strings to your URLs, or to form-encode your `PUT` & `POST` data \u2014 but nowadays, just use the `json` method!\n\nRequests is one of the most downloaded Python packages today, pulling in around `300M downloads / week` \u2014 according to GitHub, Requests is currently [depended upon](https://github.com/psf/requests/network/dependents?package_id=UGFja2FnZS01NzA4OTExNg%3D%3D) by `4,000,000+` repositories.\n\n## Installing Requests and Supported Versions\n\nRequests is available on PyPI:\n\n```console\n$ python -m pip install requests\n```\n\nRequests officially supports Python 3.10+.\n\n## Supported Features & Best\u2013Practices\n\nRequests is ready for the demands of building robust and reliable HTTP\u2013speaking applications, for the needs of today.\n\n- Keep-Alive & Connection Pooling\n- International Domains and URLs\n- Sessions with Cookie Persistence\n- Browser-style TLS/SSL Verification\n- Basic & Digest Authentication\n- Familiar `dict`\u2013like Cookies\n- Automatic Content Decompression and Decoding\n- Multi-part File Uploads\n- SOCKS Proxy Support\n- Connection Timeouts\n- Streaming Downloads\n- Automatic honoring of `.netrc`\n- Chunked HTTP Requests\n\n## Cloning the repository\n\nWhen cloning the Requests repository, you may need to add the `-c\nfetch.fsck.badTimezone=ignore` flag to avoid an error about a bad commit timestamp (see\n[this issue](https://github.com/psf/requests/issues/2690) for more background):\n\n```shell\ngit clone -c fetch.fsck.badTimezone=ignore https://github.com/psf/requests.git\n```\n\nYou can also apply this setting to your global Git config:\n\n```shell\ngit config --global fetch.fsck.badTimezone ignore\n```\n\n---\n\n[![Kenneth Reitz](https://raw.githubusercontent.com/psf/requests/main/ext/kr.png)](https://kennethreitz.org) [![Python Software Foundation](https://raw.githubusercontent.com/psf/requests/main/ext/psf.png)](https://www.python.org/psf)\n",
+  "rootFiles": [
+    ".coveragerc",
+    ".git-blame-ignore-revs",
+    ".github",
+    ".gitignore",
+    ".pre-commit-config.yaml",
+    ".readthedocs.yaml",
+    "AUTHORS.rst",
+    "HISTORY.md",
+    "LICENSE",
+    "MANIFEST.in",
+    "Makefile",
+    "NOTICE",
+    "README.md",
+    "docs",
+    "ext",
+    "pyproject.toml",
+    "requirements-dev.txt",
+    "setup.py",
+    "src",
+    "tests",
+    "tox.ini"
+  ],
+  "manifest": {
+    "file": "pyproject.toml",
+    "content": "[build-system]\nrequires = [\"setuptools>=61.0\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"requests\"\ndescription = \"Python HTTP for Humans.\"\nreadme = \"README.md\"\nlicense = {text = \"Apache-2.0\"}\nauthors = [\n    { name = \"Kenneth Reitz\", email = \"me@kennethreitz.org\" },\n]\nmaintainers = [\n    {name = \"Ian Stapleton Cordasco\", email=\"graffatcolmingov@gmail.com\"},\n    {name = \"Nate Prewitt\", email=\"nate.prewitt@gmail.com\"}\n]\nrequires-python = \">=3.10\"\ndependencies = [\n    \"charset_normalizer>=2,<4\",\n    \"idna>=2.5,<4\",\n    \"urllib3>=1.26,<3\",\n    \"certifi>=2023.5.7\"\n]\ndynamic = [\"version\"]\n\nclassifiers = [\n    \"Development Status :: 5 - Production/Stable\",\n    \"Environment :: Web Environment\",\n    \"Intended Audience :: Developers\",\n    \"License :: OSI Approved :: Apache Software License\",\n    \"Natural Language :: English\",\n    \"Operating System :: OS Independent\",\n    \"Programming Language :: Python\",\n    \"Programming Language :: Python :: 3\",\n    \"Programming Language :: Python :: 3.10\",\n    \"Programming Language :: Python :: 3.11\",\n    \"Programming Language :: Python :: 3.12\",\n    \"Programming Language :: Python :: 3.13\",\n    \"Programming Language :: Python :: 3.14\",\n    \"Programming Language :: Python :: 3.15\",\n    \"Programming Language :: Python :: 3 :: Only\",\n    \"Programming Language :: Python :: Implementation :: CPython\",\n    \"Programming Language :: Python :: Implementation :: PyPy\",\n    \"Programming Language :: Python :: Free Threading :: 2 - Beta\",\n    \"Topic :: Internet :: WWW/HTTP\",\n    \"Topic :: Software Development :: Libraries\"\n]\n\n[project.urls]\nDocumentation = \"https://requests.readthedocs.io\"\nSource = \"https://github.com/psf/requests\"\n\n[project.optional-dependencies]\nsecurity = []\nsocks = [\"PySocks>=1.5.6, !=1.5.7\"]\nuse_chardet_on_py3 = [\"chardet>=3.0.2,<8\"]\n\n[dependency-groups]\ntest = [\n    \"requests[socks]\",\n    \"pytest-httpbin==2.1.0\",\n    \"httpbin~=0.10.0\",\n    \"pytest-cov\",\n    \"pytest-mock\",\n    \"pytest-xdist\",\n    \"pytest>=3\",\n    \"trustme\",\n]\ntypecheck = [\n    \"pyright\",\n    \"typing_extensions\",\n    \"chardet\",\n    \"cryptography\",\n    \"PyOpenSSL\",\n]\n\n[tool.setuptools]\nlicense-files = [\"LICENSE\", \"NOTICE\"]\n\n[tool.setuptools.dynamic]\nversion = {attr = \"requests.__version__.__version__\"}\n\n[tool.setuptools.packages.find]\nwhere = [\"src\"]\n\n[tool.ruff]\ntarget-version = \"py310\"\nsrc = [\"src/requests\", \"tests\"]\nexclude = [\"docs/\", \"ext/\"]\n\n[tool.ruff.lint]\nselect = [\n    \"E\",      # pycodestyle errors\n    \"W\",      # pycodestyle warnings\n    \"F\",      # pyflakes\n    \"I\",      # isort\n    \"UP\",     # pyupgrade\n    \"T10\",    # flake8-debugger (replaces debug-statements hook)\n]\nignore = [\"E203\", \"E501\", \"UP031\"]\nper-file-ignores = {\"src/requests/__init__.py\" = [\"E402\", \"F401\"], \"src/requests/compat.py\" = [\"E402\", \"F401\"], \"tests/compat.py\" = [\"F401\"]}\n\n[tool.ruff.lint.isort]\nknown-first-party = [\"requests\"]\n\n[tool.ruff.format]\n# Use black-compatible formatting\nquote-style = \"double\"\nindent-style = \"space\"\n\n[tool.pytest.ini_options]\naddopts = \"--doctest-modules\"\ndoctest_optionflags = \"NORMALIZE_WHITESPACE ELLIPSIS\"\nminversion = \"6.2\"\ntestpaths = [\"tests\"]\n\n\n[tool.pyright]\ninclude = [\"src/requests\"]\ntypeCheckingMode = \"strict\"\n# linting rules unrelated to type checking\nreportPrivateUsage = false\nreportPrivateImportUsage = false\nreportUnnecessaryIsInstance = false\nreportUnusedImport = false  # duplicate of Ruff's F401 rule\n"
+  }
+}

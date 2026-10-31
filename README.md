@@ -73,8 +73,11 @@ Open http://localhost:3000. Click **See a saved example** to see the full result
 | `npm run dev` | Starts the app locally with live reload |
 | `npm run build` | Builds the production version (run before pushing to catch errors) |
 | `npm start` | Runs the production build locally (after `npm run build`) |
+| `npm test` | Runs the tests (no API keys needed) |
 | `npm run lint` | Checks code style |
 | `npx tsc --noEmit` | Checks types |
+
+While the dev server runs, http://localhost:3000/lab shows every monster archetype and two real repos run through the no-key pipeline. Use it when working on the art.
 
 ## Deploying (Vercel)
 You don't need to run or manage a server. Vercel hosts the pages and runs `/api/summon` as a serverless function on demand. The free Hobby plan is enough for a hackathon.
@@ -91,26 +94,50 @@ If deployment fails on the day, demo locally with `npm run build` then `npm star
 ## Project Structure
 ```
 src/lib/contract.ts          Shared data contract (Zod schemas and types). Agree before changing.
-src/fixtures/example.json    Sample response so the UI can be built before the API works
 
 Builder A (data and generation)
-src/lib/github.ts            Bounded GitHub fetch, URL parsing, errors
-src/lib/facts.ts             Repository snapshot to evidence facts (deterministic)
-src/lib/generate.ts          Claude call, validation, fallback character
+src/lib/github.ts            Bounded GitHub fetch and URL parsing (TODO: needs the GitHub token)
+src/lib/facts.ts             Snapshot to measured numbers and evidence facts (deterministic)
+src/lib/manifest.ts          Dependency names from package.json, pyproject.toml, requirements.txt, Cargo.toml, go.mod
+src/lib/palette.ts           Monster colours from the language mix
+src/lib/generate.ts          Claude call (structured output), validation, retry, then fallback
+src/lib/fallback.ts          Deterministic character used when Claude is unavailable
 src/lib/errors.ts            Server error type
 src/app/api/summon/route.ts  POST /api/summon
 
 Builder B (experience and visuals)
+src/styles/theme.css         ALL colours and fonts (see "Changing the art direction")
+src/content/copy.ts          All user-facing wording
 src/app/page.tsx             Input, example repos, loading, error and retry
-src/components/Monster/      Procedural SVG part library
-src/components/Reveal.tsx    Reveal animation
-src/components/ResultCard.tsx, TraitChip.tsx
+src/components/Monster/      Procedural SVG monster: bodies, eyes, accessories, auras
+src/components/              Reveal, ResultCard, TraitChip, DigLoader, Graveyard backdrop
+src/app/lab/page.tsx         Dev page showing every archetype
 src/lib/examples.ts          Saved examples
 
+src/fixtures/                Sample response and real GitHub snapshots (used by tests and /lab)
+test/                        Vitest tests
 docs/                        Design doc, idea, plan, pitch
 docs/Stuff_WeDidSoFar.md     Progress log: what's done so far and what's next
 ```
 Search for `TODO(A)` and `TODO(B)` to find each builder's next steps. See [CONTRIBUTING.md](CONTRIBUTING.md) for how we work together.
+
+## Changing the art direction
+The art direction can change at any time without touching component logic:
+
+| To change | Edit |
+|---|---|
+| Any UI or SVG colour, the page background | `src/styles/theme.css` (semantic tokens such as `--color-primary`, `--art-outline`) |
+| Fonts | `src/app/layout.tsx` (which fonts load) and `--font-display` / `--font-sans` in `theme.css` |
+| Wording and tone | `src/content/copy.ts` |
+| Monster shapes | `src/components/Monster/bodies.tsx` (one entry per archetype, each with anchor points) |
+| Eyes, accessories, auras | `src/components/Monster/parts.tsx` |
+| Backdrop scene | `src/components/Graveyard.tsx` |
+| How repo facts map to looks | `src/lib/fallback.ts` and the prompt in `src/lib/generate.ts` |
+
+Rules that keep this working:
+- Components use semantic token classes (`bg-surface`, `text-muted`, `bg-primary`) and `ART.*` values, never raw colours.
+- A monster's body colours come from the repo's languages (`src/lib/palette.ts`), so they are data, not theme.
+- A new archetype, eye style, accessory or aura must be added to the enums in `src/lib/contract.ts` first; TypeScript then points to every place that needs a drawing.
 
 ## Team
 | Name | Role | GitHub |

@@ -3,20 +3,22 @@
 import { useState, type FormEvent } from "react";
 import { SummonResponseSchema, type SummonSuccess } from "@/lib/contract";
 import { exampleResult } from "@/lib/examples";
+import { COPY } from "@/content/copy";
+import { DigLoader } from "@/components/DigLoader";
 import { ResultCard } from "@/components/ResultCard";
 import { Reveal } from "@/components/Reveal";
 
-// TODO(B): pick three contrasting public repos for judges (big framework, tiny script, no README).
+/** Three contrasting public repos for judges: a huge framework, a classic library, a tiny utility. */
 const EXAMPLE_REPOS = [
   "https://github.com/facebook/react",
   "https://github.com/psf/requests",
-  "https://github.com/jonschlinkert/is-odd",
+  "https://github.com/vercel/ms",
 ] as const;
 
 type State =
   | { status: "idle" }
   | { status: "loading" }
-  | { status: "done"; result: SummonSuccess }
+  | { status: "done"; result: SummonSuccess; runId: number }
   | { status: "error"; message: string };
 
 export default function Home() {
@@ -33,13 +35,13 @@ export default function Home() {
       });
       const parsed = SummonResponseSchema.safeParse(await res.json());
       if (!parsed.success) {
-        setState({ status: "error", message: "The graveyard sent back something strange. Try again." });
+        setState({ status: "error", message: COPY.badResponse });
         return;
       }
       const data = parsed.data;
-      setState(data.ok ? { status: "done", result: data } : { status: "error", message: data.message });
+      setState(data.ok ? { status: "done", result: data, runId: Date.now() } : { status: "error", message: data.message });
     } catch {
-      setState({ status: "error", message: "Couldn't reach the graveyard. Check your connection and try again." });
+      setState({ status: "error", message: COPY.offline });
     }
   }
 
@@ -53,57 +55,67 @@ export default function Home() {
     void summon(repoUrl);
   }
 
+  const busy = state.status === "loading";
+
   return (
-    <main className="min-h-screen px-4 py-12">
+    <main className="min-h-dvh px-4 pb-48 pt-12 sm:pt-16">
       <header className="mx-auto mb-8 max-w-xl text-center">
-        <h1 className="text-4xl font-bold">Grave Digger</h1>
-        <p className="mt-2 opacity-80">Every codebase has a monster inside it. Meet yours.</p>
+        <h1 className="font-display text-6xl sm:text-7xl">{COPY.appName}</h1>
+        <p className="mt-3 text-lg text-muted">{COPY.tagline}</p>
       </header>
 
       <form onSubmit={onSubmit} className="mx-auto mb-4 flex max-w-xl gap-2">
         <input
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          placeholder="https://github.com/owner/repo"
-          aria-label="Public GitHub repository URL"
-          className="flex-1 rounded-lg border border-white/20 bg-white/5 px-3 py-2"
+          placeholder={COPY.inputPlaceholder}
+          aria-label={COPY.inputLabel}
+          className="min-w-0 flex-1 rounded-xl border border-line bg-surface px-4 py-3 outline-none focus-visible:border-highlight"
           required
         />
         <button
           type="submit"
-          disabled={state.status === "loading"}
-          className="rounded-lg bg-orange-500 px-4 py-2 font-semibold text-black disabled:opacity-50"
+          disabled={busy}
+          className="rounded-xl bg-primary px-5 py-3 font-semibold text-primary-ink transition hover:brightness-110 disabled:opacity-50"
         >
-          Dig
+          {COPY.submit}
         </button>
       </form>
 
-      <div className="mx-auto mb-8 flex max-w-xl flex-wrap justify-center gap-3 text-sm">
+      <div className="mx-auto mb-10 flex max-w-xl flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted">
+        <span>{COPY.examplesLabel}</span>
         {EXAMPLE_REPOS.map((repoUrl) => (
-          <button key={repoUrl} type="button" onClick={() => tryExample(repoUrl)} className="underline opacity-70">
+          <button
+            key={repoUrl}
+            type="button"
+            disabled={busy}
+            onClick={() => tryExample(repoUrl)}
+            className="underline underline-offset-2 hover:text-ink disabled:opacity-50"
+          >
             {repoUrl.replace("https://github.com/", "")}
           </button>
         ))}
         <button
           type="button"
-          onClick={() => setState({ status: "done", result: exampleResult })}
-          className="underline opacity-70"
+          disabled={busy}
+          onClick={() => setState({ status: "done", result: exampleResult, runId: Date.now() })}
+          className="underline underline-offset-2 hover:text-ink disabled:opacity-50"
         >
-          See a saved example
+          {COPY.savedExample}
         </button>
       </div>
 
-      {state.status === "loading" && <p className="text-center">Digging up your repo...</p>}
+      {state.status === "loading" && <DigLoader />}
       {state.status === "error" && (
-        <div className="mx-auto max-w-xl text-center" role="alert">
+        <div role="alert" className="mx-auto max-w-xl rounded-2xl border border-line bg-surface-strong p-5 text-center">
           <p>{state.message}</p>
-          <button type="button" onClick={() => void summon(url)} className="mt-2 underline">
-            Try again
+          <button type="button" onClick={() => void summon(url)} className="mt-3 underline underline-offset-2">
+            {COPY.retry}
           </button>
         </div>
       )}
       {state.status === "done" && (
-        <Reveal>
+        <Reveal key={state.runId}>
           <ResultCard result={state.result} />
         </Reveal>
       )}

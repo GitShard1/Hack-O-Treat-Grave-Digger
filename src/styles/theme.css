@@ -1,0 +1,60 @@
+/*
+ * ART DIRECTION: the one file to edit to change the look.
+ *
+ * - UI tokens (@theme) become Tailwind classes: bg-surface, text-ink, bg-primary, border-line, font-display, ...
+ * - Art tokens (--art-*) colour the SVG monster parts and the backdrop (see src/components/Monster/art.ts).
+ * - Fonts are loaded in src/app/layout.tsx and wired in through --font-display / --font-sans below.
+ * - A monster's body colours come from the repo's languages (src/lib/palette.ts), not from this file.
+ *
+ * Components use these semantic names only, never raw colours, so a restyle needs no component edits.
+ */
+
+@theme {
+  /* page */
+  --color-page: #0c0816;
+  --color-page-glow: #1c1233;
+  --color-ink: #f1ecff;          /* main text */
+  --color-muted: #c9c1e6;        /* secondary text */
+  --color-line: rgb(255 255 255 / 0.12);
+  --color-surface: rgb(255 255 255 / 0.05);
+  --color-surface-strong: rgb(12 8 22 / 0.72);
+
+  /* actions and highlights */
+  --color-primary: #ff8a1f;      /* main button */
+  --color-primary-ink: #160c02;  /* text on the main button */
+  --color-highlight: #9cff57;    /* evidence, focus rings */
+  --color-badge: rgb(255 191 71 / 0.18);
+  --color-badge-ink: #ffd89a;
+
+  /* type */
+  --font-display: var(--font-creepster), ui-serif, serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* monster parts */
+  --art-outline: #140d20;
+  --art-night: #22183a;          /* capes, hats, lantern frames */
+  --art-eye: #fbf7ff;
+  --art-shade: #000000;          /* body shading, used at low opacity */
+  --art-ground-shadow: #000000;
+  --art-metal: #c9c3d8;          /* chains */
+  --art-lantern: #ffd166;
+  --art-candle: #f4ead5;
+  --art-candle-shade: #e4d6b8;
+  --art-flame: #ffb347;
+  --art-ember: #ff8a1f;
+  --art-web: #ddd6ec;
+  --art-fog: #e9e4ff;
+  --art-default-body: #7c6aa8;   /* only if a character has no palette */
+  --art-default-accent: #ff8a1f;
+
+  /* backdrop */
+  --art-star: #ffffff;
+  --art-moon: #fff4d6;
+  --art-moon-glow: rgb(255 244 214 / 0.18);
+  --art-hill: #140d24;
+  --art-silhouette: #07040e;
+}

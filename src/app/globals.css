@@ -1,12 +1,59 @@
 @import "tailwindcss";
-
-/* TODO(B): art direction tokens (palette, glow, fog backdrop) */
-:root {
-  --background: #0d0b14;
-  --foreground: #f1ecff;
-}
+/* All colours and fonts live in theme.css. Change the art direction there. */
+@import "../styles/theme.css";
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  min-height: 100dvh;
+  overflow-x: clip;
+  background-color: var(--color-page);
+  background-image: radial-gradient(ellipse at 50% 0%, var(--color-page-glow) 0%, transparent 70%);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Motion. Class names describe the movement, not the theme, so they survive a restyle. */
+
+/* ---------- monster motion ---------- */
+
+@keyframes gd-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes gd-rise {
+  0% { transform: translateY(0); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translateY(-160px); opacity: 0; }
+}
+@keyframes gd-twinkle {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 1; }
+}
+@keyframes gd-drift {
+  0%, 100% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+}
+@keyframes gd-drip {
+  0%, 60% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(18px); opacity: 0; }
+}
+@keyframes gd-flicker {
+  0%, 100% { transform: scale(1); }
+  40% { transform: scale(0.85, 1.1); }
+  70% { transform: scale(1.1, 0.92); }
+}
+@keyframes gd-dig {
+  0%, 100% { transform: rotate(-18deg) translateY(0); }
+  50% { transform: rotate(8deg) translateY(6px); }
+}
+
+.gd-float { animation: gd-float 4s ease-in-out infinite; }
+.gd-rise { animation: gd-rise 3.2s ease-out infinite; }
+.gd-twinkle { animation: gd-twinkle 2.4s ease-in-out infinite; }
+.gd-drift { animation: gd-drift 7s ease-in-out infinite; }
+.gd-drip { animation: gd-drip 2.6s ease-in infinite; }
+.gd-flicker { animation: gd-flicker 0.9s ease-in-out infinite; transform-box: fill-box; transform-origin: center bottom; }
+.gd-dig { animation: gd-dig 0.9s ease-in-out infinite; transform-box: fill-box; transform-origin: 80% 10%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gd-float, .gd-rise, .gd-twinkle, .gd-drift, .gd-drip, .gd-flicker, .gd-dig { animation: none; }
 }

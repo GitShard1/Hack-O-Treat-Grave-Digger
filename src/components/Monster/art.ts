@@ -1,0 +1,23 @@
+// OWNER: Builder B. SVG colour tokens. Values live in src/styles/theme.css; edit them there, not here.
+export const ART = {
+  outline: "var(--art-outline)",
+  night: "var(--art-night)",
+  eye: "var(--art-eye)",
+  shade: "var(--art-shade)",
+  groundShadow: "var(--art-ground-shadow)",
+  metal: "var(--art-metal)",
+  lantern: "var(--art-lantern)",
+  candle: "var(--art-candle)",
+  candleShade: "var(--art-candle-shade)",
+  flame: "var(--art-flame)",
+  ember: "var(--art-ember)",
+  web: "var(--art-web)",
+  fog: "var(--art-fog)",
+  defaultBody: "var(--art-default-body)",
+  defaultAccent: "var(--art-default-accent)",
+  star: "var(--art-star)",
+  moon: "var(--art-moon)",
+  moonGlow: "var(--art-moon-glow)",
+  hill: "var(--art-hill)",
+  silhouette: "var(--art-silhouette)",
+} as const;

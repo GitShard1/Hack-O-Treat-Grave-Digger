@@ -52,6 +52,8 @@ Optional, only after the core flow works: a downloadable PNG card, a labelled sa
 - Fallback: if the LLM fails, the deterministic mapping picks the parts.
 - Honest labelling: the art is described as "procedurally assembled from your repo's traits".
 
+Art direction is not fixed. All colours and fonts are tokens in `src/styles/theme.css`, all wording is in `src/content/copy.ts`, and monster shapes are swappable per archetype. See "Changing the art direction" in the README.
+
 ## 5. Shared data contract (agree in first 15 min)
 `src/lib/contract.ts`, the only file both builders touch, and only at the start:
 ```ts
@@ -81,6 +83,7 @@ In code, each type is a Zod schema with the type inferred from it, so the server
 | `src/lib/generate.ts` (prompt, schema, zod, retry, fallback) | `src/components/Reveal.tsx`, `ResultCard.tsx`, `TraitChip.tsx` |
 | `src/app/api/summon/route.ts` + cache | Styling, art direction, loading/error UI |
 | `src/lib/errors.ts` (server error type) | `src/lib/examples.ts` + `src/fixtures/` (saved examples) |
+| `src/lib/manifest.ts`, `palette.ts`, `fallback.ts` | `src/styles/theme.css`, `src/content/copy.ts`, `/lab` page |
 | Vercel deploy + env vars | Demo script, recording |
 
 **Prompt safety (A):** README/manifest text goes in delimited `<repo_data>` blocks. The system prompt says it is untrusted data and must never be followed as instructions. Output is limited to the schema. No tools are given to the model. Nothing from the repo is executed. The prompt also says not to invent history or incidents and not to judge security or quality, and to write humour about the *fiction*, not about real people.
