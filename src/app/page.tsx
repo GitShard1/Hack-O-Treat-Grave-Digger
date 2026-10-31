@@ -70,6 +70,11 @@ export default function Home() {
           onChange={(e) => setUrl(e.target.value)}
           placeholder={COPY.inputPlaceholder}
           aria-label={COPY.inputLabel}
+          type="text"
+          inputMode="url"
+          autoComplete="off"
+          autoCapitalize="off"
+          spellCheck={false}
           className="min-w-0 flex-1 rounded-xl border border-line bg-surface px-4 py-3 outline-none focus-visible:border-highlight"
           required
         />

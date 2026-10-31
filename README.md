@@ -53,12 +53,12 @@ Then open `.env.local` and fill in:
 | Variable | What it is | Who sets it up |
 |---|---|---|
 | `ANTHROPIC_API_KEY` | Claude API key from [console.anthropic.com](https://console.anthropic.com) | Whoever owns generation |
-| `GITHUB_TOKEN` | Fine-grained GitHub token, public repositories, read-only | Builder A |
+| `GITHUB_TOKEN` | Fine-grained GitHub token, public repositories, read-only, no extra permissions. **Required.** Checked at startup: the app won't start if it is missing or rejected. | Builder A |
 
 Rules for keys:
 - `.env.local` is ignored by git. **Never commit it, paste keys in chat, or put them in code.**
-- Keys are only read on the server (`src/lib/github.ts`, `src/lib/generate.ts`, both marked `server-only`). They never reach the browser.
-- The app still starts without keys. Features that need them return an error or the fallback character.
+- Keys are only read on the server (`src/lib/github.ts`, `src/lib/github-auth.ts`, `src/lib/generate.ts`, all marked `server-only`). They never reach the browser.
+- The app starts without `ANTHROPIC_API_KEY`: the character falls back to a no-AI version. It does **not** start without `GITHUB_TOKEN`.
 
 ### 4. Run it
 ```bash
@@ -96,7 +96,8 @@ If deployment fails on the day, demo locally with `npm run build` then `npm star
 src/lib/contract.ts          Shared data contract (Zod schemas and types). Agree before changing.
 
 Builder A (data and generation)
-src/lib/github.ts            Bounded GitHub fetch and URL parsing (TODO: needs the GitHub token)
+src/lib/github.ts            URL parsing and bounded public GitHub fetch
+src/lib/github-auth.ts       GITHUB_TOKEN check at startup (src/instrumentation.ts)
 src/lib/facts.ts             Snapshot to measured numbers and evidence facts (deterministic)
 src/lib/manifest.ts          Dependency names from package.json, pyproject.toml, requirements.txt, Cargo.toml, go.mod
 src/lib/palette.ts           Monster colours from the language mix
