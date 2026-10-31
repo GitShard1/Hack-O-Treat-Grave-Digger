@@ -1,4 +1,4 @@
-// OWNER: Builder B. Input, loading, result, and error with retry.
+// OWNER: Builder B. Input, example repos, loading, result, and error with retry.
 "use client";
 import { useState, type FormEvent } from "react";
 import { SummonResponseSchema, type SummonSuccess } from "@/lib/contract";
@@ -7,6 +7,7 @@ import { COPY } from "@/content/copy";
 import { DigLoader } from "@/components/DigLoader";
 import { ResultCard } from "@/components/ResultCard";
 import { Reveal } from "@/components/Reveal";
+import { SketchFrame } from "@/components/SketchFrame";
 
 /** Three contrasting public repos for judges: a huge framework, a classic library, a tiny utility. */
 const EXAMPLE_REPOS = [
@@ -58,67 +59,76 @@ export default function Home() {
   const busy = state.status === "loading";
 
   return (
-    <main className="min-h-dvh px-4 pb-48 pt-12 sm:pt-16">
-      <header className="mx-auto mb-8 max-w-xl text-center">
-        <h1 className="font-display text-6xl sm:text-7xl">{COPY.appName}</h1>
-        <p className="mt-3 text-lg text-muted">{COPY.tagline}</p>
+    <main className="min-h-dvh px-4 pb-56 pt-12 sm:pt-20">
+      <header className="mx-auto max-w-2xl text-center">
+        <h1 className="font-display text-6xl leading-none sm:text-7xl">{COPY.appName}</h1>
+        <p className="mt-4 text-sm text-muted sm:text-base">
+          <span className="text-highlight">{"// "}</span>
+          {COPY.tagline}
+        </p>
       </header>
 
-      <form onSubmit={onSubmit} className="mx-auto mb-4 flex max-w-xl gap-2">
-        <input
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          placeholder={COPY.inputPlaceholder}
-          aria-label={COPY.inputLabel}
-          className="min-w-0 flex-1 rounded-xl border border-line bg-surface px-4 py-3 outline-none focus-visible:border-highlight"
-          required
-        />
-        <button
-          type="submit"
-          disabled={busy}
-          className="rounded-xl bg-primary px-5 py-3 font-semibold text-primary-ink transition hover:brightness-110 disabled:opacity-50"
-        >
-          {COPY.submit}
-        </button>
-      </form>
+      <SketchFrame as="section" className="mx-auto mt-8 max-w-2xl rounded-[1.6rem] bg-surface-strong p-5 backdrop-blur-sm sm:p-7">
+        <p className="text-sm text-muted">{COPY.blurb}</p>
 
-      <div className="mx-auto mb-10 flex max-w-xl flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted">
-        <span>{COPY.examplesLabel}</span>
-        {EXAMPLE_REPOS.map((repoUrl) => (
+        <form onSubmit={onSubmit} className="mt-5 flex flex-col gap-3 sm:flex-row">
+          <input
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder={COPY.inputPlaceholder}
+            aria-label={COPY.inputLabel}
+            className="min-w-0 flex-1 rounded-xl border border-line bg-surface px-4 py-3 text-sm outline-none focus-visible:border-highlight"
+            required
+          />
           <button
-            key={repoUrl}
+            type="submit"
+            disabled={busy}
+            className="rounded-xl bg-primary px-7 py-3 font-display text-2xl leading-none text-primary-ink transition hover:brightness-110 disabled:opacity-50"
+          >
+            {COPY.submit}
+          </button>
+        </form>
+
+        <div className="mt-5 flex flex-wrap items-center gap-2 text-xs">
+          <span className="text-muted">{COPY.examplesLabel}</span>
+          {EXAMPLE_REPOS.map((repoUrl) => (
+            <button
+              key={repoUrl}
+              type="button"
+              disabled={busy}
+              onClick={() => tryExample(repoUrl)}
+              className="rounded-full border border-line px-3 py-1 text-muted transition hover:border-highlight hover:text-ink disabled:opacity-50"
+            >
+              {repoUrl.replace("https://github.com/", "")}
+            </button>
+          ))}
+          <button
             type="button"
             disabled={busy}
-            onClick={() => tryExample(repoUrl)}
-            className="underline underline-offset-2 hover:text-ink disabled:opacity-50"
+            onClick={() => setState({ status: "done", result: exampleResult, runId: Date.now() })}
+            className="px-1 text-muted underline underline-offset-2 hover:text-ink disabled:opacity-50"
           >
-            {repoUrl.replace("https://github.com/", "")}
-          </button>
-        ))}
-        <button
-          type="button"
-          disabled={busy}
-          onClick={() => setState({ status: "done", result: exampleResult, runId: Date.now() })}
-          className="underline underline-offset-2 hover:text-ink disabled:opacity-50"
-        >
-          {COPY.savedExample}
-        </button>
-      </div>
-
-      {state.status === "loading" && <DigLoader />}
-      {state.status === "error" && (
-        <div role="alert" className="mx-auto max-w-xl rounded-2xl border border-line bg-surface-strong p-5 text-center">
-          <p>{state.message}</p>
-          <button type="button" onClick={() => void summon(url)} className="mt-3 underline underline-offset-2">
-            {COPY.retry}
+            {COPY.savedExample}
           </button>
         </div>
-      )}
-      {state.status === "done" && (
-        <Reveal key={state.runId}>
-          <ResultCard result={state.result} />
-        </Reveal>
-      )}
+      </SketchFrame>
+
+      <div className="mt-10">
+        {state.status === "loading" && <DigLoader />}
+        {state.status === "error" && (
+          <SketchFrame className="mx-auto max-w-xl rounded-[1.6rem] bg-surface-strong p-5 text-center" tone="border-primary">
+            <p role="alert" className="text-sm">{state.message}</p>
+            <button type="button" onClick={() => void summon(url)} className="mt-3 text-sm underline underline-offset-2">
+              {COPY.retry}
+            </button>
+          </SketchFrame>
+        )}
+        {state.status === "done" && (
+          <Reveal key={state.runId}>
+            <ResultCard result={state.result} />
+          </Reveal>
+        )}
+      </div>
     </main>
   );
 }

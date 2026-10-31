@@ -110,7 +110,8 @@ src/styles/theme.css         ALL colours and fonts (see "Changing the art direct
 src/content/copy.ts          All user-facing wording
 src/app/page.tsx             Input, example repos, loading, error and retry
 src/components/Monster/      Procedural SVG monster: bodies, eyes, accessories, auras
-src/components/              Reveal, ResultCard, TraitChip, DigLoader, Graveyard backdrop
+src/components/              Reveal, ResultCard, TraitChip, DigLoader, SketchFrame
+src/components/scene/        Layered backdrop: moon, bats, code rain, tombstones, sketch filters
 src/app/lab/page.tsx         Dev page showing every archetype
 src/lib/examples.ts          Saved examples
 
@@ -131,7 +132,8 @@ The art direction can change at any time without touching component logic:
 | Wording and tone | `src/content/copy.ts` |
 | Monster shapes | `src/components/Monster/bodies.tsx` (one entry per archetype, each with anchor points) |
 | Eyes, accessories, auras | `src/components/Monster/parts.tsx` |
-| Backdrop scene | `src/components/Graveyard.tsx` |
+| Backdrop scene | `src/components/scene/Scene.tsx` (layers, parallax depth) and `CodeRain.tsx` |
+| Hand-drawn wobble | `src/components/scene/SketchDefs.tsx` (filter strength) |
 | How repo facts map to looks | `src/lib/fallback.ts` and the prompt in `src/lib/generate.ts` |
 
 Rules that keep this working:

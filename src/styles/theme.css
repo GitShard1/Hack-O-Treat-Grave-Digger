@@ -1,8 +1,11 @@
 /*
  * ART DIRECTION: the one file to edit to change the look.
  *
+ * Current direction: "sketchbook graveyard". A hand-drawn, slightly wobbling night scene (moon, bats,
+ * tombstones with code epitaphs, falling code rain) built in parallax layers like a Live2D scene.
+ *
  * - UI tokens (@theme) become Tailwind classes: bg-surface, text-ink, bg-primary, border-line, font-display, ...
- * - Art tokens (--art-*) colour the SVG monster parts and the backdrop (see src/components/Monster/art.ts).
+ * - Art tokens (--art-*) colour the SVG scene and monster parts (see src/components/Monster/art.ts).
  * - Fonts are loaded in src/app/layout.tsx and wired in through --font-display / --font-sans below.
  * - A monster's body colours come from the repo's languages (src/lib/palette.ts), not from this file.
  *
@@ -11,50 +14,57 @@
 
 @theme {
   /* page */
-  --color-page: #0c0816;
-  --color-page-glow: #1c1233;
-  --color-ink: #f1ecff;          /* main text */
-  --color-muted: #c9c1e6;        /* secondary text */
-  --color-line: rgb(255 255 255 / 0.12);
-  --color-surface: rgb(255 255 255 / 0.05);
-  --color-surface-strong: rgb(12 8 22 / 0.72);
+  --color-page: #0a0e1f;          /* ink-blue night */
+  --color-page-glow: #1b2147;
+  --color-ink: #f2efe6;           /* chalk white: main text and sketch lines */
+  --color-muted: #a9b0cf;
+  --color-line: rgb(242 239 230 / 0.22);
+  --color-surface: rgb(242 239 230 / 0.06);
+  --color-surface-strong: rgb(10 14 31 / 0.78);
 
   /* actions and highlights */
-  --color-primary: #ff8a1f;      /* main button */
-  --color-primary-ink: #160c02;  /* text on the main button */
-  --color-highlight: #9cff57;    /* evidence, focus rings */
-  --color-badge: rgb(255 191 71 / 0.18);
-  --color-badge-ink: #ffd89a;
+  --color-primary: #ff7a2f;       /* pumpkin: summon button */
+  --color-primary-ink: #1a0b02;
+  --color-highlight: #4dff9a;     /* matrix green: evidence, focus, code */
+  --color-badge: rgb(77 255 154 / 0.14);
+  --color-badge-ink: #8dffbd;
 
   /* type */
-  --font-display: var(--font-creepster), ui-serif, serif;
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-marker), ui-serif, serif;
+  --font-sans: var(--font-jetbrains), ui-monospace, monospace;
 }
 
 :root {
   color-scheme: dark;
 
+  /* sketch lines */
+  --art-sketch: #f2efe6;
+
   /* monster parts */
-  --art-outline: #140d20;
-  --art-night: #22183a;          /* capes, hats, lantern frames */
+  --art-outline: #0d0a18;
+  --art-night: #1d2246;           /* capes, hats, lantern frames */
   --art-eye: #fbf7ff;
-  --art-shade: #000000;          /* body shading, used at low opacity */
+  --art-shade: #000000;
   --art-ground-shadow: #000000;
-  --art-metal: #c9c3d8;          /* chains */
+  --art-metal: #c9c3d8;
   --art-lantern: #ffd166;
   --art-candle: #f4ead5;
   --art-candle-shade: #e4d6b8;
   --art-flame: #ffb347;
-  --art-ember: #ff8a1f;
+  --art-ember: #ff7a2f;
   --art-web: #ddd6ec;
-  --art-fog: #e9e4ff;
-  --art-default-body: #7c6aa8;   /* only if a character has no palette */
-  --art-default-accent: #ff8a1f;
+  --art-fog: #cfd6ff;
+  --art-default-body: #7c6aa8;
+  --art-default-accent: #ff7a2f;
 
-  /* backdrop */
-  --art-star: #ffffff;
-  --art-moon: #fff4d6;
-  --art-moon-glow: rgb(255 244 214 / 0.18);
-  --art-hill: #140d24;
-  --art-silhouette: #07040e;
+  /* scene */
+  --art-star: #f2efe6;
+  --art-moon: #f6efd8;
+  --art-moon-shade: #d9cfae;
+  --art-moon-glow: rgb(246 239 216 / 0.22);
+  --art-bat: #05060f;
+  --art-code-rain: #4dff9a;
+  --art-hill: #151a38;
+  --art-silhouette: #05060f;
+  --art-epitaph: #4dff9a;         /* code carved on tombstones */
 }

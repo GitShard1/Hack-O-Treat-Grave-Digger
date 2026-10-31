@@ -46,6 +46,41 @@ body {
   50% { transform: rotate(8deg) translateY(6px); }
 }
 
+/* ---------- scene motion (Live2D-style idle layers) ---------- */
+
+@keyframes gd-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1.5deg); }
+}
+@keyframes gd-fly {
+  from { transform: translateX(-15vw); }
+  to { transform: translateX(115vw); }
+}
+@keyframes gd-flap {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.35); }
+}
+@keyframes gd-sway {
+  0%, 100% { transform: rotate(-1.2deg); }
+  50% { transform: rotate(1.2deg); }
+}
+@keyframes gd-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.012); }
+}
+
+.gd-bob { animation: gd-bob 9s ease-in-out infinite; }
+.gd-bob-fast { animation: gd-bob 1.6s ease-in-out infinite; }
+.gd-fly { animation: gd-fly 20s linear infinite; }
+.gd-flap { animation: gd-flap 0.3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.gd-sway { animation: gd-sway 6s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+.gd-breathe { animation: gd-breathe 7s ease-in-out infinite; transform-origin: 50% 100%; }
+.gd-fade-down { mask-image: linear-gradient(to bottom, black 0%, transparent 75%); }
+
+/* Hand-drawn border: put on an absolutely positioned layer behind content, not on text. */
+.gd-sketch { filter: url(#gd-sketch); }
+.gd-sketch-strong { filter: url(#gd-sketch-strong); }
+
 .gd-float { animation: gd-float 4s ease-in-out infinite; }
 .gd-rise { animation: gd-rise 3.2s ease-out infinite; }
 .gd-twinkle { animation: gd-twinkle 2.4s ease-in-out infinite; }
@@ -55,5 +90,7 @@ body {
 .gd-dig { animation: gd-dig 0.9s ease-in-out infinite; transform-box: fill-box; transform-origin: 80% 10%; }
 
 @media (prefers-reduced-motion: reduce) {
-  .gd-float, .gd-rise, .gd-twinkle, .gd-drift, .gd-drip, .gd-flicker, .gd-dig { animation: none; }
+  .gd-float, .gd-rise, .gd-twinkle, .gd-drift, .gd-drip, .gd-flicker, .gd-dig,
+  .gd-bob, .gd-bob-fast, .gd-fly, .gd-flap, .gd-sway, .gd-breathe { animation: none; }
+  .gd-fly { display: none; }
 }
