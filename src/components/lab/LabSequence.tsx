@@ -48,6 +48,8 @@ export function LabSequence({ result, onDone }: Props) {
   const [box, setBox] = useState<Box | null>(null);
   /** -1 = lab powering up, 0..n-1 = building steps, n = finale. */
   const [index, setIndex] = useState(-1);
+  /** Starts in step mode: Next (or the right arrow key) moves one step, for walking a demo audience through it. Auto plays it on a timer. */
+  const [stepping, setStepping] = useState(true);
 
   const onDoneRef = useRef(onDone);
   useEffect(() => {
@@ -72,17 +74,26 @@ export function LabSequence({ result, onDone }: Props) {
   }, []);
 
   const finale = index >= steps.length;
-  useEffect(() => {
-    const seconds = index < 0 ? LAB_TIMING.boot : finale ? LAB_TIMING.finale : LAB_TIMING.step;
-    const timer = window.setTimeout(() => (finale ? finish() : setIndex((i) => i + 1)), seconds * 1000);
-    return () => window.clearTimeout(timer);
-  }, [index, finale, finish]);
+  const next = useCallback(() => (finale ? finish() : setIndex((i) => i + 1)), [finale, finish]);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && finish();
+    if (stepping) return;
+    const seconds = index < 0 ? LAB_TIMING.boot : finale ? LAB_TIMING.finale : LAB_TIMING.step;
+    const timer = window.setTimeout(next, seconds * 1000);
+    return () => window.clearTimeout(timer);
+  }, [index, finale, next, stepping]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") finish();
+      if (e.key === "ArrowRight") {
+        setStepping(true);
+        next();
+      }
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [finish]);
+  }, [finish, next]);
 
   const step = finale ? undefined : steps[index];
   const shot: Shot = finale ? "finale" : (step?.part ?? "boot");
@@ -126,7 +137,7 @@ export function LabSequence({ result, onDone }: Props) {
                 <Pedestal center={{ x: place.center.x, y: floorY }} width={place.size * 1.05} />
               </motion.div>
               <div ref={monsterRef} className="absolute" style={{ left: place.left, top: place.top, width: place.size, height: place.height }}>
-                <Monster character={character} size={place.size} stage={stage} />
+                <Monster character={character} size={place.size} stage={stage} facts={facts.facts} />
               </div>
               {!finale && <Arms box={box} target={focus} reach={place.size * 0.16} />}
               {focus && <Sparks key={index} at={focus} spread={place.size * 0.22} />}
@@ -193,15 +204,40 @@ export function LabSequence({ result, onDone }: Props) {
               />
             </div>
           </div>
-          <button
-            type="button"
-            onClick={finish}
-            title={COPY.lab.skipHint}
-            aria-label={COPY.lab.skipHint}
-            className="pointer-events-auto shrink-0 rounded-xl border border-line bg-surface-strong px-4 py-2 font-display text-lg leading-none backdrop-blur-sm transition hover:border-highlight focus-visible:outline-2 focus-visible:outline-highlight"
-          >
-            {COPY.lab.skip} {"->"}
-          </button>
+          <div className="flex shrink-0 gap-2">
+            <div
+              role="group"
+              aria-label={COPY.lab.modeLabel}
+              title={COPY.lab.stepHint}
+              className="pointer-events-auto flex shrink-0 overflow-hidden rounded-xl border border-line bg-surface-strong font-display text-lg leading-none backdrop-blur-sm"
+            >
+              {[false, true].map((mode) => (
+                <button
+                  key={String(mode)}
+                  type="button"
+                  onClick={() => setStepping(mode)}
+                  aria-pressed={stepping === mode}
+                  className={`px-3 py-2 transition focus-visible:outline-2 focus-visible:outline-highlight ${stepping === mode ? "bg-highlight/20 text-highlight" : "text-muted hover:text-ink"}`}
+                >
+                  {mode ? COPY.lab.step : COPY.lab.autoplay}
+                </button>
+              ))}
+            </div>
+            {stepping && (
+              <button type="button" onClick={next} title={COPY.lab.nextHint} className="pointer-events-auto shrink-0 rounded-xl border border-line bg-surface-strong px-4 py-2 font-display text-lg leading-none backdrop-blur-sm transition hover:border-highlight focus-visible:outline-2 focus-visible:outline-highlight border-highlight text-highlight">
+                {COPY.lab.next} {"->"}
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={finish}
+              title={COPY.lab.skipHint}
+              aria-label={COPY.lab.skipHint}
+              className="pointer-events-auto shrink-0 rounded-xl border border-line bg-surface-strong px-4 py-2 font-display text-lg leading-none backdrop-blur-sm transition hover:border-highlight focus-visible:outline-2 focus-visible:outline-highlight"
+            >
+              {COPY.lab.skip} {"->"}
+            </button>
+          </div>
         </div>
       </div>
     </section>

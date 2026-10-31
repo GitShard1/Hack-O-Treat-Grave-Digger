@@ -5,12 +5,12 @@
 // facts the traits point to ARE derived from the repo, so the evidence links stay real.
 import "server-only";
 import type { Accessory, Archetype, Aura, Character, EyeStyle, RepoFacts, Trait } from "@/lib/contract";
-import type { RepoMeasures } from "@/lib/facts";
+import { pickSignatureFactId, type RepoMeasures } from "@/lib/facts";
 import { paletteFromLanguages } from "@/lib/palette";
 
 export const PLACEHOLDER_NAME = "Placeholder Monster";
 export const PLACEHOLDER_TRAIT = "This is a placeholder.";
-/** 100 words of filler so the origin-story length check (80-120 words) still runs on placeholder output. */
+/** 100 words of filler so the origin-story length check still runs on placeholder output (40-110 accepted). */
 export const PLACEHOLDER_STORY =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
   "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
@@ -57,9 +57,14 @@ function pickAura(m: RepoMeasures): Aura {
   return "fog";
 }
 
-/** The three most distinctive facts this repo has, so different repos point at different evidence. */
+/** The signature fact first, then the most distinctive others, so different repos point at different evidence. */
 function pickFactIds(m: RepoMeasures, archetype: Archetype, facts: RepoFacts): [string, string, string] {
   const candidates: [boolean, string][] = [
+    [true, pickSignatureFactId(facts, m)],
+    [true, "f_tree_names"],
+    [true, "f_code_imports"],
+    [true, "f_tree_few_files"],
+    [true, "f_tree_folder"],
     [archetype === "golem" || m.runtimeDeps.length >= 5, "f_deps"],
     [m.devDeps.length >= 5, "f_dev_deps"],
     [m.languages.length >= 3, "f_lang_mix"],

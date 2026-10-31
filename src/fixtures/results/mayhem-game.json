@@ -1,0 +1,106 @@
+{
+  "ok": true,
+  "facts": {
+    "repo": "Roblox-MAYHEM/Game",
+    "url": "https://github.com/Roblox-MAYHEM/Game",
+    "facts": [
+      {
+        "id": "f_lang_top",
+        "label": "Main language",
+        "value": "100% Luau"
+      },
+      {
+        "id": "f_stars",
+        "label": "Stars",
+        "value": "0"
+      },
+      {
+        "id": "f_age",
+        "label": "Created",
+        "value": "Jun 2026 (0 years ago)"
+      },
+      {
+        "id": "f_last_push",
+        "label": "Last push",
+        "value": "2 months ago"
+      },
+      {
+        "id": "f_last_commit",
+        "label": "Latest commit",
+        "value": "Aug 2026"
+      },
+      {
+        "id": "f_readme",
+        "label": "README",
+        "value": "No README found"
+      },
+      {
+        "id": "f_root_files",
+        "label": "Top-level files",
+        "value": "13 files and folders"
+      },
+      {
+        "id": "f_tree_files",
+        "label": "Files",
+        "value": "307 files"
+      },
+      {
+        "id": "f_tree_types",
+        "label": "File types",
+        "value": "98% .luau, 1% .md"
+      },
+      {
+        "id": "f_tree_names",
+        "label": "Files in ServerScriptService/Weapon/Weapons",
+        "value": "BaseballBat, GreatSword, Boots, ClassicSword, DBShotgun, PumpShotgun"
+      },
+      {
+        "id": "f_code_file",
+        "label": "File we read",
+        "value": "ServerScriptService/GameSettings.luau (2,230 characters, 61 lines)"
+      },
+      {
+        "id": "f_code_excerpt",
+        "label": "GameSettings.luau excerpt",
+        "value": "1| local PhysicsService = game:GetService(\"PhysicsService\")\n2| local Players = game:GetService(\"Players\")\n3| local ReplicatedStorage = game:GetService(\"ReplicatedStorage\")\n4| local CollectionService = game:GetService(\"CollectionService\")\n6| local Remotes = ReplicatedStorage.Events\n7| local module = {}\n9| local NO_COLLIDE_GROUP = \"NoCollision\"\n10| local DEFAULT_PLAYER_GROUP = \"Players\""
+      },
+      {
+        "id": "f_tree_revision",
+        "label": "Inspected revision",
+        "value": "7eb0ca0119eda9baba067c239cfe7e19f67cacbb"
+      }
+    ]
+  },
+  "character": {
+    "name": "Mayhem Gamemangler",
+    "archetype": "golem",
+    "palette": [
+      "#00a2ff",
+      "#ff8a1f"
+    ],
+    "eyes": "pair",
+    "accessories": [
+      "lantern"
+    ],
+    "aura": "embers",
+    "traits": [
+      {
+        "title": "Weapon-Labelled Claws",
+        "description": "ServerScriptService/Weapon/Weapons holds six weapon files, including BaseballBat, GreatSword and Boots.",
+        "factId": "f_tree_names"
+      },
+      {
+        "title": "Collision Group Joints",
+        "description": "GameSettings.luau registers the ViewModel, Players and NoCollision groups and switches character parts between them.",
+        "factId": "f_code_file"
+      },
+      {
+        "title": "Luau-Dominant Frame",
+        "description": "98% of the 307 files are .luau, and only 1% are .md.",
+        "factId": "f_tree_types"
+      }
+    ],
+    "originStory": "Gather round, junior devs. This creature lives behind a ghost switch: one remote call and a character slips through every other player like fog. Its claws are labelled BaseballBat, GreatSword and DBShotgun, so every swing carries a file name. It arrived with no README, so it tells its tale by firelight instead. Its one habit is slipping through GameSettings.luau as if the file were fog too. Keep your coffee close, and whatever you do, don't rename its claws.",
+    "source": "saved-example"
+  }
+}

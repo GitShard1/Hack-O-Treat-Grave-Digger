@@ -1,0 +1,1269 @@
+{
+  "ref": {
+    "owner": "Roblox-MAYHEM",
+    "name": "Game"
+  },
+  "private": false,
+  "description": null,
+  "stars": 0,
+  "createdAt": "2026-06-22T19:38:08Z",
+  "pushedAt": "2026-08-14T06:41:18Z",
+  "latestCommitAt": "2026-08-14T06:41:07Z",
+  "latestCommitSha": "7eb0ca0119eda9baba067c239cfe7e19f67cacbb",
+  "languages": {
+    "Luau": 1203371
+  },
+  "readme": null,
+  "rootFiles": [
+    ".gitignore",
+    "MovementSystemRef",
+    "ReplicatedStorage",
+    "ServerScriptService",
+    "ServerStorage",
+    "StarterGui",
+    "StarterPlayer",
+    "caveman.md",
+    "confighotreload.luau",
+    "docs",
+    "gamedesign.md",
+    "sourcemap.json",
+    "swordexample.luau"
+  ],
+  "manifest": null,
+  "tree": [
+    {
+      "path": ".gitignore",
+      "size": 12
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Animate.local.luau",
+      "size": 15962
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/BASICmovement/Controller.local.luau",
+      "size": 3789
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/BASICmovement/Movement/Jump.luau",
+      "size": 225
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/BASICmovement/Utils/Direction.luau",
+      "size": 680
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/BASICmovement/Utils/Variables.luau",
+      "size": 260
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Camera/CameraSubject.local.luau",
+      "size": 766
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Camera/CameraTilts.local.luau",
+      "size": 1132
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Camera/HeadOffset.local.luau",
+      "size": 2668
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/CharacterTilt.local.luau",
+      "size": 941
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/DEBUGPhys.local.luau",
+      "size": 691
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/DirectionalMovement.local.luau",
+      "size": 3600
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Falldamage.local.luau",
+      "size": 3676
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Glass.local.luau",
+      "size": 1697
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/HRPStuffwow.legacy.luau",
+      "size": 73
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/JumpAnims.local.luau",
+      "size": 669
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/LocalScript.local.luau",
+      "size": 134
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/LocalScript2.local.luau",
+      "size": 1213
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Movement/CameraMovement.luau",
+      "size": 1432
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Movement/LedgeClimb.local.luau",
+      "size": 5712
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Movement/Momentum.local.luau",
+      "size": 2237
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Movement/Pipe.local.luau",
+      "size": 5094
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Movement/Rope.local.luau",
+      "size": 2435
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Movement/ShiftBoost.local.luau",
+      "size": 3161
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Movement/Sliding.local.luau",
+      "size": 12570
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Movement/SlidingBACKUP.local.luau",
+      "size": 8545
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Movement/Slopes.local.luau",
+      "size": 3171
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Movement/TightRope.local.luau",
+      "size": 4889
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Movement/Vault.local.luau",
+      "size": 6439
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Movement/WallClimb.local.luau",
+      "size": 8476
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Movement/Wallrun.local.luau",
+      "size": 8053
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/SFX.local.luau",
+      "size": 451
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/Script.legacy.luau",
+      "size": 173
+    },
+    {
+      "path": "MovementSystemRef/StarterCharacterScripts/ShiftSetup.local.luau",
+      "size": 176
+    },
+    {
+      "path": "MovementSystemRef/StarterPlayerScripts/CustomShiftLock/SmoothShiftLock/Maid.luau",
+      "size": 4867
+    },
+    {
+      "path": "MovementSystemRef/StarterPlayerScripts/CustomShiftLock/SmoothShiftLock/Spring.luau",
+      "size": 6564
+    },
+    {
+      "path": "MovementSystemRef/StarterPlayerScripts/CustomShiftLock/SmoothShiftLock/init.luau",
+      "size": 4890
+    },
+    {
+      "path": "MovementSystemRef/StarterPlayerScripts/CustomShiftLock/init.local.luau",
+      "size": 111
+    },
+    {
+      "path": "MovementSystemRef/StarterPlayerScripts/LocalScript.local.luau",
+      "size": 235
+    },
+    {
+      "path": "MovementSystemRef/StarterPlayerScripts/TightSpace.local.luau",
+      "size": 4699
+    },
+    {
+      "path": "ReplicatedStorage/Assets/Crates/Data.luau",
+      "size": 1268
+    },
+    {
+      "path": "ReplicatedStorage/Assets/Weapons/Data/Animations.luau",
+      "size": 6909
+    },
+    {
+      "path": "ReplicatedStorage/Assets/Weapons/Data/Config.luau",
+      "size": 16242
+    },
+    {
+      "path": "ReplicatedStorage/Assets/Weapons/Data/Info.luau",
+      "size": 3652
+    },
+    {
+      "path": "ReplicatedStorage/Assets/Weapons/List.luau",
+      "size": 272
+    },
+    {
+      "path": "ReplicatedStorage/Data/LevelProgression.luau",
+      "size": 287
+    },
+    {
+      "path": "ReplicatedStorage/Packages/FastCastRedux/ActiveCast.luau",
+      "size": 34492
+    },
+    {
+      "path": "ReplicatedStorage/Packages/FastCastRedux/Signal.luau",
+      "size": 4927
+    },
+    {
+      "path": "ReplicatedStorage/Packages/FastCastRedux/Table.luau",
+      "size": 3858
+    },
+    {
+      "path": "ReplicatedStorage/Packages/FastCastRedux/TypeDefinitions.luau",
+      "size": 2835
+    },
+    {
+      "path": "ReplicatedStorage/Packages/FastCastRedux/TypeMarshaller.luau",
+      "size": 574
+    },
+    {
+      "path": "ReplicatedStorage/Packages/FastCastRedux/init.luau",
+      "size": 6148
+    },
+    {
+      "path": "ReplicatedStorage/Packages/MiddleClass.luau",
+      "size": 5874
+    },
+    {
+      "path": "ReplicatedStorage/Packages/PartCache/Table.luau",
+      "size": 4034
+    },
+    {
+      "path": "ReplicatedStorage/Packages/PartCache/init.luau",
+      "size": 7462
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ProjectileHitbox.luau",
+      "size": 5300
+    },
+    {
+      "path": "ReplicatedStorage/Packages/Promise.luau",
+      "size": 60944
+    },
+    {
+      "path": "ReplicatedStorage/Packages/Replica/ReplicaShared/Maid.luau",
+      "size": 4252
+    },
+    {
+      "path": "ReplicatedStorage/Packages/Replica/ReplicaShared/RateLimit.luau",
+      "size": 3210
+    },
+    {
+      "path": "ReplicatedStorage/Packages/Replica/ReplicaShared/Remote.luau",
+      "size": 4287
+    },
+    {
+      "path": "ReplicatedStorage/Packages/Replica/ReplicaShared/Signal.luau",
+      "size": 3852
+    },
+    {
+      "path": "ReplicatedStorage/Packages/Replica/RoundStateWrite.luau",
+      "size": 3381
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ShapecastHitbox/Hitbox.luau",
+      "size": 7741
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ShapecastHitbox/Settings.luau",
+      "size": 691
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ShapecastHitbox/Solvers/Attachment.luau",
+      "size": 734
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ShapecastHitbox/Solvers/Blockcast.luau",
+      "size": 780
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ShapecastHitbox/Solvers/Bone.luau",
+      "size": 560
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ShapecastHitbox/Solvers/Raycast.luau",
+      "size": 468
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ShapecastHitbox/Solvers/Spherecast.luau",
+      "size": 538
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ShapecastHitbox/Solvers/init.luau",
+      "size": 164
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ShapecastHitbox/Types.luau",
+      "size": 10328
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ShapecastHitbox/Visualizers/Blockcast.luau",
+      "size": 3100
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ShapecastHitbox/Visualizers/Raycast.luau",
+      "size": 3005
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ShapecastHitbox/Visualizers/Spherecast.luau",
+      "size": 3032
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ShapecastHitbox/Visualizers/init.luau",
+      "size": 164
+    },
+    {
+      "path": "ReplicatedStorage/Packages/ShapecastHitbox/init.luau",
+      "size": 904
+    },
+    {
+      "path": "ReplicatedStorage/Packages/Signal.luau",
+      "size": 11335
+    },
+    {
+      "path": "ReplicatedStorage/Packages/Trove.luau",
+      "size": 19361
+    },
+    {
+      "path": "ReplicatedStorage/Settings.luau",
+      "size": 58
+    },
+    {
+      "path": "ReplicatedStorage/Utils/Cooldown.luau",
+      "size": 1149
+    },
+    {
+      "path": "ReplicatedStorage/Utils/DebugVisualize.luau",
+      "size": 8004
+    },
+    {
+      "path": "ReplicatedStorage/Utils/DeepCopy.luau",
+      "size": 199
+    },
+    {
+      "path": "ReplicatedStorage/Utils/Loader.luau",
+      "size": 1861
+    },
+    {
+      "path": "ReplicatedStorage/Utils/Metatables.luau",
+      "size": 1181
+    },
+    {
+      "path": "ReplicatedStorage/Utils/ProjectileUtils.luau",
+      "size": 9116
+    },
+    {
+      "path": "ReplicatedStorage/Utils/Spring.luau",
+      "size": 1722
+    },
+    {
+      "path": "ServerScriptService/Character.luau",
+      "size": 7659
+    },
+    {
+      "path": "ServerScriptService/Crate/Handler.luau",
+      "size": 2296
+    },
+    {
+      "path": "ServerScriptService/Data/DataManager.luau",
+      "size": 2294
+    },
+    {
+      "path": "ServerScriptService/Data/Handler.luau",
+      "size": 3075
+    },
+    {
+      "path": "ServerScriptService/Data/Template.luau",
+      "size": 510
+    },
+    {
+      "path": "ServerScriptService/Experience/Handler.luau",
+      "size": 1766
+    },
+    {
+      "path": "ServerScriptService/GameSettings.luau",
+      "size": 2230
+    },
+    {
+      "path": "ServerScriptService/Handler.legacy.luau",
+      "size": 366
+    },
+    {
+      "path": "ServerScriptService/HeadSync.luau",
+      "size": 2966
+    },
+    {
+      "path": "ServerScriptService/Initializer.luau",
+      "size": 228
+    },
+    {
+      "path": "ServerScriptService/Projectile.luau",
+      "size": 5218
+    },
+    {
+      "path": "ServerScriptService/Ringout.luau",
+      "size": 2883
+    },
+    {
+      "path": "ServerScriptService/Round/DeploySystem.luau",
+      "size": 4621
+    },
+    {
+      "path": "ServerScriptService/Round/Gamemodes/KOTH.luau",
+      "size": 6008
+    },
+    {
+      "path": "ServerScriptService/Round/Handler.luau",
+      "size": 8115
+    },
+    {
+      "path": "ServerScriptService/Round/LoadMap.luau",
+      "size": 3193
+    },
+    {
+      "path": "ServerScriptService/Weapon/BaseWeapon.luau",
+      "size": 3516
+    },
+    {
+      "path": "ServerScriptService/Weapon/Handler.luau",
+      "size": 10112
+    },
+    {
+      "path": "ServerScriptService/Weapon/Modules/DamageFalloff.luau",
+      "size": 2000
+    },
+    {
+      "path": "ServerScriptService/Weapon/Modules/DamageHandler.luau",
+      "size": 6974
+    },
+    {
+      "path": "ServerScriptService/Weapon/Modules/Explosion.luau",
+      "size": 3743
+    },
+    {
+      "path": "ServerScriptService/Weapon/Modules/Heal.luau",
+      "size": 1865
+    },
+    {
+      "path": "ServerScriptService/Weapon/Modules/ImpactService.luau",
+      "size": 6005
+    },
+    {
+      "path": "ServerScriptService/Weapon/Modules/Knockback.luau",
+      "size": 1573
+    },
+    {
+      "path": "ServerScriptService/Weapon/Modules/MeleeValidator.luau",
+      "size": 2982
+    },
+    {
+      "path": "ServerScriptService/Weapon/Modules/ProjectileCaster.luau",
+      "size": 4258
+    },
+    {
+      "path": "ServerScriptService/Weapon/Modules/ProjectileValidator.luau",
+      "size": 15798
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/BaseballBat.luau",
+      "size": 4337
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/Boots.luau",
+      "size": 3475
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/ClassicSword.luau",
+      "size": 3126
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/DBShotgun.luau",
+      "size": 3075
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/Dartgun.luau",
+      "size": 2403
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/Flamethrower/HitboxCollision.luau",
+      "size": 1170
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/Flamethrower/StatusBurn.luau",
+      "size": 785
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/Flamethrower/init.luau",
+      "size": 3670
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/GreatSword.luau",
+      "size": 3526
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/HandCannon.luau",
+      "size": 2154
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/KBShotgun.luau",
+      "size": 2983
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/Medkit.luau",
+      "size": 2987
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/Pan.luau",
+      "size": 2325
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/Pistol.luau",
+      "size": 3041
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/PumpShotgun.luau",
+      "size": 3075
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/RPG.luau",
+      "size": 2155
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/Revolver.luau",
+      "size": 3008
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/Rock.luau",
+      "size": 2325
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/RocketLauncher.luau",
+      "size": 2153
+    },
+    {
+      "path": "ServerScriptService/Weapon/Weapons/Umbrella.luau",
+      "size": 2266
+    },
+    {
+      "path": "ServerStorage/Libraries/LevelSystem.luau",
+      "size": 2558
+    },
+    {
+      "path": "ServerStorage/Libraries/PositionHistory.luau",
+      "size": 11408
+    },
+    {
+      "path": "ServerStorage/Libraries/ProfileStore.luau",
+      "size": 64510
+    },
+    {
+      "path": "ServerStorage/Libraries/ReplicaServer.luau",
+      "size": 28155
+    },
+    {
+      "path": "StarterGui/CharHUD/Cooldown.luau",
+      "size": 33
+    },
+    {
+      "path": "StarterGui/CharHUD/Crosshair.luau",
+      "size": 2993
+    },
+    {
+      "path": "StarterGui/CharHUD/DmgMarker.luau",
+      "size": 776
+    },
+    {
+      "path": "StarterGui/CharHUD/Handler.local.luau",
+      "size": 514
+    },
+    {
+      "path": "StarterGui/CharHUD/Healthbar.luau",
+      "size": 1397
+    },
+    {
+      "path": "StarterGui/CharHUD/Hotbar.luau",
+      "size": 4313
+    },
+    {
+      "path": "StarterGui/CharHUD/ImpactDisplay.luau",
+      "size": 6654
+    },
+    {
+      "path": "StarterGui/CharHUD/Initializer.luau",
+      "size": 441
+    },
+    {
+      "path": "StarterGui/CharHUD/Utils/WeaponObserver.luau",
+      "size": 2221
+    },
+    {
+      "path": "StarterGui/CharHUD/ViewportCharacterHandler.luau",
+      "size": 4392
+    },
+    {
+      "path": "StarterGui/CharHUD/Vignette.luau",
+      "size": 1264
+    },
+    {
+      "path": "StarterGui/CharHUD/WeaponInfo.luau",
+      "size": 1800
+    },
+    {
+      "path": "StarterGui/GameHUD/DeathHandler.luau",
+      "size": 3215
+    },
+    {
+      "path": "StarterGui/GameHUD/Handler.local.luau",
+      "size": 132
+    },
+    {
+      "path": "StarterGui/GameHUD/Initializer.luau",
+      "size": 403
+    },
+    {
+      "path": "StarterGui/GameHUD/RoundVisuals/Handler.luau",
+      "size": 4988
+    },
+    {
+      "path": "StarterGui/GameHUD/RoundVisuals/PlayerCard.luau",
+      "size": 1556
+    },
+    {
+      "path": "StarterGui/GlobalUI/ExpFeed/ExpPopup.luau",
+      "size": 656
+    },
+    {
+      "path": "StarterGui/GlobalUI/ExpFeed/Handler.luau",
+      "size": 2758
+    },
+    {
+      "path": "StarterGui/GlobalUI/Handler.local.luau",
+      "size": 132
+    },
+    {
+      "path": "StarterGui/GlobalUI/KillFeed/Handler.luau",
+      "size": 3916
+    },
+    {
+      "path": "StarterGui/GlobalUI/KillFeed/KillEntry.luau",
+      "size": 1532
+    },
+    {
+      "path": "StarterGui/GlobalUI/Leaderboard/Handler.luau",
+      "size": 4859
+    },
+    {
+      "path": "StarterGui/GlobalUI/Leaderboard/PlayerEntry.luau",
+      "size": 1162
+    },
+    {
+      "path": "StarterGui/MainMenu/Crates.luau",
+      "size": 3694
+    },
+    {
+      "path": "StarterGui/MainMenu/Debug.luau",
+      "size": 924
+    },
+    {
+      "path": "StarterGui/MainMenu/Handler.local.luau",
+      "size": 132
+    },
+    {
+      "path": "StarterGui/MainMenu/Loadout.luau",
+      "size": 14293
+    },
+    {
+      "path": "StarterGui/MainMenu/MenuHandler.luau",
+      "size": 6998
+    },
+    {
+      "path": "StarterGui/MainMenu/Shop.luau",
+      "size": 1194
+    },
+    {
+      "path": "StarterPlayer/Components/CrateSpinner.luau",
+      "size": 3558
+    },
+    {
+      "path": "StarterPlayer/Components/DmgMarker.luau",
+      "size": 1929
+    },
+    {
+      "path": "StarterPlayer/Components/Draggable.luau",
+      "size": 3194
+    },
+    {
+      "path": "StarterPlayer/Components/HitHighlight.luau",
+      "size": 853
+    },
+    {
+      "path": "StarterPlayer/Components/HitMarker.luau",
+      "size": 1837
+    },
+    {
+      "path": "StarterPlayer/Components/ItemTemplate.luau",
+      "size": 4558
+    },
+    {
+      "path": "StarterPlayer/Libraries/AnimationController.luau",
+      "size": 5271
+    },
+    {
+      "path": "StarterPlayer/Libraries/SoundController.luau",
+      "size": 3923
+    },
+    {
+      "path": "StarterPlayer/Libraries/UIBootstrap.luau",
+      "size": 1492
+    },
+    {
+      "path": "StarterPlayer/Libraries/ViewmodelController/CreateRig.luau",
+      "size": 2350
+    },
+    {
+      "path": "StarterPlayer/Libraries/ViewmodelController/init.luau",
+      "size": 10334
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Animation/ExternalTime.luau",
+      "size": 2187
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Animation/Spring.luau",
+      "size": 9665
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Animation/Stopwatch.luau",
+      "size": 2816
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Animation/Tween.luau",
+      "size": 5398
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Animation/getTweenDuration.luau",
+      "size": 678
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Animation/getTweenRatio.luau",
+      "size": 1340
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Animation/lerpType.luau",
+      "size": 5157
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Animation/packType.luau",
+      "size": 2832
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Animation/springCoefficients.luau",
+      "size": 2477
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Animation/unpackType.luau",
+      "size": 3111
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Colour/Oklab.luau",
+      "size": 2292
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Colour/sRGB.luau",
+      "size": 1355
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/External.luau",
+      "size": 4137
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/ExternalDebug.luau",
+      "size": 1839
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Graph/Observer.luau",
+      "size": 2685
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Graph/castToGraph.luau",
+      "size": 593
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Graph/change.luau",
+      "size": 2349
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Graph/depend.luau",
+      "size": 1020
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Graph/evaluate.luau",
+      "size": 1519
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Instances/Attribute.luau",
+      "size": 1419
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Instances/AttributeChange.luau",
+      "size": 1197
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Instances/AttributeOut.luau",
+      "size": 1651
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Instances/Child.luau",
+      "size": 505
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Instances/Children.luau",
+      "size": 4120
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Instances/Hydrate.luau",
+      "size": 842
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Instances/New.luau",
+      "size": 1573
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Instances/OnChange.luau",
+      "size": 1298
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Instances/OnEvent.luau",
+      "size": 1292
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Instances/Out.luau",
+      "size": 1751
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Instances/applyInstanceProps.luau",
+      "size": 4193
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Instances/defaultProps.luau",
+      "size": 4162
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Logging/formatError.luau",
+      "size": 1546
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Logging/messages.luau",
+      "size": 4021
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Logging/parseError.luau",
+      "size": 519
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Memory/checkLifetime.luau",
+      "size": 3851
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Memory/deriveScope.luau",
+      "size": 720
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Memory/deriveScopeImpl.luau",
+      "size": 1161
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Memory/doCleanup.luau",
+      "size": 2223
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Memory/innerScope.luau",
+      "size": 849
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Memory/legacyCleanup.luau",
+      "size": 426
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Memory/needsDestruction.luau",
+      "size": 341
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Memory/poisonScope.luau",
+      "size": 783
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Memory/scopePool.luau",
+      "size": 1373
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Memory/scoped.luau",
+      "size": 684
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Memory/whichLivesLonger.luau",
+      "size": 2266
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/RobloxExternal.luau",
+      "size": 2082
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/State/Computed.luau",
+      "size": 3761
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/State/For/Disassembly.luau",
+      "size": 5837
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/State/For/ForTypes.luau",
+      "size": 900
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/State/For/init.luau",
+      "size": 2492
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/State/ForKeys.luau",
+      "size": 2702
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/State/ForPairs.luau",
+      "size": 3029
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/State/ForValues.luau",
+      "size": 2742
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/State/Value.luau",
+      "size": 2135
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/State/castToState.luau",
+      "size": 463
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/State/peek.luau",
+      "size": 692
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/State/updateAll.luau",
+      "size": 45
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Types.luau",
+      "size": 10021
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Utility/Contextual.luau",
+      "size": 2159
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Utility/Safe.luau",
+      "size": 494
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Utility/isSimilar.luau",
+      "size": 705
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Utility/merge.luau",
+      "size": 726
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Utility/nameOf.luau",
+      "size": 726
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Utility/never.luau",
+      "size": 236
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Utility/nicknames.luau",
+      "size": 270
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/Utility/xtypeof.luau",
+      "size": 529
+    },
+    {
+      "path": "StarterPlayer/Packages/Fusion/init.luau",
+      "size": 2740
+    },
+    {
+      "path": "StarterPlayer/Packages/ReplicaClient.luau",
+      "size": 25027
+    },
+    {
+      "path": "StarterPlayer/Packages/Screen3D/Component3D.luau",
+      "size": 8209
+    },
+    {
+      "path": "StarterPlayer/Packages/Screen3D/Definitions.luau",
+      "size": 1509
+    },
+    {
+      "path": "StarterPlayer/Packages/Screen3D/init.luau",
+      "size": 1625
+    },
+    {
+      "path": "StarterPlayer/StarterCharacterScripts/Animate.local.luau",
+      "size": 16002
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Camera/CameraShaker/CameraShakeInstance.luau",
+      "size": 3723
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Camera/CameraShaker/CameraShakePresets.luau",
+      "size": 2369
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Camera/CameraShaker/init.luau",
+      "size": 6043
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Camera/Handler.luau",
+      "size": 5695
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/CharacterHandler.local.luau",
+      "size": 3886
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/HeadSync.luau",
+      "size": 10660
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Initializer.luau",
+      "size": 428
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Movement/Actions/Knockback.luau",
+      "size": 2173
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Movement/Actions/Lunge.luau",
+      "size": 723
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Movement/Actions/Stomp.luau",
+      "size": 943
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Movement/Actions/Vault.luau",
+      "size": 1684
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Movement/Actions/WallRun.luau",
+      "size": 2773
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Movement/Data/Animations.luau",
+      "size": 493
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Movement/Data/Config.luau",
+      "size": 1167
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Movement/Data/Sounds.luau",
+      "size": 93
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Movement/Frame.luau",
+      "size": 2554
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Movement/Handler.luau",
+      "size": 16242
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Movement/Locomotion.luau",
+      "size": 1910
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Movement/RaycastModule/CastVisuals.luau",
+      "size": 5332
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Movement/RaycastModule/init.luau",
+      "size": 7662
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Movement/SpeedLines.luau",
+      "size": 578
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/PlayerEffects/Effects/Explosion2Effect/init.luau",
+      "size": 4902
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/PlayerEffects/Effects/HealEffect.luau",
+      "size": 324
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/PlayerEffects/Effects/MuzzleFlash.luau",
+      "size": 1474
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/PlayerEffects/Handler.luau",
+      "size": 3356
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Projectile/Handler.luau",
+      "size": 6799
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Projectile/Visuals.luau",
+      "size": 7863
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/Weapon.luau",
+      "size": 6790
+    },
+    {
+      "path": "StarterPlayer/Weapon/BaseWeapon.luau",
+      "size": 6525
+    },
+    {
+      "path": "StarterPlayer/Weapon/Behaviors/Ranged.luau",
+      "size": 14297
+    },
+    {
+      "path": "StarterPlayer/Weapon/Modules/ClientHitbox.luau",
+      "size": 5011
+    },
+    {
+      "path": "StarterPlayer/Weapon/Modules/Effects.luau",
+      "size": 885
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/BaseballBat.luau",
+      "size": 5175
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/Boots.luau",
+      "size": 3198
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/ClassicSword.luau",
+      "size": 4502
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/DBShotgun.luau",
+      "size": 1547
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/Dartgun.luau",
+      "size": 1535
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/Flamethrower.luau",
+      "size": 3251
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/GreatSword.luau",
+      "size": 4445
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/HandCannon.luau",
+      "size": 1446
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/KBShotgun.luau",
+      "size": 1537
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/Medkit.luau",
+      "size": 4772
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/Pan.luau",
+      "size": 3920
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/Pistol.luau",
+      "size": 1577
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/PumpShotgun.luau",
+      "size": 1537
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/RPG.luau",
+      "size": 1414
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/Revolver.luau",
+      "size": 2433
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/Rock.luau",
+      "size": 4076
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/RocketLauncher.luau",
+      "size": 1414
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/Umbrella/Animate.luau",
+      "size": 2215
+    },
+    {
+      "path": "StarterPlayer/Weapon/Weapons/Umbrella/init.luau",
+      "size": 9708
+    },
+    {
+      "path": "caveman.md",
+      "size": 5009
+    },
+    {
+      "path": "confighotreload.luau",
+      "size": 12332
+    },
+    {
+      "path": "docs/superpowers/README.md",
+      "size": 718
+    },
+    {
+      "path": "gamedesign.md",
+      "size": 38326
+    },
+    {
+      "path": "sourcemap.json",
+      "size": 89674
+    },
+    {
+      "path": "swordexample.luau",
+      "size": 5530
+    }
+  ],
+  "treeTruncated": false,
+  "sourceFile": {
+    "path": "ServerScriptService/GameSettings.luau",
+    "content": "local PhysicsService = game:GetService(\"PhysicsService\")\nlocal Players = game:GetService(\"Players\")\nlocal ReplicatedStorage = game:GetService(\"ReplicatedStorage\")\nlocal CollectionService = game:GetService(\"CollectionService\")\n\nlocal Remotes = ReplicatedStorage.Events\nlocal module = {}\n\nlocal NO_COLLIDE_GROUP = \"NoCollision\"\nlocal DEFAULT_PLAYER_GROUP = \"Players\"\n\n-- Helper to set the group for all parts in a character\nlocal function setCharacterCollisionGroup(character: Model, groupName: string)\n\tfor _, part in ipairs(character:GetDescendants()) do\n\t\tif part:IsA(\"BasePart\") then\n\t\t\tpart.CollisionGroup = groupName\n\t\tend\n\tend\nend\n\nfunction module:Init()\n\t-- 1. Setup Groups (Keeping your existing setup)\n\tpcall(function() PhysicsService:RegisterCollisionGroup(\"ViewModel\") end)\n\tPhysicsService:CollisionGroupSetCollidable(\"ViewModel\", \"Default\", false)\n\n\tpcall(function() PhysicsService:RegisterCollisionGroup(DEFAULT_PLAYER_GROUP) end)\n\tPhysicsService:CollisionGroupSetCollidable(DEFAULT_PLAYER_GROUP, \"ViewModel\", false)\n\tPhysicsService:CollisionGroupSetCollidable(DEFAULT_PLAYER_GROUP, DEFAULT_PLAYER_GROUP, false)\n\n\n\tpcall(function() PhysicsService:RegisterCollisionGroup(NO_COLLIDE_GROUP) end)\n\t-- This makes NoCollision group ignore both ViewModels and normal Players\n\tPhysicsService:CollisionGroupSetCollidable(NO_COLLIDE_GROUP, \"ViewModel\", false)\n\tPhysicsService:CollisionGroupSetCollidable(NO_COLLIDE_GROUP, NO_COLLIDE_GROUP, false)\n\tPhysicsService:CollisionGroupSetCollidable(NO_COLLIDE_GROUP, DEFAULT_PLAYER_GROUP, false)\n\n\tfor _, dummy in CollectionService:GetTagged(\"Dummy\") do\n\t\tsetCharacterCollisionGroup(dummy, DEFAULT_PLAYER_GROUP)\n\tend\n\n\tCollectionService:GetInstanceAddedSignal(\"Dummy\"):Connect(function(dummy)\n\t\tsetCharacterCollisionGroup(dummy, DEFAULT_PLAYER_GROUP)\n\tend)\n\n\t-- 2. Handle the Toggle Request\n\tRemotes.NoCollideRequest.OnServerEvent:Connect(function(plr: Player, state: boolean)\n\t\tlocal character = plr.Character\n\t\tif not character then return end\n\n\t\tif state == true then\n\t\t\t-- Switch to Ghost Mode\n\t\t\tsetCharacterCollisionGroup(character, NO_COLLIDE_GROUP)\n\t\telse\n\t\t\t-- Switch back to Normal\n\t\t\tsetCharacterCollisionGroup(character, DEFAULT_PLAYER_GROUP)\n\t\tend\n\tend)\nend\n\nreturn module\n",
+    "truncated": false
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "ok": true,
+  "facts": {
+    "repo": "CleverRaven/Cataclysm-DDA",
+    "url": "https://github.com/CleverRaven/Cataclysm-DDA",
+    "facts": [
+      {
+        "id": "f_description",
+        "label": "Description",
+        "value": "\"Cataclysm - Dark Days Ahead. A turn-based survival game set in a post-apocalyptic world.\""
+      },
+      {
+        "id": "f_lang_top",
+        "label": "Main language",
+        "value": "97% C++"
+      },
+      {
+        "id": "f_lang_mix",
+        "label": "Languages",
+        "value": "20 languages: C++, Python, CMake, Java"
+      },
+      {
+        "id": "f_stars",
+        "label": "Stars",
+        "value": "13,443"
+      },
+      {
+        "id": "f_age",
+        "label": "Created",
+        "value": "Sep 2012 (14 years ago)"
+      },
+      {
+        "id": "f_last_push",
+        "label": "Last push",
+        "value": "today"
+      },
+      {
+        "id": "f_last_commit",
+        "label": "Latest commit",
+        "value": "Oct 2026"
+      },
+      {
+        "id": "f_deps",
+        "label": "Dependencies",
+        "value": "0 in pyproject.toml"
+      },
+      {
+        "id": "f_readme",
+        "label": "README",
+        "value": "4,000 characters"
+      },
+      {
+        "id": "f_readme_title",
+        "label": "README headline",
+        "value": "\"Cataclysm: Dark Days Ahead\""
+      },
+      {
+        "id": "f_root_files",
+        "label": "Top-level files",
+        "value": "49 files and folders"
+      },
+      {
+        "id": "f_tests",
+        "label": "Tests",
+        "value": "Has a test folder or test files"
+      },
+      {
+        "id": "f_ci",
+        "label": "CI",
+        "value": "Has CI configuration"
+      },
+      {
+        "id": "f_license",
+        "label": "License",
+        "value": "Has a license file"
+      },
+      {
+        "id": "f_tree_files",
+        "label": "Files",
+        "value": "10,471 files"
+      },
+      {
+        "id": "f_tree_types",
+        "label": "File types",
+        "value": "64% .json, 13% .gz, 8% .cpp"
+      },
+      {
+        "id": "f_tree_folder",
+        "label": "Biggest folder",
+        "value": "data/mods/ holds 4,748 files (45%)"
+      },
+      {
+        "id": "f_tree_names",
+        "label": "Files in src",
+        "value": "activity_actor, map, game, npctalk, iuse, vehicle"
+      },
+      {
+        "id": "f_code_file",
+        "label": "File we read",
+        "value": "src/game.h (20,000 characters, 483 lines)"
+      },
+      {
+        "id": "f_code_imports",
+        "label": "game.h imports",
+        "value": "array, chrono, cstdint, ctime, functional"
+      },
+      {
+        "id": "f_code_excerpt",
+        "label": "game.h excerpt",
+        "value": "1| #pragma once\n2| #ifndef CATA_SRC_GAME_H\n3| #define CATA_SRC_GAME_H\n5| #include <array>\n6| #include <chrono>\n7| #include <cstdint>\n8| #include <ctime>\n9| #include <functional>"
+      },
+      {
+        "id": "f_tree_revision",
+        "label": "Inspected revision",
+        "value": "84fc3f4fc034cde01221574d35f0e0defb73f52c"
+      }
+    ]
+  },
+  "character": {
+    "name": "Jsonstrophe",
+    "archetype": "golem",
+    "palette": [
+      "#f34b7d",
+      "#3572a5",
+      "#b07219"
+    ],
+    "eyes": "many",
+    "accessories": [],
+    "aura": "sparks",
+    "traits": [
+      {
+        "title": "Tablets from 64% JSON",
+        "description": "Most of its files are JSON, so a swarm of little data tablets, each labelled by file type, orbits it.",
+        "factId": "f_tree_types"
+      },
+      {
+        "title": "Parts stacked in data/mods",
+        "description": "Nearly half its files sit in one mods folder, so it is a golem stitched together from thousands of small parts.",
+        "factId": "f_tree_folder"
+      },
+      {
+        "title": "Chained by game.h includes",
+        "description": "game.h pulls in array, chrono, cstdint, ctime and functional, so its arms are bound by a chain of headers.",
+        "factId": "f_code_imports"
+      }
+    ],
+    "originStory": "WANTED: Jsonstrophe. Known for surviving a turn-based post-apocalypse while juggling 64 percent JSON. Last seen lurking in data/mods/, where 4,748 files crowd the shelves. Its only pyproject.toml exists to keep lines at 79 characters, a habit it considers a personal challenge. Dangerous when someone opens game.h, since its includes never end. Reward: one full tank of gas, offered to whoever convinces it that a semicolon is enough.",
+    "source": "saved-example"
+  }
+}

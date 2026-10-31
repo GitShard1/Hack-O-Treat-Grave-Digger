@@ -1,0 +1,121 @@
+{
+  "ok": true,
+  "facts": {
+    "repo": "EricZ6365/spincube",
+    "url": "https://github.com/EricZ6365/spincube",
+    "facts": [
+      {
+        "id": "f_description",
+        "label": "Description",
+        "value": "\"a spinning cube render in wireframe contained within 1 expresssion windows only\""
+      },
+      {
+        "id": "f_lang_top",
+        "label": "Main language",
+        "value": "100% Python"
+      },
+      {
+        "id": "f_stars",
+        "label": "Stars",
+        "value": "0"
+      },
+      {
+        "id": "f_age",
+        "label": "Created",
+        "value": "Jul 2026 (0 years ago)"
+      },
+      {
+        "id": "f_last_push",
+        "label": "Last push",
+        "value": "3 months ago"
+      },
+      {
+        "id": "f_last_commit",
+        "label": "Latest commit",
+        "value": "Jul 2026"
+      },
+      {
+        "id": "f_readme",
+        "label": "README",
+        "value": "No README found"
+      },
+      {
+        "id": "f_root_files",
+        "label": "Top-level files",
+        "value": "2 files and folders"
+      },
+      {
+        "id": "f_tree_files",
+        "label": "Files",
+        "value": "2 files"
+      },
+      {
+        "id": "f_tree_types",
+        "label": "File types",
+        "value": "100% .py"
+      },
+      {
+        "id": "f_tree_few_files",
+        "label": "Source files",
+        "value": "Only 2 source files: cube.py, shadecube.py"
+      },
+      {
+        "id": "f_code_file",
+        "label": "File we read",
+        "value": "cube.py (7,594 characters, 53 lines)"
+      },
+      {
+        "id": "f_code_imports",
+        "label": "cube.py imports",
+        "value": "functools, math, ctypes, time"
+      },
+      {
+        "id": "f_code_one_expression",
+        "label": "Program shape",
+        "value": "cube.py is one single expression"
+      },
+      {
+        "id": "f_code_excerpt",
+        "label": "cube.py excerpt",
+        "value": "1| (lambda all_libs={\"functools\": __import__(\"functools\"),\"math\": __import__(\"math\"), \"ctypes\": (lam...\n2| setattr(m,\"gdi32\",m.WinDLL(\"gdi32.dll\", use_last_error=True)) or setattr(m,\"user32\",m.WinDLL(\"use...\n3| \"time\": __import__(\"time\"), \"wintypes\": __import__(\"ctypes.wintypes\", fromlist=[\"*\"]), \"config\": ...\n4| {\"angle\": 0., \"buf\": [0] * 350 * 500, \"depth\": [999999] * 350 * 500}}, init=[lambda all_libs: {\"W...\n5| Structure,), {\"_fields_\": [(\"style\", all_libs[\"ctypes\"].c_uint), (\"lpfnWndProc\", all_libs[\"ctypes...\n6| all_libs[\"ctypes\"].wintypes.HWND, all_libs[\"ctypes\"].wintypes.UINT,  all_libs[\"ctypes\"].wintypes....\n7| (\"cbClsExtra\", all_libs[\"ctypes\"].c_int), (\"cbWndExtra\", all_libs[\"ctypes\"].c_int), (\"hInstance\",...\n8| all_libs[\"ctypes\"].c_void_p), (\"hCursor\", all_libs[\"ctypes\"].c_void_p), (\"hbrBackground\", all_lib..."
+      },
+      {
+        "id": "f_tree_revision",
+        "label": "Inspected revision",
+        "value": "fd8445315d238201ad722b6d7a88a92de344833f"
+      }
+    ]
+  },
+  "character": {
+    "name": "Spincubus",
+    "archetype": "witch",
+    "palette": [
+      "#3572a5",
+      "#ff8a1f"
+    ],
+    "eyes": "glowing",
+    "accessories": [
+      "candle"
+    ],
+    "aura": "sparks",
+    "traits": [
+      {
+        "title": "Single-Expression Body",
+        "description": "cube.py is one expression spanning 53 lines, with lambdas nested inside a single dictionary literal.",
+        "factId": "f_code_one_expression"
+      },
+      {
+        "title": "Standard-Library Imports",
+        "description": "cube.py imports functools, math, ctypes and time, all from the Python standard library.",
+        "factId": "f_code_imports"
+      },
+      {
+        "title": "Two-Module Layout",
+        "description": "The repository holds only two source files, cube.py and shadecube.py, with no other Python modules.",
+        "factId": "f_tree_few_files"
+      }
+    ],
+    "originStory": "The Spincubus is found on a Windows desktop, where it draws a rotating cube in thin wireframe lines. It feeds on the clock, reading time and math with every turn. Its body is one unbroken expression, stretched over fifty-three lines, and a glowing filament runs through every fold of it. Field notes record no README, so no naturalist has learned its habits from a manual. Its companion, shadecube.py, lives in the same clearing, but the Spincubus has never been seen shading a single face. It spins on, faithful to one line.",
+    "source": "saved-example"
+  }
+}

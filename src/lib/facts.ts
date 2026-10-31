@@ -4,6 +4,7 @@ import "server-only";
 import type { Fact, RepoFacts } from "@/lib/contract";
 import { repoSlug, type RepoSnapshot } from "@/lib/github";
 import { parseDependencies } from "@/lib/manifest";
+import { DATA_EXTENSIONS, extension, fileName, importsOf, measureTree, pythonStatementCount, type TreeMeasures } from "@/lib/tree";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -30,6 +31,19 @@ export type RepoMeasures = {
   hasCi: boolean;
   hasDocker: boolean;
   hasLicense: boolean;
+  tree: TreeMeasures;
+  treeTruncated: boolean;
+  /** The one source file we read, measured. Null when none was picked or it could not be read. */
+  code: {
+    path: string;
+    chars: number;
+    lines: number;
+    imports: string[];
+    /** Whole file is one Python expression. Only checked when the full file was read. */
+    oneExpression: boolean;
+    /** First non-blank lines, each "<line number>| <text>", for the dissect panel. UNTRUSTED text. */
+    excerpt: string;
+  } | null;
 };
 
 export function measureRepo(snapshot: RepoSnapshot, now: Date = new Date()): RepoMeasures {
@@ -64,7 +78,36 @@ export function measureRepo(snapshot: RepoSnapshot, now: Date = new Date()): Rep
     hasCi: root.includes(".github") || root.includes(".travis.yml") || root.includes(".gitlab-ci.yml"),
     hasDocker: root.some((file) => file === "dockerfile" || file.startsWith("docker-compose")),
     hasLicense: root.some((file) => file.startsWith("license") || file.startsWith("licence")),
+    tree: measureTree(snapshot.tree),
+    treeTruncated: snapshot.treeTruncated,
+    code: snapshot.sourceFile ? measureCode(snapshot.sourceFile) : null,
   };
+}
+
+function measureCode(file: NonNullable<RepoSnapshot["sourceFile"]>): NonNullable<RepoMeasures["code"]> {
+  const { path, content, truncated } = file;
+  return {
+    path,
+    chars: content.length,
+    lines: content.split(/\r?\n/).length,
+    imports: importsOf(path, content),
+    oneExpression: !truncated && extension(path) === "py" && content.length >= 500 && pythonStatementCount(content) === 1,
+    excerpt: excerptOf(content),
+  };
+}
+
+const EXCERPT_LINES = 8;
+const EXCERPT_LINE_CHARS = 100;
+
+/** "12| first line" ... for the first few non-blank lines, each cut to a readable width. */
+function excerptOf(content: string): string {
+  return content
+    .split(/\r?\n/)
+    .map((text, index) => ({ text: text.replace(/\t/g, "  ").trimEnd(), number: index + 1 }))
+    .filter((line) => line.text.trim().length > 0)
+    .slice(0, EXCERPT_LINES)
+    .map(({ text, number }) => `${number}| ${text.length > EXCERPT_LINE_CHARS ? `${text.slice(0, EXCERPT_LINE_CHARS - 3)}...` : text}`)
+    .join("\n");
 }
 
 export function buildFacts(snapshot: RepoSnapshot, now: Date = new Date()): RepoFacts {
@@ -94,7 +137,54 @@ export function buildFacts(snapshot: RepoSnapshot, now: Date = new Date()): Repo
   if (m.hasDocker) add("f_docker", "Docker", "Has a Dockerfile");
   if (m.hasLicense) add("f_license", "License", "Has a license file");
 
+  // File list and code. Ids say where each fact came from: f_tree_* the file list, f_code_* the one source file read.
+  const t = m.tree;
+  const inList = m.treeTruncated ? " in the returned file list" : "";
+  if (t.fileCount > 0) add("f_tree_files", "Files", `${t.fileCount.toLocaleString("en-US")} files${inList}`);
+  if (t.extensions.length > 0) {
+    add("f_tree_types", "File types", t.extensions.slice(0, 3).map((e) => `${e.share}% .${e.ext}`).join(", ") + inList);
+  }
+  if (t.heavyFolder) {
+    const { folder, count, share } = t.heavyFolder;
+    add("f_tree_folder", "Biggest folder", `${folder}/ holds ${count.toLocaleString("en-US")} files (${share}%)${inList}`);
+  }
+  if (t.namedFolder) add("f_tree_names", `Files in ${t.namedFolder.folder || "the root"}`, t.namedFolder.names.join(", "));
+  if (t.fewSources) add("f_tree_few_files", "Source files", `Only ${plural(t.fewSources.length, "source file")}: ${t.fewSources.join(", ")}`);
+  if (m.code) {
+    const name = fileName(m.code.path);
+    add("f_code_file", "File we read", `${m.code.path} (${m.code.chars.toLocaleString("en-US")} characters, ${plural(m.code.lines, "line")})`);
+    if (m.code.imports.length > 0) add("f_code_imports", `${name} imports`, m.code.imports.join(", "));
+    if (m.code.oneExpression) add("f_code_one_expression", "Program shape", `${name} is one single expression`);
+    if (m.code.excerpt) add("f_code_excerpt", `${name} excerpt`, m.code.excerpt);
+  }
+  if (snapshot.latestCommitSha && /^[0-9a-f]{7,40}$/i.test(snapshot.latestCommitSha)) {
+    add("f_tree_revision", "Inspected revision", snapshot.latestCommitSha);
+  }
+
   return { repo: m.slug, url: `https://github.com/${m.slug}`, facts };
+}
+
+/**
+ * The repo's signature: the single most distinctive fact, picked by fixed rules so the art, the first
+ * trait and the lab all point at the same thing. Code and file-list facts beat stars and age.
+ */
+export function pickSignatureFactId(facts: RepoFacts, m: RepoMeasures): string {
+  const has = new Set(facts.facts.map((f) => f.id));
+  const topExt = m.tree.extensions[0];
+  const dataHeavy = topExt !== undefined && DATA_EXTENSIONS.has(topExt.ext) && topExt.share >= 50;
+  const order: [boolean, string][] = [
+    [true, "f_code_one_expression"],
+    [dataHeavy, "f_tree_types"],
+    [true, "f_tree_names"],
+    [true, "f_tree_few_files"],
+    [true, "f_tree_folder"],
+    [true, "f_description"],
+    [true, "f_readme_title"],
+    [true, "f_lang_top"],
+    [true, "f_stars"],
+  ];
+  const found = order.find(([when, id]) => when && has.has(id));
+  return found?.[1] ?? facts.facts[0]?.id ?? "f_stars";
 }
 
 // ---------- formatting helpers ----------
