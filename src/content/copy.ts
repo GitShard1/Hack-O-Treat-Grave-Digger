@@ -25,6 +25,18 @@ export const COPY = {
   storyHeading: "Origin story",
   storyNote: "Fiction, inspired by real repo facts.",
   artNote: "Art procedurally assembled from your repo's traits.",
+  auth: {
+    signIn: "Sign in with GitHub for private repos",
+    chooseRepos: "Choose repos",
+    signOut: "Sign out",
+    privacyNote:
+      "Signed in: private repos work too. Their README and dependency file excerpts are sent to Anthropic's API to write your monster, and results are never cached or shared.",
+    messages: {
+      ok: "Signed in with GitHub.",
+      error: "GitHub sign-in didn't finish. Try again.",
+      unavailable: "GitHub sign-in isn't set up on this server yet.",
+    },
+  },
   sourceBadge: {
     live: null,
     fallback: "Quick summon (AI unavailable)",

@@ -3,6 +3,7 @@
     "owner": "vercel",
     "name": "ms"
   },
+  "private": false,
   "description": "Tiny millisecond conversion utility",
   "stars": 5559,
   "createdAt": "2012-03-08T02:10:13Z",

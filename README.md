@@ -52,12 +52,15 @@ Then open `.env.local` and fill in:
 
 | Variable | What it is | Who sets it up |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | Claude API key from [console.anthropic.com](https://console.anthropic.com) | Whoever owns generation |
-| `GITHUB_TOKEN` | Fine-grained GitHub token, public repositories, read-only | Builder A |
+| `ANTHROPIC_API_KEY` | Claude API key from [console.anthropic.com](https://console.anthropic.com) (needs API credits, not a Claude subscription) | Whoever owns generation |
+| `GITHUB_TOKEN` | Fine-grained GitHub token, public repositories, read-only. Raises the limit from 60 to 5,000 GitHub calls per hour | Builder A |
+| `GITHUB_APP_CLIENT_ID`, `GITHUB_APP_CLIENT_SECRET`, `GITHUB_APP_SLUG`, `SESSION_SECRET`, `APP_URL` | GitHub sign-in for private repos. See [GitHub sign-in](#github-sign-in-private-repos) below | Builder A |
+
+Everything is optional. With no keys at all, public repos work and get the built-in fallback monster.
 
 Rules for keys:
 - `.env.local` is ignored by git. **Never commit it, paste keys in chat, or put them in code.**
-- Keys are only read on the server (`src/lib/github.ts`, `src/lib/generate.ts`, both marked `server-only`). They never reach the browser.
+- Keys are only read on the server (`src/lib/github.ts`, `src/lib/generate.ts`, `src/lib/auth/`, all marked `server-only`). They never reach the browser.
 - The app still starts without keys. Features that need them return an error or the fallback character.
 
 ### 4. Run it
@@ -65,6 +68,27 @@ Rules for keys:
 npm run dev
 ```
 Open http://localhost:3000. Click **See a saved example** to see the full result screen without any keys.
+
+### GitHub sign-in (private repos)
+Sign-in uses a **GitHub App**, which only gets read-only access to the repos each user picks. There's no database: the user's GitHub token is encrypted into an httpOnly cookie with `SESSION_SECRET` and expires after 8 hours.
+
+One-time setup (whoever owns the GitHub account):
+1. Go to GitHub **Settings > Developer settings > GitHub Apps > New GitHub App**.
+2. **Homepage URL:** your site URL (or `http://localhost:3000`).
+3. **Callback URL:** `http://localhost:3000/api/auth/github/callback`. Add your deployed URL's `/api/auth/github/callback` too when you deploy.
+4. Tick **Expire user authorization tokens** and **Request user authorization (OAuth) during installation**.
+5. **Webhook:** untick **Active**.
+6. **Repository permissions:** set **Contents** to **Read-only** and **Metadata** to **Read-only**. Leave everything else at **No access**.
+7. **Where can this GitHub App be installed?** Pick **Any account** so teammates and judges can use it.
+8. Create the app, then **Generate a new client secret**.
+9. Put these in `.env.local` (and in your server's environment settings when deployed):
+   - `GITHUB_APP_CLIENT_ID`: the app's Client ID
+   - `GITHUB_APP_CLIENT_SECRET`: the secret from step 8
+   - `GITHUB_APP_SLUG`: the last part of the app's public page, `https://github.com/apps/<slug>`
+   - `SESSION_SECRET`: run `node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"`
+   - `APP_URL`: `http://localhost:3000` locally, your real URL when deployed
+
+How users use it: **Sign in with GitHub**, then pick which repos Grave Digger may read (the **Choose repos** link changes this later). A private repo that wasn't picked shows as "not found". For private repos, README and dependency-file excerpts are sent to Anthropic's API to write the monster; results are never cached or shared.
 
 ## Commands
 
@@ -96,7 +120,9 @@ If deployment fails on the day, demo locally with `npm run build` then `npm star
 src/lib/contract.ts          Shared data contract (Zod schemas and types). Agree before changing.
 
 Builder A (data and generation)
-src/lib/github.ts            Bounded GitHub fetch and URL parsing (TODO: needs the GitHub token)
+src/lib/github.ts            Bounded GitHub fetch (6 calls max) and URL parsing
+src/lib/auth/                GitHub App sign-in and encrypted session cookie
+src/app/api/auth/            Sign-in, callback, sign-out and "who am I" routes
 src/lib/facts.ts             Snapshot to measured numbers and evidence facts (deterministic)
 src/lib/manifest.ts          Dependency names from package.json, pyproject.toml, requirements.txt, Cargo.toml, go.mod
 src/lib/palette.ts           Monster colours from the language mix

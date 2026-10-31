@@ -12,6 +12,7 @@ export const msSnapshot: RepoSnapshot = ms;
 /** A repo with nothing optional: no README, no manifest, no languages. */
 export const bareSnapshot: RepoSnapshot = {
   ref: { owner: "someone", name: "empty-crypt" },
+  private: false,
   description: null,
   stars: 0,
   createdAt: "2026-10-01T00:00:00Z",

@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { SummonResponseSchema, type SummonSuccess } from "@/lib/contract";
 import { exampleResult } from "@/lib/examples";
 import { COPY } from "@/content/copy";
+import { AuthButton } from "@/components/AuthButton";
 import { DigLoader } from "@/components/DigLoader";
 import { ResultCard } from "@/components/ResultCard";
 import { Reveal } from "@/components/Reveal";
@@ -59,7 +60,10 @@ export default function Home() {
   const busy = state.status === "loading";
 
   return (
-    <main className="min-h-dvh px-4 pb-56 pt-12 sm:pt-20">
+    <main className="min-h-dvh px-4 pb-56 pt-5 sm:pt-6">
+      <div className="mx-auto mb-8 max-w-2xl sm:mb-12">
+        <AuthButton />
+      </div>
       <header className="mx-auto max-w-2xl text-center">
         <h1 className="font-display text-6xl leading-none sm:text-7xl">{COPY.appName}</h1>
         <p className="mt-4 text-sm text-muted sm:text-base">

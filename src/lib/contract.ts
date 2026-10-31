@@ -106,3 +106,16 @@ export const SummonResponseSchema = z.discriminatedUnion("ok", [SummonSuccessSch
 export type SummonSuccess = z.infer<typeof SummonSuccessSchema>;
 export type SummonFailure = z.infer<typeof SummonFailureSchema>;
 export type SummonResponse = z.infer<typeof SummonResponseSchema>;
+
+// ---------- API: GET /api/auth/me ----------
+
+export const AuthStatusSchema = z.object({
+  /** False when GitHub sign-in isn't configured on this server (public repos still work). */
+  available: z.boolean(),
+  signedIn: z.boolean(),
+  login: z.string().nullable(),
+  avatarUrl: z.string().nullable(),
+  /** GitHub page where the user picks which repos Grave Digger may read. */
+  installUrl: z.string().nullable(),
+});
+export type AuthStatus = z.infer<typeof AuthStatusSchema>;

@@ -101,6 +101,9 @@ In code, each type is a Zod schema with the type inferred from it, so the server
 2. **The visual looks cheap:** strict style guide, few parts done well, palette from languages. Fallback: one strong archetype with recolours.
 3. **GitHub, LLM or deploy failure during the demo:** token plus cache, a pre-warmed cache for the demo repos, and saved examples clearly badged "Saved example". If deploy fails, run locally plus the backup recording.
 
+## Private repos (added after the first plan)
+Private repos are now in scope through **GitHub sign-in with a GitHub App** (read-only Contents + Metadata, only on repos the user picks). The user's token is kept in an AES-256-GCM encrypted httpOnly cookie (no database) and is only used server-side. Private results are never cached, and the UI tells signed-in users that README and manifest excerpts go to Anthropic's API. Code: `src/lib/auth/`, `src/app/api/auth/`, `src/components/AuthButton.tsx`.
+
 ## Confirmed decisions
 - Stack: **Next.js + Tailwind on Vercel**.
 - LLM: **Anthropic Claude**. A fast model (e.g. `claude-haiku-5-5`, with `claude-sonnet-5-5` if quality needs it), structured output via tool use. Env: `ANTHROPIC_API_KEY`.

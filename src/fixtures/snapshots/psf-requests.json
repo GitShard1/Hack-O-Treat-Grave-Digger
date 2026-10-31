@@ -3,6 +3,7 @@
     "owner": "psf",
     "name": "requests"
   },
+  "private": false,
   "description": "A simple, yet elegant, HTTP library.",
   "stars": 54656,
   "createdAt": "2011-02-13T18:38:17Z",
