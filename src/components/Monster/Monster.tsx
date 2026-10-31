@@ -1,13 +1,16 @@
 // OWNER: Builder B. Procedural SVG monster assembled from Character parts.
-// Layers, back to front: glow, back aura, body, eyes, accessories, front aura.
+// Layers, back to front: glow, back aura, signature (back), body, eyes, accessories, signature (front), front aura.
+// Pass the repo's `facts` to add its signature part (see signature.ts); without them the monster has none.
 // Pass `stage` to draw a partly built monster (used by the monster lab); leave it out for the finished one.
 "use client";
-import { useId, type ReactNode } from "react";
+import { useId, useMemo, type ReactNode } from "react";
 import { motion } from "framer-motion";
-import type { Character } from "@/lib/contract";
+import type { Character, Fact } from "@/lib/contract";
 import { ART } from "./art";
 import { BODIES, type Colors } from "./bodies";
 import { Accessories, AuraBack, AuraFront, Eyes } from "./parts";
+import { SignaturePart } from "./SignaturePart";
+import { signatureOf } from "./signature";
 import { BUILD_STAGES, type BuildStage } from "./stages";
 
 type Props = {
@@ -16,12 +19,14 @@ type Props = {
   animated?: boolean;
   /** How many BUILD_STAGES are done (0-5). Undefined draws the finished monster with no entry animation. */
   stage?: number;
+  /** The repo's facts. Picks and labels the signature part; it is built in the lab's "extras" step. */
+  facts?: Fact[];
 };
 
 const FRAME_COLORS: Colors = { body: ART.labFrame, accent: ART.labFrame, third: ART.labFrame };
 const POP = { type: "spring", stiffness: 260, damping: 16 } as const;
 
-export function Monster({ character, size = 280, animated = true, stage }: Props) {
+export function Monster({ character, size = 280, animated = true, stage, facts }: Props) {
   const uid = useId().replace(/:/g, "");
   const glowId = `${uid}-glow`;
   const haloId = `${uid}-halo`;
@@ -29,6 +34,7 @@ export function Monster({ character, size = 280, animated = true, stage }: Props
   const [body = ART.defaultBody, accent = ART.defaultAccent, third] = character.palette;
   const colors: Colors = { body, accent, third: third ?? accent };
   const { anchors, draw } = BODIES[character.archetype];
+  const signature = useMemo(() => (facts ? signatureOf(character, facts) : null), [character, facts]);
 
   const building = stage !== undefined;
   const done = (part: BuildStage) => !building || stage > BUILD_STAGES.indexOf(part);
@@ -41,6 +47,17 @@ export function Monster({ character, size = 280, animated = true, stage }: Props
       </motion.g>
     ) : (
       children
+    );
+
+  /** The signature part arrives with the extras; scale grows it out from the monster's centre. */
+  const signatureLayer = (layer: "back" | "front") =>
+    signature &&
+    done("accessories") &&
+    enter(
+      `signature-${layer}`,
+      { opacity: 0, scale: 0.6 },
+      <SignaturePart signature={signature} colors={colors} layer={layer} glowId={glowId} animated={animated} />,
+      { duration: 0.7 },
     );
 
   const eyes = <Eyes style={character.eyes} at={anchors.eyes} colors={colors} glowId={glowId} />;
@@ -91,6 +108,7 @@ export function Monster({ character, size = 280, animated = true, stage }: Props
       <ellipse cx={120} cy={262} rx={74} ry={9} fill={ART.groundShadow} opacity={0.4} />
       {done("aura") && enter("aura-back", { opacity: 0 }, <AuraBack aura={character.aura} colors={colors} />, { duration: 0.6 })}
       <g className={animated ? "gd-float" : undefined}>
+        {signatureLayer("back")}
         {building ? (
           <>
             {done("frame") && enter("frame", { opacity: 0, scaleY: 0.3, y: 30 }, draw(FRAME_COLORS))}
@@ -101,6 +119,7 @@ export function Monster({ character, size = 280, animated = true, stage }: Props
         )}
         {done("eyes") && enter("eyes", { opacity: 0, scale: 0 }, eyes)}
         {done("accessories") && enter("accessories", { opacity: 0, y: -60 }, accessories, { ...POP, damping: 11 })}
+        {signatureLayer("front")}
       </g>
       {done("aura") && enter("aura-front", { opacity: 0 }, <AuraFront aura={character.aura} colors={colors} />, { duration: 0.6 })}
     </svg>

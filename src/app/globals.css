@@ -19,6 +19,9 @@ body {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
+@keyframes gd-flow {
+  to { stroke-dashoffset: -680; }
+}
 @keyframes gd-rise {
   0% { transform: translateY(0); opacity: 0; }
   15% { opacity: 1; }
@@ -83,6 +86,7 @@ body {
 
 .gd-float { animation: gd-float 4s ease-in-out infinite; }
 .gd-rise { animation: gd-rise 3.2s ease-out infinite; }
+.gd-flow { animation: gd-flow 6s linear infinite; }
 .gd-twinkle { animation: gd-twinkle 2.4s ease-in-out infinite; }
 .gd-drift { animation: gd-drift 7s ease-in-out infinite; }
 .gd-drip { animation: gd-drip 2.6s ease-in infinite; }
@@ -90,7 +94,7 @@ body {
 .gd-dig { animation: gd-dig 0.9s ease-in-out infinite; transform-box: fill-box; transform-origin: 80% 10%; }
 
 @media (prefers-reduced-motion: reduce) {
-  .gd-float, .gd-rise, .gd-twinkle, .gd-drift, .gd-drip, .gd-flicker, .gd-dig,
+  .gd-float, .gd-flow, .gd-rise, .gd-twinkle, .gd-drift, .gd-drip, .gd-flicker, .gd-dig,
   .gd-bob, .gd-bob-fast, .gd-fly, .gd-flap, .gd-sway, .gd-breathe { animation: none; }
   .gd-fly { display: none; }
 }

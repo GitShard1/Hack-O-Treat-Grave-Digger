@@ -126,7 +126,7 @@ export function LabSequence({ result, onDone }: Props) {
                 <Pedestal center={{ x: place.center.x, y: floorY }} width={place.size * 1.05} />
               </motion.div>
               <div ref={monsterRef} className="absolute" style={{ left: place.left, top: place.top, width: place.size, height: place.height }}>
-                <Monster character={character} size={place.size} stage={stage} />
+                <Monster character={character} size={place.size} stage={stage} facts={facts.facts} />
               </div>
               {!finale && <Arms box={box} target={focus} reach={place.size * 0.16} />}
               {focus && <Sparks key={index} at={focus} spread={place.size * 0.22} />}

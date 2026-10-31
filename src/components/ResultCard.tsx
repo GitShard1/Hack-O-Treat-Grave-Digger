@@ -29,7 +29,7 @@ export function ResultCard({ result, handoff }: Props) {
               <div aria-hidden className="h-full rounded-full bg-[radial-gradient(circle,var(--color-page-glow)_0%,transparent_70%)]" />
             </FadeIn>
             <FlipIn from={handoff?.monsterFrom} className="relative">
-              <Monster character={character} size={260} />
+              <Monster character={character} size={260} facts={facts.facts} />
             </FlipIn>
           </div>
 
