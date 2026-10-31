@@ -93,7 +93,7 @@ export default function LabPage() {
             source: "saved-example",
           };
           return (
-            <figure key={motif} className="flex flex-col items-center rounded-2xl border border-line bg-surface p-4">
+            <figure key={motif} className="flex flex-col items-center overflow-hidden rounded-2xl border border-line bg-surface p-4">
               <Monster character={character} size={160} facts={[{ ...demo, label: "Demo" }]} />
               <figcaption className="mt-8 text-sm">{motif}</figcaption>
             </figure>
@@ -101,7 +101,7 @@ export default function LabPage() {
         })}
       </section>
 
-      <section className="mt-12 grid gap-10 lg:grid-cols-2">
+      <section className="mt-12 grid gap-10">
         {samples.map((sample) => (
           <ResultCard key={sample.facts.repo} result={sample} />
         ))}

@@ -21,12 +21,13 @@ type Props = {
   stage?: number;
   /** The repo's facts. Picks and labels the signature part; it is built in the lab's "extras" step. */
   facts?: Fact[];
+  className?: string;
 };
 
 const FRAME_COLORS: Colors = { body: ART.labFrame, accent: ART.labFrame, third: ART.labFrame };
 const POP = { type: "spring", stiffness: 260, damping: 16 } as const;
 
-export function Monster({ character, size = 280, animated = true, stage, facts }: Props) {
+export function Monster({ character, size = 280, animated = true, stage, facts, className }: Props) {
   const uid = useId().replace(/:/g, "");
   const glowId = `${uid}-glow`;
   const haloId = `${uid}-halo`;
@@ -72,7 +73,7 @@ export function Monster({ character, size = 280, animated = true, stage, facts }
       height={(size * 280) / 240}
       role="img"
       aria-label={`${character.name}, a ${character.archetype.replace("-", " ")}`}
-      className="overflow-visible"
+      className={`overflow-visible ${className ?? ""}`}
     >
       <defs>
         <filter id={glowId} x="-100%" y="-100%" width="300%" height="300%">

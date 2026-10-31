@@ -11,6 +11,8 @@ type Layer = "back" | "front";
 type Props = { signature: Signature; colors: Colors; layer: Layer; glowId: string; animated: boolean };
 
 const CENTER = { x: 120, y: 155 };
+/** One decimal place, so server and browser render the same numbers (no hydration mismatch). */
+const r1 = (n: number) => Math.round(n * 10) / 10;
 const LABEL = { fontFamily: "var(--font-sans)", paintOrder: "stroke" as const, stroke: ART.outline, strokeWidth: 3 };
 
 /** Seconds since mount, updated every frame. Stays at 0 when not animated or the viewer prefers less motion. */
@@ -62,7 +64,7 @@ function Cage({ layer, colors, glowId, angle }: { layer: Layer; colors: Colors; 
     const y2 = y * Math.cos(tilt) - z1 * Math.sin(tilt);
     const z2 = y * Math.sin(tilt) + z1 * Math.cos(tilt);
     const f = 1 + z2 * 0.16;
-    return { x: CENTER.x + x1 * r * f, y: CENTER.y + y2 * r * 0.92 * f, z: z2 };
+    return { x: r1(CENTER.x + x1 * r * f), y: r1(CENTER.y + y2 * r * 0.92 * f), z: z2 };
   });
   return (
     <g filter={layer === "front" ? `url(#${glowId})` : undefined}>
@@ -184,9 +186,10 @@ function Rig({ layer, colors, labels, time, seed }: { layer: Layer; colors: Colo
     const spread = (i / (count - 1)) * 200 - 190; // degrees, from left-down round the top to right-down
     const sway = Math.sin(time * 1.7 + i * 1.3 + (seed % 7)) * 6;
     const base = ((spread + sway) * Math.PI) / 180;
-    const bend = (((i % 2 === 0 ? 28 : -28) + Math.sin(time * 2.3 + i) * 10) * Math.PI) / 180;
-    const elbow = { x: socket.x + Math.cos(base) * 86, y: socket.y + Math.sin(base) * 86 };
-    const tip = { x: elbow.x + Math.cos(base + bend) * 58, y: elbow.y + Math.sin(base + bend) * 58 };
+    // Elbows bend away from the middle so neighbouring tips (and their labels) spread apart.
+    const bend = (((Math.cos(base) < 0 ? -28 : 28) + Math.sin(time * 2.3 + i) * 10) * Math.PI) / 180;
+    const elbow = { x: r1(socket.x + Math.cos(base) * 86), y: r1(socket.y + Math.sin(base) * 86) };
+    const tip = { x: r1(elbow.x + Math.cos(base + bend) * 58), y: r1(elbow.y + Math.sin(base + bend) * 58) };
     return { elbow, tip, label: labels[i], out: base + bend };
   });
 
@@ -218,8 +221,8 @@ function Rig({ layer, colors, labels, time, seed }: { layer: Layer; colors: Colo
         label ? (
           <text
             key={i}
-            x={tip.x + Math.cos(out) * 10}
-            y={tip.y + Math.sin(out) * 10 + 3}
+            x={r1(tip.x + Math.cos(out) * 10)}
+            y={r1(tip.y + Math.sin(out) * 10 + 3)}
             textAnchor={Math.cos(out) < -0.3 ? "end" : Math.cos(out) > 0.3 ? "start" : "middle"}
             fontSize={11}
             fill={ART.sketch}
@@ -247,10 +250,10 @@ function Glyphs({ layer, colors, labels, angle }: { layer: Layer; colors: Colors
         return (
           <text
             key={i}
-            x={CENTER.x + Math.cos(a) * 112}
-            y={140 + z * 30}
+            x={r1(CENTER.x + Math.cos(a) * 112)}
+            y={r1(140 + z * 30)}
             textAnchor="middle"
-            fontSize={9 + z * 2}
+            fontSize={r1(9 + z * 2)}
             fill={i % 2 === 0 ? colors.accent : ART.sketch}
             opacity={layer === "back" ? 0.45 : 1}
             {...LABEL}

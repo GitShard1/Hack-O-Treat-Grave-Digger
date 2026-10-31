@@ -25,6 +25,19 @@ export const COPY = {
   storyHeading: "Origin story",
   storyNote: "Fiction, inspired by real repo facts.",
   artNote: "Art procedurally assembled from your repo's traits.",
+  /** Result card. Origins match the fact id prefixes in src/lib/facts.ts (see src/components/evidence.ts). */
+  result: {
+    signatureTag: "Signature: the strangest thing we dug up",
+    inspectHeading: "What we could inspect",
+    inspectNote: "Every fact we fetched, grouped by where it came from. We read the file list and one source file, not the whole repo.",
+    origins: {
+      code: "from the code",
+      tree: "from the file list",
+      docs: "from the README",
+      manifest: "from the dependency file",
+      meta: "from GitHub",
+    },
+  },
   auth: {
     signIn: "Sign in with GitHub for private repos",
     chooseRepos: "Choose repos",
